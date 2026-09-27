@@ -1,14 +1,25 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { SiteShell } from "../components/SiteShell";
 
 export const metadata: Metadata = {
-  title: "Bright View LLC | Power Washing & Window Cleaning",
+  title: {
+    default: "Bright View LLC | Michigan Exterior Cleaning & Holiday Lighting",
+    template: "%s | Bright View LLC",
+  },
   description:
-    "Family-owned Michigan power washing, window cleaning, and holiday lighting services. Request a free quote from Bright View LLC.",
+    "Family-owned Michigan window cleaning, power washing, and holiday lighting. Explore Bright View LLC services and request a free quote.",
+  keywords: [
+    "Bright View LLC",
+    "Michigan window cleaning",
+    "Michigan power washing",
+    "pressure washing Michigan",
+    "holiday light installation Michigan",
+  ],
   openGraph: {
     title: "Bright View LLC",
     description:
-      "Power washing, window cleaning, and holiday lighting for Michigan homes and businesses.",
+      "Window cleaning, power washing, and holiday lighting from a family-owned Michigan business.",
     type: "website",
   },
 };
@@ -20,7 +31,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <SiteShell>{children}</SiteShell>
+      </body>
     </html>
   );
 }
