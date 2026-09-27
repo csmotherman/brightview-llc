@@ -4,12 +4,13 @@ type IconProps = {
     | "spray"
     | "lights"
     | "arrow"
-    | "spark"
     | "check"
     | "camera"
-    | "map"
+    | "shield"
     | "message"
-    | "shield";
+    | "chevrons"
+    | "mapPin"
+    | "calendar";
   className?: string;
 };
 
@@ -28,8 +29,8 @@ export function Icon({ name, className = "" }: IconProps) {
   if (name === "window") {
     return (
       <svg {...common}>
-        <rect x="4" y="3" width="16" height="18" rx="1.5" />
-        <path d="M12 3v18M4 12h16M7.5 8.5l1.75-1.75M15.5 17l1.5-1.5" />
+        <rect x="4" y="3" width="16" height="18" rx="1" />
+        <path d="M12 3v18M4 12h16" />
       </svg>
     );
   }
@@ -38,7 +39,7 @@ export function Icon({ name, className = "" }: IconProps) {
     return (
       <svg {...common}>
         <path d="M3 18h5.5l2.2-7.8 4.9-2.6 4 2.1" />
-        <path d="m16.8 4.6 3 3M4 21h17M7.5 8.5l2 2" />
+        <path d="m16.8 4.6 3 3M4 21h17" />
         <path d="M18.7 12.4h.01M20.9 14.1h.01M17.7 15.1h.01" />
       </svg>
     );
@@ -62,15 +63,6 @@ export function Icon({ name, className = "" }: IconProps) {
     );
   }
 
-  if (name === "spark") {
-    return (
-      <svg {...common}>
-        <path d="M12 2l1.3 5.7L19 9l-5.7 1.3L12 16l-1.3-5.7L5 9l5.7-1.3L12 2Z" />
-        <path d="M19 16l.6 2.4L22 19l-2.4.6L19 22l-.6-2.4L16 19l2.4-.6L19 16Z" />
-      </svg>
-    );
-  }
-
   if (name === "check") {
     return (
       <svg {...common}>
@@ -88,20 +80,37 @@ export function Icon({ name, className = "" }: IconProps) {
     );
   }
 
-  if (name === "map") {
-    return (
-      <svg {...common}>
-        <path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3V6Z" />
-        <path d="M9 3v15M15 6v15" />
-      </svg>
-    );
-  }
-
   if (name === "message") {
     return (
       <svg {...common}>
         <path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H9l-5 4v-4H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z" />
         <path d="M7 9h10M7 13h6" />
+      </svg>
+    );
+  }
+
+  if (name === "chevrons") {
+    return (
+      <svg {...common}>
+        <path d="M15 6l6 6-6 6M9 6 3 12l6 6" />
+      </svg>
+    );
+  }
+
+  if (name === "mapPin") {
+    return (
+      <svg {...common}>
+        <path d="M12 21s7-6.5 7-11.5a7 7 0 1 0-14 0C5 14.5 12 21 12 21Z" />
+        <circle cx="12" cy="9.5" r="2.4" />
+      </svg>
+    );
+  }
+
+  if (name === "calendar") {
+    return (
+      <svg {...common}>
+        <rect x="3.5" y="5" width="17" height="16" rx="1.5" />
+        <path d="M3.5 9.5h17M8 3v4M16 3v4" />
       </svg>
     );
   }

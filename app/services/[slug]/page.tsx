@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { BeforeAfter } from "../../../components/BeforeAfter";
 import { Icon } from "../../../components/Icons";
-import { getService, services } from "../../../lib/site";
+import { ServiceMotif } from "../../../components/ServiceMotif";
+import { ProjectGallery } from "../../../components/ProjectGallery";
+import { HowItWorks } from "../../../components/HowItWorks";
+import { getService, services } from "../../../data/services";
+import { getProjectsByService } from "../../../data/projects";
 
 export function generateStaticParams() {
   return services.map((service) => ({ slug: service.slug }));
@@ -23,7 +26,7 @@ export async function generateMetadata({
 
   return {
     title: service.name,
-    description: service.summary,
+    description: service.seoDescription,
   };
 }
 
@@ -37,112 +40,113 @@ export default async function ServicePage({
 
   if (!service) notFound();
 
+  const otherServices = services.filter((item) => item.slug !== service.slug);
+  const projects = getProjectsByService(service.slug);
+
   return (
     <>
-      <section className={`service-detail-hero service-detail-${service.slug}`}>
-        <div className="service-detail-copy">
-          <span className="service-detail-icon">
-            <Icon name={service.icon} />
-          </span>
-          <p className="eyebrow eyebrow-light">{service.kicker}</p>
-          <h1>{service.headline}</h1>
-          <p>{service.summary}</p>
-          <div className="hero-actions">
-            <Link
-              className="button button-gold"
-              href={`/quote?service=${service.slug}`}
-            >
-              Get a free quote
-              <Icon name="arrow" />
-            </Link>
-            <Link className="button button-ghost-light" href="/gallery">
-              See project gallery
-            </Link>
+      <section
+        className={`service-detail-hero ${
+          service.mood === "evening" ? "service-detail-holiday-lighting" : ""
+        }`}
+      >
+        <div className="shell service-detail-hero-inner">
+          <div>
+            <span className="numeral service-detail-number">{service.number}</span>
+            <p className="eyebrow eyebrow-light">{service.kicker}</p>
+            <h1>{service.headline}</h1>
+            <p>{service.dek}</p>
+            <div className="hero-actions">
+              <Link className="btn btn-gold" href={`/quote?service=${service.slug}`}>
+                Get a free quote
+                <Icon name="arrow" />
+              </Link>
+              <Link className="btn btn-outline-light" href="/gallery">
+                See project gallery
+              </Link>
+            </div>
           </div>
-        </div>
-
-        <div className="service-detail-panel">
-          <span className="detail-panel-number">
-            0{services.findIndex((item) => item.slug === service.slug) + 1}
-          </span>
-          <Icon name={service.icon} />
-          <p>{service.name}</p>
-          <small>Michigan service requests</small>
+          <div className="service-detail-motif">
+            <ServiceMotif icon={service.icon} />
+          </div>
         </div>
       </section>
 
-      <section className="service-features section-shell">
-        <div className="section-intro section-intro-split">
-          <div>
-            <p className="eyebrow eyebrow-dark">What the request can cover</p>
-            <h2>Start with the scope. Keep the process simple.</h2>
-          </div>
-          <p>
-            You do not need to know every measurement before reaching out.
-            Give Bright View enough context to understand the property and
-            follow up about the details.
-          </p>
+      <section className="shell service-features">
+        <div className="section-head">
+          <p className="eyebrow eyebrow-dark">What the request can cover</p>
+          <h2 style={{ color: "var(--navy)" }}>Start with the scope. Keep it simple.</h2>
         </div>
-
         <div className="feature-list-grid">
-          {service.features.map((feature, index) => (
-            <div key={feature}>
+          {service.coverage.map((item, index) => (
+            <div key={item}>
               <span>0{index + 1}</span>
-              <p>{feature}</p>
+              <p>{item}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="service-result section-shell">
-        <div className="service-result-heading">
+      <section className="shell why-section">
+        <div className="section-head">
+          <p className="eyebrow eyebrow-dark">Why it matters</p>
+        </div>
+        <p className="why-copy">{service.whyItMatters}</p>
+      </section>
+
+      <section className="shell section">
+        <div className="section-head">
+          <p className="eyebrow eyebrow-dark">{service.name} results</p>
+          <h2 style={{ color: "var(--navy)" }}>Real jobs, matched shots.</h2>
+        </div>
+        <ProjectGallery projects={projects} />
+      </section>
+
+      <HowItWorks
+        steps={service.process}
+        heading={`From “I need this done” to a finished ${service.name.toLowerCase()} job.`}
+      />
+
+      <section className="shell faq-section">
+        <div className="section-head">
+          <p className="eyebrow eyebrow-dark">Common questions</p>
+          <h2 style={{ color: "var(--navy)" }}>{service.name} FAQ</h2>
+        </div>
+        <div className="faq-list">
+          {service.faqs.map((faq) => (
+            <details className="faq-item" key={faq.question}>
+              <summary>{faq.question}</summary>
+              <p>{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <section className="shell cross-links">
+        <div className="section-head">
+          <p className="eyebrow eyebrow-dark">Also explore</p>
+        </div>
+        <div className="cross-links-row">
+          {otherServices.map((item) => (
+            <Link className="cross-link-card" key={item.slug} href={`/services/${item.slug}`}>
+              {item.name}
+              <Icon name="arrow" />
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="shell">
+        <section className="simple-cta">
           <div>
-            <p className="eyebrow eyebrow-dark">Reserved for real work</p>
-            <h2>{service.photoHint}</h2>
+            <p className="eyebrow eyebrow-dark">Ready when you are</p>
+            <h2 style={{ color: "var(--navy)" }}>Get a {service.name.toLowerCase()} quote.</h2>
           </div>
-          <p>
-            Matched before-and-after photos can drop directly into this
-            component without redesigning the page.
-          </p>
-        </div>
-        <BeforeAfter
-          title={`${service.name} project`}
-          service={service.name}
-        />
-      </section>
-
-      <section className="process-section">
-        <div className="section-shell process-inner">
-          <div className="process-heading">
-            <p className="eyebrow eyebrow-light">How it works</p>
-            <h2>Three steps between “I need this done” and getting started.</h2>
-          </div>
-          <div className="process-steps">
-            {service.process.map((step, index) => (
-              <article key={step.title}>
-                <span>0{index + 1}</span>
-                <div>
-                  <h3>{step.title}</h3>
-                  <p>{step.copy}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="simple-cta section-shell">
-        <div>
-          <p className="eyebrow eyebrow-dark">Ready when you are</p>
-          <h2>Get a {service.name.toLowerCase()} quote.</h2>
-        </div>
-        <Link
-          className="button button-navy"
-          href={`/quote?service=${service.slug}`}
-        >
-          Start free quote
-          <Icon name="arrow" />
-        </Link>
+          <Link className="btn btn-navy" href={`/quote?service=${service.slug}`}>
+            Start free quote
+            <Icon name="arrow" />
+          </Link>
+        </section>
       </section>
     </>
   );

@@ -1,281 +1,176 @@
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../brightview-main-logo.png";
-import { BeforeAfter } from "../components/BeforeAfter";
+import { services } from "../data/services";
+import { projects } from "../data/projects";
+import { business } from "../lib/business";
 import { Icon } from "../components/Icons";
-import { services, facebookUrl } from "../lib/site";
+import { WindowMotif } from "../components/WindowMotif";
+import { ServiceStory } from "../components/ServiceStory";
+import { ProjectGallery } from "../components/ProjectGallery";
+import { HowItWorks } from "../components/HowItWorks";
+import { QuoteCTA } from "../components/QuoteCTA";
+import { Roofline } from "../components/Roofline";
+
+const homeSteps = [
+  {
+    title: "Tell us what needs attention",
+    copy: "Pick a service, share the property, and describe the job in a couple of lines.",
+  },
+  {
+    title: "Bright View reviews the request",
+    copy: "We confirm scope and pricing before anything gets scheduled — no surprises.",
+  },
+  {
+    title: "The work gets scheduled",
+    copy: "Pick a time that works. No account, no app, no back-and-forth required.",
+  },
+  {
+    title: "Enjoy the result",
+    copy: "A property that looks the way it's supposed to — from the street and up close.",
+  },
+];
 
 export default function Home() {
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    name: "Bright View LLC",
-    description:
-      "Family-owned Michigan window cleaning, power washing, and holiday lighting business.",
-    areaServed: {
-      "@type": "State",
-      name: "Michigan",
-    },
-    sameAs: [facebookUrl],
-  };
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-      />
-
-      <section className="home-hero">
-        <div className="home-hero-copy">
-          <div className="eyebrow">
-            <span className="eyebrow-dot" />
-            Family-owned • Michigan
-          </div>
-
-          <h1>
-            The kind of clean
-            <span>you notice from the curb.</span>
-          </h1>
-
-          <p className="hero-lede">
-            Window cleaning, power washing, and holiday lighting with a simple
-            process and a sharp eye for the details people actually see.
-          </p>
-
-          <div className="hero-actions">
-            <Link className="button button-gold" href="/quote">
-              Get a free quote
-              <Icon name="arrow" />
-            </Link>
-            <Link className="button button-ghost-light" href="/gallery">
-              See the difference
-            </Link>
-          </div>
-
-          <div className="hero-service-list" aria-label="Bright View services">
-            {services.map((service) => (
-              <Link key={service.slug} href={`/services/${service.slug}`}>
-                <Icon name={service.icon} />
-                <span>{service.shortName}</span>
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        <div className="hero-visual" aria-label="Bright View brand">
-          <div className="hero-visual-grid" />
-          <div className="hero-logo-halo" />
-          <div className="hero-logo-card">
-            <span className="hero-card-kicker">Michigan exterior care</span>
-            <Image
-              src={logo}
-              alt="Bright View LLC - Power Washing and Window Cleaning"
-              priority
-              className="hero-logo"
-              sizes="(max-width: 720px) 72vw, 480px"
-            />
-            <div className="hero-card-footer">
-              <span>Windows</span>
-              <i />
-              <span>Exterior</span>
-              <i />
-              <span>Holiday</span>
-            </div>
-          </div>
-          <div className="hero-badge hero-badge-left">
-            <Icon name="spark" />
-            <span>
-              <strong>Bright results</strong>
-              built for curb appeal
-            </span>
-          </div>
-          <div className="hero-badge hero-badge-right">
-            <span className="michigan-mini">MI</span>
-            <span>
-              <strong>Local</strong>
-              family-owned
-            </span>
-          </div>
-        </div>
-
-        <div className="hero-scroll-cue" aria-hidden="true">
-          <span>Scroll to explore</span>
-          <i />
-        </div>
-      </section>
-
-      <section className="statement-band">
-        <p>Clear glass.</p>
-        <span />
-        <p>Clean surfaces.</p>
-        <span />
-        <p>Brighter seasons.</p>
-      </section>
-
-      <section className="home-services section-shell">
-        <div className="section-intro section-intro-split">
+      <section className="hero">
+        <div className="shell hero-grid">
           <div>
-            <p className="eyebrow eyebrow-dark">Three ways to brighten the property</p>
-            <h2>Exterior care without the runaround.</h2>
-          </div>
-          <p>
-            Pick the service. Tell us about the property. Bright View handles
-            the next step without forcing you through an account, app, or
-            complicated booking flow.
-          </p>
-        </div>
+            <p className="eyebrow eyebrow-light hero-eyebrow">
+              {business.ownership} &middot; {business.state}
+            </p>
+            <h1>
+              A cleaner property <em>changes the whole view.</em>
+            </h1>
+            <p className="hero-dek">{business.tagline}. A simple quote, a direct process, and results you can see from the curb.</p>
 
-        <div className="service-showcase">
-          {services.map((service, index) => (
-            <Link
-              className={`service-showcase-card service-card-${index + 1}`}
-              href={`/services/${service.slug}`}
-              key={service.slug}
-            >
-              <div className="service-showcase-top">
-                <span className="service-index">0{index + 1}</span>
-                <span className="service-icon">
-                  <Icon name={service.icon} />
-                </span>
-              </div>
-              <div className="service-showcase-copy">
-                <p>{service.kicker}</p>
-                <h3>{service.name}</h3>
-                <span>{service.homeCopy}</span>
-              </div>
-              <div className="service-showcase-link">
-                Explore service
+            <div className="hero-actions">
+              <Link className="btn btn-gold" href="/quote">
+                Get a free quote
                 <Icon name="arrow" />
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section className="results-section">
-        <div className="section-shell">
-          <div className="results-heading">
-            <div>
-              <p className="eyebrow eyebrow-light">Proof belongs in the photos</p>
-              <h2>Before. After. Bright View.</h2>
+              </Link>
+              <Link className="btn btn-outline-light" href="/gallery">
+                See our work
+              </Link>
             </div>
-            <p>
-              This section is already built for real project photography.
-              Replace the reserved frames with matched before-and-after shots
-              as soon as they are available.
-            </p>
-          </div>
 
-          <div className="featured-result">
-            <BeforeAfter
-              title="Featured Bright View transformation"
-              service="Power Washing"
-            />
-          </div>
-
-          <div className="results-footer">
-            <div>
-              <Icon name="camera" />
-              <span>
-                <strong>Real work only.</strong>
-                No stock-photo gallery pretending to be a completed job.
-              </span>
+            <div className="hero-service-rail">
+              {services.map((service) => (
+                <Link key={service.slug} href={`/services/${service.slug}`}>
+                  <Icon name={service.icon} />
+                  {service.shortName}
+                </Link>
+              ))}
             </div>
-            <Link href="/gallery">
-              Open the before & after gallery
-              <Icon name="arrow" />
-            </Link>
+          </div>
+
+          <div className="hero-visual" aria-hidden="true">
+            <WindowMotif className="hero-pane" />
+            <div className="hero-logo-tag">
+              <Image src={logo} alt="" width={26} height={26} priority />
+              <span>Michigan exterior care</span>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="standard-section section-shell">
-        <div className="standard-heading">
-          <span className="big-number">04</span>
-          <div>
-            <p className="eyebrow eyebrow-dark">The Bright View standard</p>
-            <h2>A small-business experience that should actually feel personal.</h2>
-          </div>
-        </div>
+      <div className="trust-rail" aria-label="Bright View at a glance">
+        <span className="trust-rail-item">
+          <Icon name="shield" />
+          {business.ownership}
+        </span>
+        <span className="trust-rail-item">
+          <Icon name="mapPin" />
+          {business.state}
+        </span>
+        <span className="trust-rail-item">
+          <Icon name="message" />
+          Free Quotes
+        </span>
+        <span className="trust-rail-item">
+          <Icon name="window" />
+          3 Core Services
+        </span>
+      </div>
 
-        <div className="standard-grid">
-          <article>
-            <span><Icon name="message" /></span>
-            <strong>Simple from the first message</strong>
-            <p>
-              A quote request asks for only what helps Bright View understand
-              the job. No customer account and no unnecessary steps.
-            </p>
-          </article>
-          <article>
-            <span><Icon name="map" /></span>
-            <strong>Built around the property</strong>
-            <p>
-              Every request starts with the service and location, so the
-              conversation stays focused on the actual project.
-            </p>
-          </article>
-          <article>
-            <span><Icon name="camera" /></span>
-            <strong>Results you can see</strong>
-            <p>
-              The site is designed around authentic before-and-after work, not
-              generic home-service stock imagery.
-            </p>
-          </article>
-          <article>
-            <span><Icon name="shield" /></span>
-            <strong>Local and straightforward</strong>
-            <p>
-              Bright View is family-owned in Michigan, with a direct path from
-              browsing a service to requesting a quote.
-            </p>
-          </article>
+      <section className="section">
+        <div className="shell section-head">
+          <p className="eyebrow eyebrow-dark">Three ways to brighten the property</p>
+          <h2 style={{ color: "var(--navy)" }}>Pick the service. Skip the runaround.</h2>
         </div>
       </section>
 
-      <section className="seasonal-section section-shell">
-        <div className="seasonal-card">
-          <div className="seasonal-lights" aria-hidden="true">
-            {Array.from({ length: 8 }).map((_, index) => (
-              <i key={index} />
-            ))}
+      <ServiceStory />
+
+      <section className="section band-paper">
+        <div className="shell">
+          <div className="section-head">
+            <p className="eyebrow eyebrow-dark">Proof belongs in the photos</p>
+            <h2 style={{ color: "var(--navy)" }}>Before. After. Bright View.</h2>
           </div>
-          <div className="seasonal-copy">
-            <p className="eyebrow eyebrow-light">Holiday lighting</p>
-            <h2>Michigan gets dark early. Your house doesn&apos;t have to.</h2>
-            <p>
-              A dedicated seasonal service for a polished holiday display
-              without turning setup into your weekend project.
-            </p>
-            <Link className="button button-gold" href="/services/holiday-lighting">
-              Explore holiday lighting
-              <Icon name="arrow" />
-            </Link>
+          <ProjectGallery projects={projects.slice(0, 3)} />
+        </div>
+      </section>
+
+      <section className="section band-navy">
+        <div className="shell">
+          <div className="section-head section-head-invert">
+            <p className="eyebrow eyebrow-light">Why Bright View</p>
+            <h2>A small-business experience, on purpose.</h2>
           </div>
-          <div className="seasonal-mark">
-            <Icon name="lights" />
+          <div className="principle-list">
+            <article>
+              <span className="numeral">01</span>
+              <h3>Family-owned</h3>
+              <p>
+                Bright View is a Michigan family business, not a lead
+                marketplace routing your request somewhere else.
+              </p>
+            </article>
+            <article>
+              <span className="numeral">02</span>
+              <h3>Direct communication</h3>
+              <p>
+                You hear back from Bright View directly — no call center,
+                no automated runaround.
+              </p>
+            </article>
+            <article>
+              <span className="numeral">03</span>
+              <h3>A simple quote process</h3>
+              <p>
+                Tell us the job. We confirm the scope. That&apos;s the whole
+                process, start to finish.
+              </p>
+            </article>
           </div>
         </div>
       </section>
 
-      <section className="home-quote-cta">
-        <div className="section-shell quote-cta-inner">
-          <div>
-            <p className="eyebrow eyebrow-dark">Free quote</p>
-            <h2>Tell us what needs a brighter view.</h2>
-            <p>
-              Choose the service, send the basics, and Bright View can take it
-              from there.
-            </p>
-          </div>
-          <Link className="button button-navy" href="/quote">
-            Start my quote
+      <HowItWorks steps={homeSteps} heading="Four steps, start to finish." />
+
+      <section className="holiday-feature">
+        <Roofline className="holiday-feature-roofline" />
+        <div className="shell holiday-feature-inner">
+          <p className="eyebrow eyebrow-gold">Holiday lighting</p>
+          <h2>Michigan gets dark early. Your house doesn&apos;t have to.</h2>
+          <p className="dek">
+            Bright View plans the layout, handles the install, and takes it
+            all down after the season — so the only thing you do is turn it on.
+          </p>
+          <Link className="btn btn-gold" href="/services/holiday-lighting">
+            Explore holiday lighting
             <Icon name="arrow" />
           </Link>
         </div>
       </section>
+
+      <QuoteCTA
+        heading="Let's see what Bright View can do for your property."
+        copy="Choose the service, send the basics, and Bright View takes it from there."
+        buttonLabel="Get my free quote"
+      />
     </>
   );
 }

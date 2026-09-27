@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useMemo, useState } from "react";
-import { services } from "../lib/site";
+import { services } from "../data/services";
 import { Icon } from "./Icons";
 
 type QuoteFormProps = {
@@ -127,7 +127,7 @@ export function QuoteForm({
 
       <fieldset className="service-picker">
         <legend>Choose a service</legend>
-        <div className="service-picker-grid">
+        <div className="service-picker-row">
           {services.map((service) => (
             <label
               key={service.slug}
@@ -142,9 +142,7 @@ export function QuoteForm({
                 checked={selectedService === service.name}
                 onChange={() => setSelectedService(service.name)}
               />
-              <span className="service-picker-icon">
-                <Icon name={service.icon} />
-              </span>
+              <Icon name={service.icon} />
               <span>{service.shortName}</span>
             </label>
           ))}
@@ -234,7 +232,7 @@ export function QuoteForm({
 
       <button
         type="submit"
-        className="button button-navy button-wide quote-submit"
+        className="btn btn-navy btn-wide quote-submit"
         disabled={status.type === "sending"}
       >
         {status.type === "sending" ? "Sending..." : "Request my free quote"}

@@ -5,7 +5,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import logo from "../brightview-main-logo.png";
-import { services } from "../lib/site";
+import { services } from "../data/services";
+import { WindowMotif } from "./WindowMotif";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -24,21 +25,9 @@ export function Header() {
 
   return (
     <>
-      <div className="topline">
-        <span>Family-owned in Michigan</span>
-        <span className="topline-separator" />
-        <Link href="/quote">Free quotes</Link>
-      </div>
-
       <header className="site-header">
         <Link className="brand" href="/" aria-label="Bright View LLC home">
-          <Image
-            src={logo}
-            alt=""
-            priority
-            className="brand-mark"
-            sizes="58px"
-          />
+          <Image src={logo} alt="" priority className="brand-mark" sizes="50px" />
           <span className="brand-type">
             <strong>BRIGHT VIEW</strong>
             <small>LLC</small>
@@ -57,7 +46,7 @@ export function Header() {
               ))}
             </div>
           </div>
-          <Link href="/gallery">Results</Link>
+          <Link href="/gallery">Before &amp; After</Link>
           <Link href="/about">About</Link>
         </nav>
 
@@ -77,26 +66,31 @@ export function Header() {
         </button>
       </header>
 
-      <div className={`mobile-drawer ${open ? "is-open" : ""}`}>
-        <nav aria-label="Mobile navigation">
+      <div
+        className={`nav-sheet ${open ? "is-open" : ""}`}
+        aria-hidden={!open}
+      >
+        <WindowMotif className="nav-sheet-motif" />
+
+        <nav className="nav-sheet-links" aria-label="Mobile navigation">
           <Link href="/">Home</Link>
-          <div className="mobile-service-label">Services</div>
+          <div className="nav-service-label">Services</div>
           {services.map((service) => (
             <Link
-              className="mobile-service-link"
+              className="nav-service-link"
               key={service.slug}
               href={`/services/${service.slug}`}
             >
               {service.name}
             </Link>
           ))}
-          <Link href="/gallery">Before & After</Link>
-          <Link href="/about">About Bright View</Link>
+          <Link href="/gallery">Before &amp; After</Link>
+          <Link href="/about">About</Link>
         </nav>
 
-        <div className="drawer-bottom">
+        <div className="nav-sheet-bottom">
           <p>Have a property in mind?</p>
-          <Link className="button button-gold button-wide" href="/quote">
+          <Link className="btn btn-gold btn-wide" href="/quote">
             Request a free quote
           </Link>
         </div>
