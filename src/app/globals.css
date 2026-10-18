@@ -263,9 +263,12 @@ p { line-height: 1.6; }
 }
 
 
+/* Shared page edge: header, hero, tiles and lower row all align to it. */
+:root { --edge: clamp(20px, 4.2vw, 64px); }
+
 /* Home header matches the design reference: 66px bar, centered nav, pill quote button. */
 .nav-chevron { margin-left: 8px; vertical-align: middle; }
-.site-header--home .site-header__inner { height: 66px; width: 100%; max-width: 1800px; padding-inline: clamp(24px, 8vw, 123px); }
+.site-header--home .site-header__inner { height: 66px; width: 100%; max-width: 1600px; padding-inline: var(--edge); }
 .site-header--home { background: linear-gradient(180deg, rgba(2,10,9,.5), rgba(2,10,9,0)); }
 .site-header--home .site-brand__logo { width: 54px; height: 54px; }
 .site-header--home .site-nav { gap: 34px; }
@@ -274,9 +277,11 @@ p { line-height: 1.6; }
 .site-header--home .site-nav a[aria-current="page"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: -8px; height: 2px; background: #f0d28a; }
 .site-header--home .header-contact { padding: 0 22px; height: 40px; display: inline-flex; align-items: center; font-size: .86rem; font-weight: 600; background: #f8e3b4; box-shadow: 0 6px 18px rgba(0,0,0,.2); }
 @media (min-width: 951px) {
-  .site-header--home .site-nav { margin-left: clamp(40px, 10.4vw, 160px); }
+  .site-header--home .site-nav { margin-left: clamp(40px, 8vw, 130px); }
 }
 @media (max-width: 950px) {
-  .site-header--home .site-header__inner { padding-inline: 20px; }
   .site-header--home .header-contact { display: none; }
 }
+
+/* Footer shares the page edge so every section lines up. */
+.site-footer .container { width: 100%; max-width: 1600px; padding-inline: var(--edge); }

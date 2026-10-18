@@ -24,13 +24,13 @@
 /* Photo dissolves into the cream page behind the service tiles. */
 .fade {
   z-index: -1;
-  background: linear-gradient(180deg, rgba(247,241,229,0) 62%, rgba(247,241,229,.55) 82%, #f7f1e5 100%);
+  background: linear-gradient(180deg, rgba(247,241,229,0) 58%, rgba(247,241,229,.35) 76%, rgba(247,241,229,.8) 90%, #f7f1e5 100%);
 }
 .heroInner {
-  height: 100%;
-  padding: 88px 49px 0 99px;
+  width: 100%; max-width: 1600px; margin-inline: auto;
+  padding: 88px var(--edge) 0;
   display: flex;
-  align-items: flex-start;
+  align-items: stretch;
   justify-content: space-between;
   gap: 32px;
 }
@@ -38,9 +38,9 @@
 .pill {
   display: inline-flex; align-items: center; gap: 11px;
   height: 33px; padding: 0 19px 0 17px; border-radius: 40px;
-  background: rgba(255,255,255,.08);
+  background: rgba(14,22,18,.6);
   border: 1px solid rgba(255,255,255,.22);
-  backdrop-filter: blur(14px) saturate(140%); -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%); -webkit-backdrop-filter: blur(18px) saturate(140%);
   font-size: .68rem; font-weight: 650; letter-spacing: .08em; white-space: nowrap;
 }
 .pill i {
@@ -94,7 +94,7 @@
 /* Slideshow controls: compact glass pill, clear of the CTA row and the tile band. */
 .controls {
   display: inline-flex; align-items: center; gap: 4px; height: 36px; padding: 0 6px;
-  border-radius: 30px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.2);
+  border-radius: 30px; background: rgba(14,22,18,.6); border: 1px solid rgba(255,255,255,.2);
   backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
 }
 .controls button {
@@ -107,21 +107,21 @@
 .controls button:last-child { font-size: .72rem; }
 
 /* Frosted glass cards. Same recipe is reused by the service tiles. */
-.floating { width: min(302px, 25vw); flex: none; display: flex; flex-direction: column; gap: 4px; margin-top: 8px; }
+/* contain:size lets the copy column set the height; the cards then stretch to match it exactly. */
+.floating { width: min(302px, 25vw); flex: none; align-self: stretch; contain: size; display: flex; flex-direction: column; gap: 6px; }
 .glassLead, .glassCard {
   position: relative; display: flex; align-items: center; gap: 20px;
-  height: 57px; padding: 0 18px 0 24px; border-radius: 17px;
+  flex: 1; min-height: 0; padding: 0 18px 0 24px; border-radius: 17px;
   color: #fff; text-decoration: none; overflow: hidden;
   background:
-    linear-gradient(135deg, rgba(255,255,255,.17) 0%, rgba(255,255,255,.05) 55%, rgba(255,255,255,.09) 100%),
-    rgba(34,42,38,.34);
+    linear-gradient(135deg, rgba(255,255,255,.14) 0%, rgba(255,255,255,.03) 55%, rgba(255,255,255,.07) 100%),
+    rgba(16,24,20,.68);
   border: 1px solid rgba(255,255,255,.2);
-  backdrop-filter: blur(20px) saturate(150%); -webkit-backdrop-filter: blur(20px) saturate(150%);
+  backdrop-filter: blur(28px) saturate(140%); -webkit-backdrop-filter: blur(28px) saturate(140%);
   box-shadow: inset 0 1px 0 rgba(255,255,255,.3), inset 0 -1px 0 rgba(255,255,255,.05), 0 10px 30px rgba(0,0,0,.28);
   transition: background-color .2s ease, border-color .2s ease;
 }
-.glassLead { height: 66px; }
-.glassLead:hover, .glassCard:hover { border-color: rgba(255,255,255,.4); background-color: rgba(60,70,64,.4); }
+.glassLead:hover, .glassCard:hover { border-color: rgba(255,255,255,.4); background-color: rgba(30,42,36,.74); }
 .sunIcon { color: #f2c95c; flex: none; display: grid; place-items: center; }
 .sunIcon svg { width: 36px; height: 36px; }
 .benefitIcon { color: #e8d4a2; flex: none; display: grid; place-items: center; width: 30px; }
@@ -135,7 +135,6 @@
 .glassLead:hover .circle, .glassCard:hover .circle { background: rgba(255,255,255,.2); }
 
 @media (max-width: 1280px) {
-  .heroInner { padding-left: 64px; padding-right: 36px; }
   .floating { width: 270px; }
   .glassCard, .glassLead { padding-left: 16px; }
 }
@@ -143,17 +142,16 @@
   .hero { height: clamp(540px, 65svh, 600px); }
   .message h1 { font-size: clamp(3.2rem, 5.4vw, 4rem); }
   .floating { display: none; }
-  .heroInner { padding: 86px 40px 0; }
 }
 @media (max-width: 780px) {
   .hero { height: 560px; }
-  .heroInner { padding: 88px 24px 0; }
+  .heroInner { padding-top: 88px; }
   .message h1 { font-size: clamp(2.95rem, 8vw, 3.9rem); }
   .tint { background: linear-gradient(0deg, rgba(2,12,10,.78), rgba(2,12,10,.55) 55%, rgba(2,12,10,.3)); }
 }
 @media (max-width: 520px) {
   .hero { height: 555px; }
-  .heroInner { padding: 82px 20px 0; }
+  .heroInner { padding-top: 82px; }
   .pill { font-size: .6rem; padding: 0 12px; height: 30px; }
   .message h1 { font-size: clamp(2.55rem, 9.8vw, 3.1rem); }
   .mainAction { height: 46px; padding: 0 20px; gap: 12px; font-size: .86rem; }
@@ -174,7 +172,4 @@
   .message h1 { font-size: clamp(3.15rem, 3.9vw, 3.7rem); line-height: .94; }
   .message > p { margin-bottom: 11px; }
   .proofRow { margin-top: 8px; }
-  .floating { margin-top: 6px; }
-  .glassCard { height: 52px; }
-  .glassLead { height: 63px; }
 }

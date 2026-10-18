@@ -1,5 +1,5 @@
 .panel {
-  min-width: 0; height: 100%; padding: 31px 40px 24px; color: #fff; border-radius: 22px;
+  min-width: 0; height: 100%; padding: 28px 40px 22px; color: #fff; border-radius: 22px;
   display: flex; flex-direction: column;
   background:
     radial-gradient(120% 90% at 100% 0%, rgba(80,130,100,.22), transparent 60%),
@@ -15,9 +15,9 @@
   color: #fff; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.4); font-size: .95rem; line-height: 1;
 }
 .nav button:hover { background: rgba(255,255,255,.2); }
-.quote { margin: 18px 0 0; font-size: .93rem; line-height: 1.42; font-weight: 400; color: #f7f7f0; }
-.person { display: flex; align-items: center; gap: 12px; margin-top: 20px; }
-.person svg { border-radius: 50%; border: 2px solid rgba(255,255,255,.85); flex: none; }
+.quote { margin: 16px 0 0; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; min-height: 5.1em; flex: none; font-size: .93rem; line-height: 1.42; font-weight: 400; color: #f7f7f0; }
+.person { display: flex; align-items: center; gap: 12px; margin-top: 14px; }
+.person .initials { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; flex: none; background: #f8e3b4; color: #14291f; font-size: .85rem; font-weight: 700; }
 .person span { display: flex; flex-direction: column; line-height: 1.3; }
 .person strong { font-size: .95rem; font-weight: 600; }
 .person small { color: #b9c7bd; font-size: .8rem; }

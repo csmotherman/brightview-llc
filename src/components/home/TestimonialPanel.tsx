@@ -21,16 +21,11 @@ export function TestimonialPanel() {
       </div>
       <blockquote className={styles.quote}>&ldquo;{item.quote}&rdquo;</blockquote>
       <div className={styles.person}>
-        <svg viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">
-          <rect width="40" height="40" fill="#b9c9d4" />
-          <circle cx="20" cy="16" r="7" fill="#e9c4a4" />
-          <path d="M13 15c0-6 4-8 8-8s6 3 6 8c-2-3-4-4-7-4s-5 1-7 4z" fill="#4a3426" />
-          <path d="M6 40c1-8 6-12 14-12s13 4 14 12z" fill="#1f3b63" />
-        </svg>
+        <span className={styles.initials} aria-hidden="true">{item.name.split(" ").map((w) => w[0]).join("")}</span>
         <span><strong>{item.name}</strong><small>{item.place}</small></span>
       </div>
       <div className={styles.dots} aria-hidden="true">
-        <i className={styles.on} /><i /><i />
+        {list.map((_, i) => <i key={i} className={i === index ? styles.on : undefined} />)}
       </div>
       <dl className={styles.stats}>
         {homeProof.stats.map((stat) => (
