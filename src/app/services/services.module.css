@@ -84,3 +84,7 @@
 @media (prefers-reduced-motion: reduce) {
   .zoomIcon { transition: none; }
 }
+
+/* Only the finished Window Cleaning detail page gets a deeper link. */
+.detailLink { display: inline-flex; align-items: center; gap: 12px; margin-top: 8px; padding: 3px 0; font-size: .81rem; text-decoration: underline; text-underline-offset: 4px; color: #164c7b; font-weight: 750; }
+.detailLink:hover { color: #092f52; }
