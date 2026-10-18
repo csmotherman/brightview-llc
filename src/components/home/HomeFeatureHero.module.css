@@ -47,12 +47,12 @@
   white-space: pre-line; text-wrap: balance;
   font-family: var(--font-display); font-weight: 580;
   font-size: clamp(3.5rem, 4.75vw, 4.7rem); line-height: .96; letter-spacing: -.043em;
-  max-width: 640px; color: #fff; margin: 16px 0 13px;
+  max-width: 640px; color: #fff; margin: 13px 0 9px;
 }
 .message > p {
   max-width: 518px; color: #f8f8f4;
   font-size: clamp(.99rem, 1.13vw, 1.075rem); line-height: 1.4;
-  margin: 0 0 17px;
+  margin: 0 0 14px;
 }
 .actions { display: flex; align-items: center; flex-wrap: wrap; gap: 17px 27px; }
 .mainAction {
@@ -74,10 +74,10 @@
   border: 1px solid rgba(255,255,255,.66); border-radius: 50%;
   font-size: 1.04rem;
 }
-.finePrint { display: block; margin-top: 9px; color: #e5e7e0; font-size: .68rem; }
+.finePrint { display: block; margin-top: 6px; color: #e5e7e0; font-size: .68rem; }
 
 /* The slideshow controls are in the copy's normal flow: they cannot cover the CTA. */
-.controls { position: static; width: 100%; margin-top: 14px; }
+.controls { position: static; width: 100%; margin-top: 10px; }
 .controlsInner { display: flex; align-items: center; flex-wrap: wrap; gap: 11px; }
 .slides { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
 .slides button {
