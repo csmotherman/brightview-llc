@@ -11,15 +11,6 @@ export type HomeProject = {
 
 export const homeProjects: HomeProject[] = [
   {
-    id: "windows",
-    label: "Windows",
-    category: "Window cleaning",
-    title: "A clearer view, inside and out.",
-    detail: "The kind of change that shows up in every reflection.",
-    before: "/images/projects/window-cleaning/Window Before 4-3.png",
-    after: "/images/projects/window-cleaning/Window After 4-3.png",
-  },
-  {
     id: "pavers",
     label: "Brick pavers",
     category: "Pressure washing",
@@ -27,6 +18,15 @@ export const homeProjects: HomeProject[] = [
     detail: "See the surface transformation, from one photo to the next.",
     before: "/images/projects/pressure-washing/BrickPaver Before 4-3.png",
     after: "/images/projects/pressure-washing/BrickPaver After 4-3.png",
+  },
+  {
+    id: "windows",
+    label: "Windows",
+    category: "Window cleaning",
+    title: "A clearer view, inside and out.",
+    detail: "The kind of change that shows up in every reflection.",
+    before: "/images/projects/window-cleaning/Window Before 4-3.png",
+    after: "/images/projects/window-cleaning/Window After 4-3.png",
   },
   {
     id: "fence",

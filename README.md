@@ -43,3 +43,7 @@ npm run build
 - Review each reserved page before publishing. The whole site remains `noindex` until launch readiness is confirmed.
 
 No Jobber, CRM, pricing, scheduling, booking, payments, database or quote intake is implemented. No invented reviews, ratings, credentials, staff imagery or precise coverage claims.
+
+## New homepage reference layout (pending review)
+
+A screenshot-guided homepage design uses deep evergreen, cream and champagne-gold. The opening slideshow features holiday lighting first using real BrightView pictures, then pressure washing and windows. A transparent header overlays the large image; four project-image service tiles overlap the hero; below, a compact process and genuine before/after comparison sit next to a factual trust panel. There are **no** invented metrics/testimonials and no booking integration. Update seasonal hero slides in `src/content/home-feature-slides.ts`. The 4th Gutter Cleaning card is linked to existing additional project evidence, not a standalone booking flow. All new work is subject to visual review before merge.

@@ -40,3 +40,14 @@ The bottom Get Free Quote button currently opens the verified BrightView Faceboo
 8. Quote form **last**
 
 Keep the site noindex until launch approval.
+
+## Screenshot-inspired homepage refresh (review branch)
+
+- Homepage follows the supplied layout reference: photographic evergreen-toned hero with transparent navigation, cream-gold quote button, four photo service tiles, and a cream lower strip with process / real before-after / dark proof panel.
+- Real photography from the repo only; no placeholder cards, external image hotlinks or simulated reviews.
+- Existing BrightView logo preserved. The screenshot's example three faces, 200+ happy customers, quoted testimonial, 5.0 rating and other unverified superlatives were deliberately not reproduced.
+- Holiday lighting is the first hero feature during the current season; subsequent slides feature pressure washing and window cleaning. Slideshow controls include pause/play, previous/next and accessible direct selection. Quote requests still go to Facebook, **not an online booking system**.
+- Four service tiles visually match the sample. Window, pressure and holiday lighting are the three confirmed core services. The Gutter Cleaning tile links only to the genuine additional-project photos already on /services; don't imply a separate gutter quote flow until scope is confirmed.
+- The right-hand proof panel shows real photograph counts, existing categories, and verified family-owned Michigan context instead of invented reviews.
+- Screenshot imagery itself is used for layout inspiration only, not as a production image; no fabricated before/after property photograph.
+- The previous slideshow PR #5 is superseded by this visual refresh. Keep the remaining service-page PR #4 independently reviewable.
