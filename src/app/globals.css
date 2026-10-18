@@ -55,26 +55,6 @@ p { line-height: 1.6; }
 .header-contact span { margin-left: 8px; }
 .menu-toggle, .mobile-nav { display: none; }
 
-/* The real job photograph is part of the layout, not a decorative poster. */
-.hero { background: var(--cream); overflow: hidden; }
-.hero__inner { display: grid; grid-template-columns: 44% 56%; align-items: stretch; }
-.hero__copy { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: 22px 32px 22px 0; }
-.hero__eyebrow { margin: 0 0 21px; font-size: .69rem; letter-spacing: .095em; color: #31546f; text-transform: uppercase; font-weight: 790; }
-.hero__eyebrow span { margin: 0 7px; color: #b2892d; }
-.hero h1 { max-width: 535px; margin: 0; font-size: clamp(2.65rem, 3.8vw, 4.35rem); font-weight: 835; line-height: 1.09; letter-spacing: -.047em; }
-.hero__description { max-width: 420px; margin: 22px 0 24px; color: #495c6f; font-size: clamp(.96rem, 1.18vw, 1.08rem); line-height: 1.65; }
-.hero__actions { display: flex; flex-wrap: wrap; gap: 11px; }
-.hero__contact-note { margin: 12px 0 0; color: #637282; font-size: .72rem; }
-.hero__image { position: relative; min-width: 0; overflow: hidden; margin-right: calc(0px - var(--page-gutter)); background: #dae3e9; }
-.hero__photo { object-fit: cover; object-position: 53% 48%; }
-.hero__image::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(90deg, var(--cream) 0%, rgb(247 247 244 / 48%) 7%, transparent 19%);
-}
-@media (min-width: 801px) {
-  .hero__inner { height: clamp(380px, calc(100svh - 165px), 600px); }
-}
-
 /* Services: photo-first editorial links instead of boxed cards. */
 .section { padding: 80px 0 90px; }
 .section-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 25px; margin-bottom: 30px; }
@@ -147,8 +127,6 @@ p { line-height: 1.6; }
   .site-nav { gap: 14px; }
   .site-header__inner { gap: 19px; }
   .site-nav a { font-size: .76rem; }
-  .hero__copy { padding-right: 22px; }
-  .hero h1 { font-size: clamp(2.55rem, 3.85vw, 3.55rem); }
   .services-grid { gap: 17px; }
 }
 @media (max-width: 950px) {
@@ -159,21 +137,12 @@ p { line-height: 1.6; }
   .mobile-nav--open { display: flex; flex-direction: column; }
   .mobile-nav a { padding: 13px 2px; text-decoration: none; border-bottom: 1px solid var(--line); font-weight: 710; }
   .mobile-nav a:last-child { margin-top: 12px; padding-inline: 12px; border: 0; color: var(--navy); background: var(--gold); }
-  .hero h1 { font-size: clamp(2.45rem, 4.2vw, 3.15rem); }
   .footer-inner { grid-template-columns: 1.5fr 1fr 1fr; }
   .footer-inner .footer-links:last-child { grid-column: 2; }
 }
 
 /* Put a real photo in the first mobile screen, not below a wall of copy. */
 @media (max-width: 800px) {
-  .hero__inner { display: flex; flex-direction: column; }
-  .hero__image { order: -1; height: clamp(195px, 42vw, 295px); margin: 0 calc(0px - var(--page-gutter)); }
-  .hero__photo { object-position: center 44%; }
-  .hero__image::after { background: linear-gradient(0deg, var(--cream), rgb(247 247 244 / 13%) 12%, transparent 27%); }
-  .hero__copy { padding: 28px 0 37px; }
-  .hero__eyebrow { margin-bottom: 11px; }
-  .hero h1 { max-width: 630px; font-size: clamp(2.5rem, 6.7vw, 3.7rem); }
-  .hero__description { margin: 15px 0 18px; }
   .section { padding: 62px 0 68px; }
   .section-heading h2, .about-preview h2, .contact-cta h2 { font-size: clamp(2rem, 5.2vw, 2.9rem); }
   .service__photo { aspect-ratio: 4/4.4; }
@@ -182,9 +151,6 @@ p { line-height: 1.6; }
   .site-header__inner { height: 67px; }
   .site-brand__logo { width: 50px; height: 50px; }
   .site-brand__text strong { font-size: 1.02rem; }
-  .hero__image { height: clamp(185px, 50vw, 240px); }
-  .hero h1 { font-size: clamp(2.5rem, 9vw, 3.15rem); }
-  .hero__copy { padding-bottom: 32px; }
   .services-grid { grid-template-columns: 1fr; gap: 35px; }
   .service__photo { aspect-ratio: 4/3; }
   .service__heading { margin-top: 14px; }
@@ -204,11 +170,6 @@ p { line-height: 1.6; }
   .footer-bottom { flex-direction: column; }
 }
 @media (max-width: 440px) {
-  .hero__actions { width: 100%; }
-  .hero__actions .button { flex: 1; gap: 9px; padding-inline: 12px; font-size: .79rem; }
-  .hero h1 { font-size: clamp(2.45rem, 10.3vw, 3rem); }
-  .hero__description { font-size: .93rem; }
-  .hero__contact-note { font-size: .7rem; }
   .section { padding: 50px 0 58px; }
   .section-heading h2, .about-preview h2, .contact-cta h2 { font-size: 2.1rem; }
   .showcase__caption span { display: block; margin-top: 2px; }

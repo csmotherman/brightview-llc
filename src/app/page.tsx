@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BeforeAfterShowcase } from "@/components/home/BeforeAfterShowcase";
+import { FeaturedCarousel } from "@/components/home/FeaturedCarousel";
 import { Container } from "@/components/layout/Container";
 import { site } from "@/config/site";
 
@@ -31,42 +32,7 @@ const services = [
 export default function HomePage() {
   return (
     <>
-      <section className="hero" aria-labelledby="hero-title">
-        <Container className="hero__inner">
-          <div className="hero__copy">
-            <p className="hero__eyebrow">BrightView LLC <span aria-hidden="true">/</span> Family-owned in Michigan</p>
-            <h1 id="hero-title">Window cleaning &amp; exterior care, done right.</h1>
-            <p className="hero__description">
-              Window cleaning, pressure washing, and holiday lighting for Michigan homes.
-            </p>
-            <div className="hero__actions">
-              <a
-                className="button button--primary"
-                href={site.facebookUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Get Free Quote — contact BrightView on Facebook (opens in a new tab)"
-              >
-                Get Free Quote <span aria-hidden="true">↗</span>
-              </a>
-              <a className="button button--secondary" href="#work">
-                See our work <span aria-hidden="true">→</span>
-              </a>
-            </div>
-            <p className="hero__contact-note">Quote requests currently open our Facebook page.</p>
-          </div>
-          <div className="hero__image">
-            <Image
-              src="/images/Hero-HomePage.png"
-              alt="A BrightView team member cleaning a residential window"
-              fill
-              priority
-              sizes="(max-width: 800px) 100vw, 56vw"
-              className="hero__photo"
-            />
-          </div>
-        </Container>
-      </section>
+      <FeaturedCarousel />
 
       <section className="section section--services" id="services" aria-labelledby="services-title">
         <Container>

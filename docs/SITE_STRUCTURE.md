@@ -40,3 +40,9 @@ The bottom Get Free Quote button currently opens the verified BrightView Faceboo
 8. Quote form **last**
 
 Keep the site noindex until launch approval.
+
+## Homepage seasonal features
+
+The homepage hero now rotates through three real-photo features, with Christmas / holiday lighting in the first position. The other features direct visitors to the existing Services catalog. The seasonal call-to-action contacts BrightView via its existing Facebook page; it does **not** claim that appointments or bookings can be completed online.
+
+The content and order live in `src/content/home-features.ts`. Replace or retire seasonal copy manually when appropriate; add actual business announcements only once verified. The carousel auto-rotates with pause, slide selection and previous/next controls, and respects reduced-motion settings. No artificial reviews, dates, deals or inventory claims have been introduced.

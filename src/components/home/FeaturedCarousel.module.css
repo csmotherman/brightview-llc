@@ -1,0 +1,128 @@
+/* Featured stories / season-led homepage hero. Intentionally scoped to the carousel. */
+.carousel { color: #fff; background: #071b35; }
+.stage {
+  position: relative; isolation: isolate; display: flex; align-items: center;
+  overflow: hidden; min-height: clamp(460px, calc(100svh - 172px), 630px);
+}
+.backgrounds { position: absolute; inset: 0; z-index: 0; }
+.background {
+  position: absolute; inset: 0; display: grid; grid-template-columns: 77% 23%;
+  gap: 5px; opacity: 0; visibility: hidden;
+  transition: opacity .75s ease, visibility .75s;
+}
+.backgroundActive { opacity: 1; visibility: visible; }
+.mainPhoto, .sidePhoto { position: relative; min-width: 0; background: #172a37; overflow: hidden; }
+.background img { object-fit: cover; }
+.sidePhoto { border-left: 1px solid rgba(255,255,255,.18); }
+.stage::after {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(3,14,26,.94) 0%, rgba(3,14,26,.85) 19%, rgba(3,14,26,.65) 40%, rgba(3,14,26,.18) 72%, rgba(3,14,26,.07) 100%),
+    linear-gradient(0deg, rgba(3,14,26,.42) 0%, transparent 28%);
+}
+.copy {
+  position: relative; z-index: 2; width: min(calc(100% - var(--page-gutter) - var(--page-gutter)), 1240px);
+  margin: 0 auto; padding: 75px 0 81px; color: #fff;
+}
+.eyebrow {
+  display: flex; align-items: center; gap: 10px; margin: 0 0 23px;
+  font-weight: 790; font-size: .73rem; letter-spacing: .13em; text-transform: uppercase;
+  color: #f4d37a; text-shadow: 0 1px 4px rgba(0,0,0,.3);
+}
+.featureMark { display: block; width: 20px; height: 2px; background: #f4be34; }
+.copy h1 {
+  margin: 0; max-width: 690px; color: #fff;
+  font-size: clamp(3.4rem, 5.8vw, 5.95rem); line-height: 1.04;
+  letter-spacing: -.057em; font-weight: 810;
+  text-wrap: balance;
+}
+.summary {
+  max-width: 485px; margin: 24px 0 29px; color: #f0f3f5;
+  line-height: 1.63; font-size: clamp(1rem, 1.3vw, 1.12rem);
+  text-shadow: 0 1px 2px rgba(0,0,0,.2);
+}
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 17px 25px; }
+.actions .button { font-size: .91rem; min-height: 52px; }
+.secondaryLink { display: inline-flex; align-items: center; gap: 13px; text-decoration: none; font-size: .88rem; color: #fff; font-weight: 750; border-bottom: 1px solid rgba(255,255,255,.66); padding-bottom: 7px; }
+.secondaryLink:hover { border-color: #fff; }
+.contactNote { margin: 11px 0 0; color: #e0e8ee; font-size: .75rem; }
+.imageAttribution {
+  position: absolute; z-index: 2; bottom: 15px; right: 24px;
+  color: rgba(255,255,255,.9); text-shadow: 0 1px 5px #000;
+  text-transform: uppercase; letter-spacing: .1em; font-size: .61rem; font-weight: 750;
+}
+.controls {
+  display: grid; grid-template-columns: 78px minmax(0, 1fr) auto;
+  align-items: stretch; width: min(calc(100% - var(--page-gutter) - var(--page-gutter)), 1240px);
+  min-height: 76px; margin: 0 auto; color: #fff;
+}
+.controlLabel { display: flex; align-items: center; gap: 9px; font-size: .72rem; font-weight: 800; letter-spacing: .08em; color: #a9c0d3; }
+.controlLabel .current { font-size: 1.12rem; color: #fff; }
+.separator { color: #e2bc54; }
+.slideSelectors { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; }
+.slideSelector {
+  position: relative; display: flex; align-items: center; gap: 12px;
+  min-width: 0; padding: 10px clamp(12px, 1.8vw, 30px);
+  background: transparent; color: #b6c8d6; border: 0; border-left: 1px solid #31465b;
+  text-align: left; font-size: .8rem; font-weight: 730;
+  transition: background .15s ease, color .15s ease;
+}
+.slideSelector:hover { color: #fff; background: #102a47; }
+.slideSelector::after {
+  content: ""; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 3px; background: transparent;
+}
+.selectorActive { color: #fff; background: #112b47; }
+.selectorActive::after { background: #f4be34; }
+.selectorNumber { flex: none; font-size: .69rem; color: #e0bc63; letter-spacing: .04em; }
+.transport { display: flex; align-items: stretch; border-left: 1px solid #31465b; }
+.transportButton {
+  width: 48px; min-height: 64px; padding: 0; border: 0; border-right: 1px solid #31465b;
+  background: transparent; color: #fff; font-size: 1.17rem; display: grid; place-items: center;
+}
+.transportButton:hover { background: #173657; }
+.transportButton:first-child { font-size: .92rem; }
+.transportButton:last-child { border-right: none; }
+
+@media (max-width: 1010px) {
+  .stage { min-height: 510px; }
+  .copy h1 { font-size: clamp(3.4rem, 6.4vw, 5rem); max-width: 590px; }
+  .background { grid-template-columns: 79% 21%; }
+  .slideSelector { gap: 7px; padding-inline: 12px; font-size: .74rem; }
+  .controls { grid-template-columns: 58px minmax(0, 1fr) auto; }
+  .transportButton { width: 43px; }
+}
+@media (max-width: 700px) {
+  .stage { min-height: 520px; align-items: flex-end; }
+  .background { grid-template-columns: 1fr; gap: 0; }
+  .sidePhoto { display: none; }
+  .stage::after {
+    background:
+      linear-gradient(0deg, rgba(3,14,26,.97) 0%, rgba(3,14,26,.88) 29%, rgba(3,14,26,.42) 65%, rgba(3,14,26,.18) 100%);
+  }
+  .copy { padding: 85px 0 35px; }
+  .copy h1 { max-width: 580px; font-size: clamp(2.8rem, 8.9vw, 4.4rem); }
+  .eyebrow { margin-bottom: 15px; font-size: .67rem; }
+  .summary { margin: 16px 0 23px; max-width: 450px; font-size: .95rem; }
+  .actions { gap: 16px; }
+  .actions .button { min-height: 46px; font-size: .83rem; }
+  .secondaryLink { font-size: .81rem; }
+  .imageAttribution { display: none; }
+  .controls { display: grid; grid-template-columns: minmax(0, 1fr) auto; min-height: 0; }
+  .controlLabel { padding: 14px 0; min-height: 50px; }
+  .transportButton { min-height: 50px; }
+  .slideSelectors { grid-column: 1 / -1; grid-row: 2; border-top: 1px solid #31465b; }
+  .slideSelector { min-height: 57px; font-size: .7rem; gap: 6px; padding: 9px; line-height: 1.3; }
+  .slideSelector:first-child { border-left: 0; }
+  .selectorNumber { display: none; }
+}
+@media (max-width: 400px) {
+  .stage { min-height: 540px; }
+  .copy h1 { font-size: clamp(2.65rem, 10vw, 3.35rem); }
+  .summary { font-size: .9rem; }
+  .actions { gap: 14px; }
+  .slideSelector { font-size: .65rem; padding: 8px 6px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .background, .slideSelector { transition: none !important; }
+}
