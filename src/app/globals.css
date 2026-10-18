@@ -251,3 +251,13 @@ p { line-height: 1.6; }
   .site-brand__text strong { font-size: .94rem; }
   .site-brand__text small { font-size: .45rem; }
 }
+
+
+/* Reference screenshot: centered desktop navigation, independent quote button. */
+@media (min-width: 951px) {
+  .site-header--home .site-nav {
+    margin-left: clamp(45px, 7vw, 112px);
+    margin-right: 0;
+  }
+  .site-header--home .header-contact { margin-left: auto; }
+}

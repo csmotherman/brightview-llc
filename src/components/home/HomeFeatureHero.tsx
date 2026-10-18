@@ -87,24 +87,8 @@ export function HomeFeatureHero() {
             <Link href={slide.secondaryHref} className={styles.secondaryAction}>{slide.secondary} <span className={styles.circleArrow} aria-hidden="true">→</span></Link>
           </div>
           {slide.key === "holiday" && <small className={styles.finePrint}>Holiday lighting inquiries currently open our Facebook page.</small>}
-        </div>
 
-        <aside className={styles.floating} aria-label="Our services">
-          <div className={styles.glassIntro}>
-            <span className={styles.sunIcon} aria-hidden="true">✳</span>
-            <p>FAMILY-OWNED<br/><strong>EXTERIOR CARE IN MICHIGAN</strong></p>
-          </div>
-          <div className={styles.glassList}>
-            <p className={styles.floatingTitle}>WHAT BRIGHTVIEW DOES</p>
-            <p><span aria-hidden="true">✧</span> Window Cleaning</p>
-            <p><span aria-hidden="true">◇</span> Pressure Washing</p>
-            <p><span aria-hidden="true">✳</span> Holiday Lighting</p>
-            <Link href="/services">Explore all project photos <span aria-hidden="true">↗</span></Link>
-          </div>
-        </aside>
-      </div>
-
-      <div className={styles.controls}>
+          <div className={styles.controls}>
         <div className={styles.controlsInner}>
           <div className={styles.slides} role="group" aria-label="Choose a featured story">
             {homeSlides.map((item, index) => (
@@ -116,7 +100,7 @@ export function HomeFeatureHero() {
                 onClick={() => choose(index)}
                 aria-label={"Show " + item.photoLabel.toLowerCase() + " feature"}
               >
-                <span>{"0" + String(index + 1)}</span> {item.photoLabel}
+                <span>{"0" + String(index + 1)}</span> {item.key === "holiday" ? "HOLIDAY" : item.key === "exterior" ? "PRESSURE" : "WINDOWS"}
               </button>
             ))}
           </div>
@@ -130,6 +114,23 @@ export function HomeFeatureHero() {
           </div>
         </div>
       </div>
+        </div>
+
+        <aside className={styles.floating} aria-label="Why explore BrightView">
+          <div className={styles.glassIntro}>
+            <span className={styles.sunIcon} aria-hidden="true">☼</span>
+            <p>FAMILY-OWNED<br/><strong>EXTERIOR CARE IN MICHIGAN</strong></p>
+          </div>
+          <div className={styles.glassList}>
+            <p className={styles.floatingTitle}>THE BRIGHTVIEW DIFFERENCE</p>
+            <p><span aria-hidden="true">✧</span> Clearer Window Views</p>
+            <p><span aria-hidden="true">◇</span> Refreshed Outdoor Areas</p>
+            <p><span aria-hidden="true">✳</span> Holiday-Ready Homes</p>
+            <p><span aria-hidden="true">▤</span> Real Project Photos</p>
+          </div>
+        </aside>
+      </div>
+
     </section>
   );
 }

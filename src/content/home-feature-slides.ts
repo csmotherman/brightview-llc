@@ -8,7 +8,7 @@ export const homeSlides = [
   {
     key: "holiday",
     eyebrow: "HOLIDAY SEASON / BRIGHTVIEW",
-    title: "Make The Holidays Shine.",
+    title: "Holiday Lights\nAre Here.",
     description:
       "Bring a little more light to your Michigan home. Explore our real holiday lighting displays and tell us what you have in mind.",
     image: "/images/projects/holiday-lights/House3.png",
@@ -24,7 +24,7 @@ export const homeSlides = [
   {
     key: "exterior",
     eyebrow: "A FRESH FIRST IMPRESSION",
-    title: "Curb Appeal Restored.",
+    title: "Curb Appeal\nRestored.",
     description:
       "From pavers and porches to outdoor surfaces, see what a proper clean can change. Real projects, real results.",
     image: "/images/projects/pressure-washing/BrickPaver After 4-3.png",
@@ -40,7 +40,7 @@ export const homeSlides = [
   {
     key: "windows",
     eyebrow: "CLEARER VIEWS START HERE",
-    title: "Let The Light Back In.",
+    title: "Clearer Windows.\nBrighter Views.",
     description:
       "Clear windows make a difference inside and out. Take a look at our residential window-cleaning work.",
     image: "/images/Hero-HomePage.png",
