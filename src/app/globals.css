@@ -285,3 +285,84 @@ p { line-height: 1.6; }
 
 /* Footer shares the page edge so every section lines up. */
 .site-footer .container { width: 100%; max-width: 1600px; padding-inline: var(--edge); }
+
+
+/* Brand consistency for inner pages — photo-led homepage styles remain isolated. */
+body { background: #f7f1e5; }
+.button { border-radius: 999px; }
+.button--secondary { border-color: #9ba99b; }
+.button--secondary:hover { background: #fbf8f1; }
+.text-link { border-bottom-color: #bca77e; }
+.kicker { color: #49674e; }
+
+/* Non-home header: same deep evergreen and champagne accents as the homepage. */
+.site-header:not(.site-header--home) {
+  background: #0b2a20;
+  color: #fff;
+  border-bottom: 1px solid rgba(248,227,180,.28);
+  box-shadow: 0 8px 20px rgba(5,22,17,.09);
+}
+.site-header:not(.site-header--home) .site-header__inner {
+  width: 100%;
+  max-width: 1600px;
+  padding-inline: var(--edge);
+}
+.site-header:not(.site-header--home) .site-brand__text small { color: #e8dabe; }
+.site-header:not(.site-header--home) .site-nav a { color: #fff; }
+.site-header:not(.site-header--home) .site-nav a:hover { color: #f8e3b4; }
+.site-header:not(.site-header--home) .site-nav a[aria-current="page"] {
+  color: #fff;
+  text-decoration-color: #f0d28a;
+}
+.site-header:not(.site-header--home) .header-contact { color: #13251c; }
+@media (max-width: 950px) {
+  .site-header:not(.site-header--home) .menu-toggle {
+    background: #12382b;
+    border: 1px solid #698477;
+    border-radius: 10px;
+  }
+  .site-header:not(.site-header--home) .menu-toggle span { background: #fff; }
+  .site-header:not(.site-header--home) .mobile-nav {
+    background: #103126;
+    border-bottom: 1px solid rgba(248,227,180,.26);
+    box-shadow: 0 14px 20px rgba(0,14,10,.18);
+  }
+  .site-header:not(.site-header--home) .mobile-nav a {
+    color: #faf6ee;
+    border-bottom-color: rgba(255,255,255,.16);
+  }
+  .site-header:not(.site-header--home) .mobile-nav a:last-child {
+    color: #122b21;
+    border-radius: 999px;
+    text-align: center;
+    background: #f8e3b4;
+  }
+}
+
+/* Preserve every placeholder's text; bring the visual scaffold into the same brand. */
+.placeholder-page {
+  background:
+    radial-gradient(ellipse 72% 105% at 110% 10%, rgba(216,184,119,.16), transparent 66%),
+    #f7f1e5;
+  border-bottom: 1px solid #e5dccb;
+}
+.placeholder-page .kicker { color: #50705a; letter-spacing: .16em; }
+.placeholder-page h1 {
+  color: #102d22;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -.035em;
+  line-height: 1.08;
+}
+.placeholder-page p:not(.kicker) { color: #546458; }
+.placeholder-page .text-link {
+  color: #1e4c37;
+  border-bottom-color: #c4aa77;
+}
+.placeholder-page .text-link:hover { border-bottom-color: #1e4c37; }
+
+/* Shared footer warm-toned instead of the old navy-blue accents. */
+.site-footer { background: #0a251c; }
+.footer-brand p, .footer-links a { color: #e1e8dc; }
+.footer-links h2 { color: #f1dbad; }
+.footer-bottom { color: #c0cbbf; border-top-color: #416050; }
