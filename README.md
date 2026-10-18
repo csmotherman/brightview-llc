@@ -1,64 +1,32 @@
-# Bright View LLC
+# BrightView LLC — Fresh Foundation
 
-A mobile-first Next.js website for Bright View LLC, a family-owned Michigan
-window cleaning, power washing, and holiday lighting business.
+This repository is deliberately reset to a **minimal, working Next.js App Router scaffold**.
 
-Design system: **Great Lakes Clarity** — navy, bright blue, water blue, and
-gold, built around a recurring window-pane motif (clean glass, reflection,
-sunlight) instead of a generic home-services template.
-
-## Structure
-
-```
-lib/business.ts     Central business facts (name, phone, email, service area, socials)
-data/services.ts     Service copy, coverage, process, FAQs
-data/projects.ts     Real before/after project photography (empty until added)
-components/          Header, mobile nav sheet, BeforeAfterSlider, ServiceStory, etc.
-app/                 Next.js App Router pages
-```
-
-Single source of truth for business facts lives in `lib/business.ts`. Fields
-that aren't confirmed yet (phone, email, service area, Google rating, owner
-photo, etc.) are left `undefined`, and every component that reads them hides
-the related UI rather than rendering a placeholder or invented value.
-
-## Adding real project photography
-
-See `public/projects/README.md` for the exact steps. Short version: drop
-matched before/after images into `public/projects/<service>/` and add an
-entry to the `projects` array in `data/projects.ts`. The homepage, service
-pages, and `/gallery` all read from that one array — until a service has at
-least one entry, its before/after section shows an honest "portfolio in
-progress" state instead of a fake or placeholder job.
-
-## Quote form setup
-
-Set this environment variable in Vercel:
-
-```
-BRIGHTVIEW_QUOTE_WEBHOOK=https://your-webhook-endpoint
-```
-
-The app POSTs quote data to that URL. This can point to an email workflow,
-Make, Zapier, a CRM later, or another lead destination without redesigning
-the customer-facing form. Until the variable is configured, the form clearly
-directs customers to Bright View's Facebook page instead of silently
-dropping a lead.
+**This change does not build the website.** The homepage is an intentional holding screen. Each page will be designed, implemented, and reviewed separately.
 
 ## Run locally
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
-## Still needed from Bright View before final public launch
+## Current scope
 
-- Business phone number and/or lead email (if they should be displayed —
-  `lib/business.ts`)
-- Confirmed service area / city list (`lib/business.ts` → `serviceArea`)
-- Real before-and-after project photography (`data/projects.ts`)
-- Owner/family photo for `/about` (`lib/business.ts` → `ownerPhotoSrc`)
-- Google Business URL, review rating/count, if Bright View wants them shown
-- Whether Bright View is licensed/insured, if that should be stated
-- The `BRIGHTVIEW_QUOTE_WEBHOOK` destination for live quote leads
+- Basic responsive shell (header, content container, footer, skip link).
+- Brand identity and the original logo preserved in `public/brand/`.
+- Small reusable design-token layer; no complex theme or prebuilt page templates.
+- Reserved page directories; no unfinished pages linked in navigation.
+- Development-stage `noindex` metadata to prevent accidental search indexing.
+- No quote form, CRM, webhook, booking, pricing, database, authentication or payment integration.
+
+## Next steps, one page at a time
+
+1. Design and implement the homepage in `src/app/page.tsx`.
+2. Implement the three service pages individually.
+3. Build project proof, about, reviews, service area, and other pages as real content becomes available.
+4. Revisit contact and lead intake **only when requirements are agreed**.
+
+See [docs/SITE_STRUCTURE.md](docs/SITE_STRUCTURE.md) for the directory layout and page ownership rules.
+
+Before public launch: verify business details and imagery, add real navigation only to existing routes, check accessibility and responsive behavior, restore appropriate indexing, and create a sitemap for published pages.
