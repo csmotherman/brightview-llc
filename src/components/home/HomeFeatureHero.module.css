@@ -1,167 +1,168 @@
-/* Screenshot-matched homepage hero geometry; all measurements include padding. */
+/* Hero geometry measured from the 1536px design reference. */
 .hero {
   position: relative;
-  height: 646px;
-  min-height: 646px;
-  padding-top: 96px;
+  height: 700px;
   isolation: isolate;
   color: #fff;
-  background: #061713;
+  background: #050f0d;
   overflow: hidden;
 }
-.photographs, .tint { position: absolute; inset: 0; z-index: -2; }
+.photographs, .tint, .fade { position: absolute; inset: 0; z-index: -3; }
 .photo, .photoActive {
   position: absolute; inset: 0; opacity: 0; visibility: hidden;
   transition: opacity .65s ease, visibility .65s;
 }
 .photoActive { visibility: visible; opacity: 1; }
 .photographs img { object-fit: cover; }
+.photographs img.flip { transform: scaleX(-1); }
 .tint {
-  z-index: -1;
+  z-index: -2;
   background:
-    linear-gradient(90deg, rgba(0,14,13,.85) 0%, rgba(0,14,13,.73) 27%, rgba(0,17,15,.15) 67%, rgba(0,10,11,.1) 100%),
-    linear-gradient(0deg, rgba(0,17,14,.38), transparent 36%);
+    linear-gradient(90deg, rgba(2,12,10,.82) 0%, rgba(2,12,10,.55) 30%, rgba(2,12,10,.08) 58%, rgba(2,12,10,.12) 100%),
+    linear-gradient(180deg, rgba(2,10,9,.55) 0%, rgba(2,10,9,0) 18%);
+}
+/* Photo dissolves into the cream page behind the service tiles. */
+.fade {
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(247,241,229,0) 62%, rgba(247,241,229,.55) 82%, #f7f1e5 100%);
 }
 .heroInner {
-  width: min(calc(100% - var(--page-gutter) - var(--page-gutter)), 1280px);
-  height: auto;
-  margin-inline: auto;
+  height: 100%;
+  padding: 100px 49px 0 99px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 36px;
+  gap: 32px;
 }
-.message { flex: 0 1 640px; min-width: 0; max-width: 640px; padding-top: 8px; }
+.message { flex: 0 1 660px; min-width: 0; }
 .pill {
-  display: inline-flex; align-items: center; gap: 9px;
-  padding: 8px 12px; border-radius: 35px;
-  background: rgba(226,233,214,.12);
-  border: 1px solid rgba(244,236,214,.22);
-  font-size: .61rem; font-weight: 770; letter-spacing: .07em; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 11px;
+  height: 33px; padding: 0 19px 0 17px; border-radius: 40px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.22);
+  backdrop-filter: blur(14px) saturate(140%); -webkit-backdrop-filter: blur(14px) saturate(140%);
+  font-size: .68rem; font-weight: 650; letter-spacing: .08em; white-space: nowrap;
 }
 .pill i {
-  display: inline-block; flex: none; width: 7px; height: 7px;
-  border-radius: 50%; background: #69e378; box-shadow: 0 0 8px #69e37899;
+  display: inline-block; flex: none; width: 8px; height: 8px;
+  border-radius: 50%; background: #3fd95e; box-shadow: 0 0 8px #3fd95e;
 }
 .message h1 {
-  white-space: pre-line; text-wrap: balance;
-  font-family: var(--font-display); font-weight: 580;
-  font-size: clamp(3.5rem, 4.75vw, 4.7rem); line-height: .96; letter-spacing: -.043em;
-  max-width: 640px; color: #fff; margin: 13px 0 9px;
+  white-space: pre-line;
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(3.4rem, 5.05vw, 5.8rem); line-height: .92; letter-spacing: -.01em;
+  color: #fff; margin: 11px 0 0; text-shadow: 0 2px 22px rgba(0,0,0,.35);
 }
 .message > p {
-  max-width: 518px; color: #f8f8f4;
-  font-size: clamp(.99rem, 1.13vw, 1.075rem); line-height: 1.4;
-  margin: 0 0 14px;
+  max-width: 509px; color: #fff;
+  font-size: clamp(.98rem, 1.07vw, 1.07rem); line-height: 1.42;
+  margin: 8px 0 17px; text-shadow: 0 1px 12px rgba(0,0,0,.5);
 }
-.actions { display: flex; align-items: center; flex-wrap: wrap; gap: 17px 27px; }
+.actions { display: flex; align-items: center; flex-wrap: wrap; gap: 17px 28px; }
 .mainAction {
-  min-height: 48px; display: inline-flex; align-items: center; justify-content: center;
-  gap: 23px; padding: 10px 25px; border-radius: 30px;
-  background: #f1dbad; color: #14211b; text-decoration: none;
-  white-space: nowrap; font-size: .82rem; font-weight: 780;
-  box-shadow: 0 8px 17px rgba(0,0,0,.14);
+  height: 50px; display: inline-flex; align-items: center; justify-content: center;
+  gap: 20px; padding: 0 28px; border-radius: 30px;
+  background: #f8e3b4; color: #1a1a14; text-decoration: none;
+  white-space: nowrap; font-size: .95rem; font-weight: 600;
+  box-shadow: 0 8px 22px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.55);
+  transition: background .18s ease;
 }
 .mainAction:hover { background: #fff0cd; }
-.mainAction span { font-size: 1.05rem; }
+.mainAction span { font-size: 1.15rem; }
 .secondaryAction {
-  display: inline-flex; align-items: center; gap: 12px;
-  color: #fff; text-decoration: none; font-size: .82rem; font-weight: 780;
+  display: inline-flex; align-items: center; gap: 15px;
+  color: #fff; text-decoration: none; font-size: .98rem; font-weight: 600;
 }
-.secondaryAction:hover { text-decoration: underline; text-underline-offset: 5px; }
+.secondaryAction:hover .circleArrow { background: rgba(255,255,255,.2); }
 .circleArrow {
-  display: grid; place-items: center; width: 34px; height: 34px;
-  border: 1px solid rgba(255,255,255,.66); border-radius: 50%;
-  font-size: 1.04rem;
+  display: grid; place-items: center; width: 44px; height: 44px;
+  border: 1.5px solid rgba(255,255,255,.85); border-radius: 50%;
+  background: rgba(255,255,255,.06);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  font-size: 1.15rem; transition: background .18s ease;
 }
-.finePrint { display: block; margin-top: 6px; color: #e5e7e0; font-size: .68rem; }
 
-/* The slideshow controls are in the copy's normal flow: they cannot cover the CTA. */
-.controls { position: static; width: 100%; margin-top: 10px; }
-.controlsInner { display: flex; align-items: center; flex-wrap: wrap; gap: 11px; }
-.slides { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
-.slides button {
-  min-height: 30px; border: 1px solid rgba(255,255,255,.3); border-radius: 28px;
-  padding: 6px 10px; color: #e9eee7; background: rgba(3,20,17,.57);
-  font-size: .61rem; font-weight: 760; letter-spacing: .045em; cursor: pointer;
-}
-.slides button span { margin-right: 5px; color: #f1dbad; }
-.slides button:hover { border-color: #f1dbad; }
-.slides button.selected { color: #15251d; background: #f1dbad; border-color: #f1dbad; }
-.slides button.selected span { color: #15251d; }
-.arrows { display: flex; gap: 5px; }
-.arrows button {
-  width: 31px; height: 31px; display: grid; place-items: center;
-  padding: 0; border-radius: 50%; border: 1px solid rgba(255,255,255,.58);
-  background: rgba(5,19,17,.49); color: #fff; font-size: 1rem; cursor: pointer;
-}
-.arrows button:hover { background: rgba(255,255,255,.19); }
-.arrows button:first-child { font-size: .78rem; }
+.proofRow { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 38px; margin-top: 18px; }
+.homeowners { display: flex; align-items: center; gap: 15px; }
+.homeowners span:last-child { display: flex; flex-direction: column; gap: 1px; line-height: 1.2; }
+.homeowners strong { font-size: 1.08rem; font-weight: 600; }
+.homeowners small { font-size: .88rem; font-weight: 400; color: #f1f1ec; }
+.faces { display: flex; }
+.faces svg { width: 42px; height: 42px; border-radius: 50%; border: 2px solid #f4f1ea; margin-left: -9px; background: #ccc; }
+.faces svg:first-child { margin-left: 0; }
 
-/* Right-hand glass panels remain above and clear of the service tile band. */
-.floating { width: 238px; flex: none; padding-top: 20px; display: flex; flex-direction: column; gap: 13px; }
-.glassIntro, .glassList {
-  background: rgba(11,27,23,.48); border: 1px solid rgba(255,255,255,.23);
-  border-radius: 15px; backdrop-filter: blur(11px); -webkit-backdrop-filter: blur(11px);
-  box-shadow: 0 12px 30px rgba(0,0,0,.22);
+/* Slideshow controls: compact glass pill, clear of the CTA row and the tile band. */
+.controls {
+  display: inline-flex; align-items: center; gap: 4px; height: 36px; padding: 0 6px;
+  border-radius: 30px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.2);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
 }
-.glassIntro { display: flex; align-items: center; gap: 12px; padding: 17px 15px; min-height: 78px; }
-.glassIntro p { font-size: .59rem; letter-spacing: .07em; line-height: 1.65; margin: 0; color: #f4f4ed; }
-.glassIntro strong { font-weight: 810; }
-.sunIcon { color: #e7c66f; font-size: 2rem; line-height: 1; }
-.glassList { padding: 12px 18px 14px; }
-.floatingTitle {
-  margin: 0 0 5px !important; font-size: .59rem !important;
-  font-weight: 840 !important; letter-spacing: .115em !important;
-  color: #ebdcb5 !important;
+.controls button {
+  min-width: 26px; height: 26px; padding: 0; border: 0; border-radius: 50%;
+  background: transparent; color: #fff; font-size: 1.05rem; line-height: 1; cursor: pointer;
 }
-.glassList p {
-  margin: 0; padding: 12px 0; display: flex; align-items: center; gap: 12px;
-  border-bottom: 1px solid rgba(255,255,255,.15);
-  color: #fff; font-size: .74rem; line-height: 1.28;
-}
-.glassList p:last-child { border-bottom: none; }
-.glassList p span { width: 19px; flex: none; color: #e5c78b; font-size: 1.19rem; text-align: center; }
+.controls button:hover { background: rgba(255,255,255,.18); }
+.controls .dot, .controls .dotOn { min-width: 0; width: 8px; height: 8px; margin: 0 4px; background: rgba(255,255,255,.45); }
+.controls .dotOn { background: #f8e3b4; }
+.controls button:last-child { font-size: .72rem; }
 
+/* Frosted glass cards. Same recipe is reused by the service tiles. */
+.floating { width: min(302px, 25vw); flex: none; display: flex; flex-direction: column; gap: 5px; margin-top: 6px; }
+.glassLead, .glassCard {
+  position: relative; display: flex; align-items: center; gap: 20px;
+  height: 69px; padding: 0 18px 0 24px; border-radius: 17px;
+  color: #fff; text-decoration: none; overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.17) 0%, rgba(255,255,255,.05) 55%, rgba(255,255,255,.09) 100%),
+    rgba(34,42,38,.34);
+  border: 1px solid rgba(255,255,255,.2);
+  backdrop-filter: blur(20px) saturate(150%); -webkit-backdrop-filter: blur(20px) saturate(150%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.3), inset 0 -1px 0 rgba(255,255,255,.05), 0 10px 30px rgba(0,0,0,.28);
+  transition: background-color .2s ease, border-color .2s ease;
+}
+.glassLead { height: 79px; }
+.glassLead:hover, .glassCard:hover { border-color: rgba(255,255,255,.4); background-color: rgba(60,70,64,.4); }
+.sunIcon { color: #f2c95c; flex: none; display: grid; place-items: center; }
+.sunIcon svg { width: 36px; height: 36px; }
+.benefitIcon { color: #e8d4a2; flex: none; display: grid; place-items: center; width: 30px; }
+.benefitIcon svg { width: 29px; height: 29px; }
+.leadText { flex: 1; font-size: .64rem; font-weight: 650; letter-spacing: .06em; line-height: 1.5; white-space: nowrap; }
+.cardText { flex: 1; font-size: .88rem; font-weight: 500; white-space: nowrap; }
+.circle {
+  display: grid; place-items: center; flex: none; width: 36px; height: 36px; border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,.7); background: rgba(255,255,255,.06); font-size: 1.05rem; position: relative; z-index: 1;
+}
+.glassLead:hover .circle, .glassCard:hover .circle { background: rgba(255,255,255,.2); }
+
+@media (max-width: 1280px) {
+  .heroInner { padding-left: 64px; padding-right: 36px; }
+  .floating { width: 270px; }
+  .glassCard, .glassLead { padding-left: 16px; }
+}
 @media (max-width: 1100px) {
-  .hero { height: 620px; min-height: 620px; padding-top: 90px; }
-  .heroInner { gap: 22px; }
-  .message { flex-basis: 610px; }
-  .message h1 { font-size: clamp(3.45rem, 5.5vw, 4.4rem); }
-  .floating { width: 223px; }
-  .glassIntro { padding: 12px; }
-  .glassList { padding-inline: 13px; }
+  .hero { height: 660px; }
+  .message h1 { font-size: clamp(3.2rem, 6vw, 4.2rem); }
+  .floating { display: none; }
+  .heroInner { padding-inline: 40px; }
 }
 @media (max-width: 780px) {
-  .hero { height: 685px; min-height: 685px; padding-top: 82px; }
-  .heroInner { display: block; }
-  .message { max-width: 610px; padding-top: 14px; }
-  .message h1 { font-size: clamp(3.4rem, 8vw, 4.5rem); max-width: 590px; }
-  .message > p { max-width: 490px; }
-  .floating { display: none; }
-  .tint { background: linear-gradient(0deg,rgba(0,16,13,.88),rgba(0,17,14,.66) 45%,rgba(0,18,14,.28)); }
+  .hero { height: 770px; }
+  .heroInner { padding: 88px 24px 0; }
+  .message h1 { font-size: clamp(3rem, 9vw, 4.2rem); }
+  .tint { background: linear-gradient(0deg, rgba(2,12,10,.78), rgba(2,12,10,.55) 55%, rgba(2,12,10,.3)); }
 }
 @media (max-width: 520px) {
-  .hero { height: 671px; min-height: 671px; padding-top: 75px; }
-  .message { padding-top: 14px; }
-  .message h1 { font-size: clamp(2.65rem, 9.6vw, 3.4rem); line-height: .99; margin: 16px 0 13px; }
-  .message > p { font-size: .88rem; line-height: 1.5; margin-bottom: 15px; }
-  .pill { font-size: .53rem; padding: 7px 9px; }
-  .actions { gap: 13px; }
-  .mainAction { padding: 10px 17px; min-height: 45px; gap: 10px; font-size: .75rem; }
-  .secondaryAction { font-size: .73rem; }
-  .circleArrow { width: 30px; height: 30px; }
-  .controls { margin-top: 15px; }
-  .controlsInner { gap: 7px; }
-  .slides { gap: 5px; }
-  .slides button { font-size: .54rem; min-height: 28px; padding: 5px 7px; }
-  .arrows button { width: 28px; height: 28px; }
-  .finePrint { font-size: .65rem; }
-}
-@media (max-width: 380px) {
-  .hero { height: 695px; min-height: 695px; }
-  .message h1 { font-size: 2.62rem; }
+  .hero { height: 790px; }
+  .heroInner { padding: 82px 20px 0; }
+  .pill { font-size: .6rem; padding: 0 12px; height: 30px; }
+  .message h1 { font-size: clamp(2.7rem, 11vw, 3.4rem); }
+  .mainAction { height: 46px; padding: 0 20px; gap: 12px; font-size: .86rem; }
+  .secondaryAction { font-size: .86rem; }
+  .circleArrow { width: 38px; height: 38px; }
+  .proofRow { gap: 12px 20px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .photo, .photoActive { transition: none; }
 }
+@media (max-width: 780px) { .hero { height: 600px; } }
+@media (max-width: 520px) { .hero { height: 610px; } }

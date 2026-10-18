@@ -9,7 +9,7 @@ import { Container } from "./Container";
 
 const nav = [
   { label: "Home", href: "/" },
-  { label: "Services", href: "/services" },
+  { label: "Services", href: "/services", menu: true },
   { label: "Our Work", href: "/#results" },
   { label: "About", href: "/about" },
   { label: "Service Area", href: "/service-areas" },
@@ -27,7 +27,7 @@ export function SiteHeader() {
           <span className="site-brand__text"><strong>BRIGHTVIEW</strong><small>EXTERIOR CLEANING</small></span>
         </Link>
         <nav className="site-nav" aria-label="Main navigation">
-          {nav.map((item) => <Link href={item.href} key={item.href} aria-current={(item.href === "/" && pathname === "/") || (item.href !== "/" && item.href !== "/#results" && pathname === item.href) ? "page" : undefined}>{item.label}</Link>)}
+          {nav.map((item) => <Link href={item.href} key={item.href} aria-current={(item.href === "/" && pathname === "/") || (item.href !== "/" && item.href !== "/#results" && pathname === item.href) ? "page" : undefined}>{item.label}{"menu" in item && <svg className="nav-chevron" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" /></svg>}</Link>)}
         </nav>
         <a
           className="header-contact"
