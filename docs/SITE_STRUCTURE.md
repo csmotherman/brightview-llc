@@ -1,25 +1,42 @@
 # BrightView — build pages one by one
 
-Only the homepage is designed and filled. The reserved pages below are separate minimal route placeholders.
+The homepage and main `/services` catalog are designed. All other routes remain blank placeholders until individually built and approved.
 
-| Route | Purpose |
+| Route | Purpose / status |
 | --- | --- |
-| / | Service-first hero, photo-led service choices, actual before/after results, brief family-owned introduction, Facebook contact |
-| /services | Full service overview — placeholder |
-| /services/window-cleaning | Window cleaning — placeholder |
-| /services/pressure-washing | Pressure washing — placeholder |
-| /services/holiday-lights | Holiday lighting — placeholder |
-| /our-work | Project portfolio — placeholder |
+| / | Homepage preview of the business and selected real project photos |
+| /services | **Built**: compact core-service descriptions, benefits, every uploaded job/photo pair and finished-project image, contact link |
+| /services/window-cleaning | Window cleaning detail — placeholder |
+| /services/pressure-washing | Pressure washing detail — placeholder |
+| /services/holiday-lights | Holiday lighting detail — placeholder |
+| /our-work | Full project portfolio — placeholder |
 | /about | Verified family story and genuine team photos — placeholder |
 | /reviews | Verified customer testimonials — placeholder |
 | /service-areas | Confirmed service-area locations — placeholder |
 | /faq | Genuine FAQs — placeholder |
-| /contact | Future quote/contact flow (not built) — placeholder |
+| /contact | Contact / quote flow to be decided last — placeholder |
 
-Do not invent testimonials, ratings, service coverage, staff or credentials. Keep only the uploaded BrightView imagery.
+## Services gallery inventory
 
-Before/after photos remain in two separate frames, Before left / After right, even on mobile; visitors can open the original file for a closer view. The home page only previews the work: it does not replace the future portfolio page.
+- Window cleaning: 1 matched before-and-after pair + 1 complete-house image.
+- Pressure washing: brick-paver and fence matched before-and-after pairs + 1 porch photo.
+- Holiday lighting: 3 completed-house photos + 1 tree-lighting photo.
+- Additional project evidence: 1 gutter-cleaning matched before-and-after pair, separated from the three confirmed advertised services rather than treating it as a newly confirmed bookable service.
+- The shared homepage hero is not duplicated as a services project photo.
 
-Quote CTAs currently open the business's existing Facebook profile in a new tab, with clear copy that this is temporary. The Contact page remains a placeholder until the owner decides how quotes should work.
+Each image is shown without a swipe control, and each opens the original file in a new browser tab. Before is always left; after is always right, including on small screens. The page uses no service-selection JS or homepage-style promotional hero.
 
-Keep noindex in place until final launch approval. No Jobber, CRM, forms, pricing, booking, database or third-party quote integration.
+The bottom Get Free Quote button currently opens the verified BrightView Facebook page in a new tab. No quote form, pricing, scheduling, CRM or Jobber integration has been implemented.
+
+## Build order
+
+1. Window cleaning
+2. Pressure washing
+3. Holiday lighting
+4. Our Work
+5. About
+6. Verified reviews, service areas, FAQ
+7. Contact
+8. Quote form **last**
+
+Keep the site noindex until launch approval.
