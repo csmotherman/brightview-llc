@@ -1,32 +1,45 @@
-# BrightView LLC — Fresh Foundation
+# BrightView LLC — homepage redesign (review branch)
 
-This repository is deliberately reset to a **minimal, working Next.js App Router scaffold**.
+BrightView is a family-owned Michigan window-cleaning, pressure-washing and holiday-lighting business. This is a page-by-page website build, not a quote-management application.
 
-**This change does not build the website.** The homepage is an intentional holding screen. Each page will be designed, implemented, and reviewed separately.
+## Homepage
 
-## Run locally
+- Compact header and restrained desktop hero using the real `Hero-HomePage.png` photo. On mobile the photo comes first. The hero is designed to fit in a typical desktop viewport without scrolling.
+- A smaller, all-navy service-first headline; short supporting description, one main CTA and a quiet secondary work link.
+- **Get Free Quote** temporarily opens the existing BrightView Facebook page (a new tab). The page explicitly says so. There is no quote form, automatic estimate, account, or CRM.
+- Three editorial, image-led service links (instead of boxed marketing cards).
+- Authentic before/after photos displayed independently, **Before on the left, After on the right**, across screen sizes. No drag/slide effect. Each photo can be opened full-size.
+- A short factual family-owned introduction and a minimal final contact call-to-action.
+- Generic three-column process filler, redundant badges/trust strip, decorative effects, and developer-facing copy have been removed.
+
+## Independent pages
+
+All routes below remain simple placeholders so they can be designed one at a time:
+
+- `/services`
+- `/services/window-cleaning`
+- `/services/pressure-washing`
+- `/services/holiday-lights`
+- `/our-work`
+- `/about`
+- `/reviews`
+- `/service-areas`
+- `/faq`
+- `/contact`
+
+## Run and check
 
 ```bash
 npm ci
 npm run dev
+npm run build
 ```
 
-## Current scope
+## Still needed before launch
 
-- Basic responsive shell (header, content container, footer, skip link).
-- Brand identity and the original logo preserved in `public/brand/`.
-- Small reusable design-token layer; no complex theme or prebuilt page templates.
-- Reserved page directories; no unfinished pages linked in navigation.
-- Development-stage `noindex` metadata to prevent accidental search indexing.
-- No quote form, CRM, webhook, booking, pricing, database, authentication or payment integration.
+- Verify the existing Facebook URL with BrightView, and replace the temporary quote link once the real quote/contact flow is approved.
+- Collect a genuine team/owners photo, verified reviews, and verified service-area details before adding public-facing claims.
+- Review the actual desktop/mobile layouts and image performance. Original PNGs are large, though Next.js optimizes them for delivery.
+- Review each reserved page before publishing. The whole site remains `noindex` until launch readiness is confirmed.
 
-## Next steps, one page at a time
-
-1. Design and implement the homepage in `src/app/page.tsx`.
-2. Implement the three service pages individually.
-3. Build project proof, about, reviews, service area, and other pages as real content becomes available.
-4. Revisit contact and lead intake **only when requirements are agreed**.
-
-See [docs/SITE_STRUCTURE.md](docs/SITE_STRUCTURE.md) for the directory layout and page ownership rules.
-
-Before public launch: verify business details and imagery, add real navigation only to existing routes, check accessibility and responsive behavior, restore appropriate indexing, and create a sitemap for published pages.
+No Jobber, CRM, pricing, scheduling, booking, payments, database or quote intake is implemented. No invented reviews, ratings, credentials, staff imagery or precise coverage claims.
