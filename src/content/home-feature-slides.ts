@@ -11,9 +11,9 @@ export const homeSlides = [
     title: "Holiday Lights\nAre Here.",
     description:
       "Bring a little more light to your Michigan home. Explore our real holiday lighting displays and tell us what you have in mind.",
-    image: "/images/projects/holiday-lights/House2.png",
-    alt: "BrightView holiday lights decorating a Michigan house at night",
-    objectPosition: "center 30%",
+    image: "/images/projects/holiday-lights/HolidayHero.png",
+    alt: "Collage of Michigan homes decorated with BrightView holiday lights at night",
+    objectPosition: "center 40%",
     flip: false,
     cta: "Request Holiday Lighting",
     href: site.facebookUrl,

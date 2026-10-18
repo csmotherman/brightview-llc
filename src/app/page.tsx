@@ -40,7 +40,7 @@ const featuredServices = [
   {
     name: "Holiday Lighting",
     caption: "Professional installation & takedown.",
-    image: "/images/projects/holiday-lights/House2.png",
+    image: "/images/projects/holiday-lights/HolidayHero.png",
     alt: "House decorated with holiday lights from a BrightView project",
     icon: "lights",
     href: "/services#holiday-lights",

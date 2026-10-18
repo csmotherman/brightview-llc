@@ -28,3 +28,9 @@
 .stats dt { font-size: 1.6rem; font-weight: 500; letter-spacing: .01em; line-height: 1.1; }
 .stats dd { margin: 5px 0 0; font-size: .78rem; white-space: nowrap; color: #d7e0d8; }
 @media (max-width: 520px) { .panel { padding-inline: 24px; } .stats { margin-inline: 0; } .stats dd { white-space: normal; } }
+@media (min-width: 1101px) {
+  .panel { padding: 34px 40px 28px; }
+  .quote { margin-top: 24px; line-height: 1.55; }
+  .person { margin-top: 22px; }
+  .stats { margin-top: 20px; padding-top: 22px; }
+}

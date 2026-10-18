@@ -32,3 +32,4 @@
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
 }
 .tabOn { background: #f8e3b4; color: #14291f; border-color: #f8e3b4; }
+@media (min-width: 1101px) { .frame { min-height: 360px; } }

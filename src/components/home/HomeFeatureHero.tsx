@@ -14,6 +14,7 @@ const careBenefits = [
   "Enjoy clearer window views",
   "Refresh your home's curb appeal",
   "Bring seasonal lighting to life",
+  "Increase your home's value",
 ] as const;
 
 function Avatar({ tone }: { tone: string }) {
