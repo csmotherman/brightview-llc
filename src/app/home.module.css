@@ -113,3 +113,12 @@
   .serviceBand { margin-top: -86px; }
   .steps::before { right: 20%; }
 }
+
+
+/* Compact the cards at short desktop heights so the lower 3-column panel is visible. */
+@media (min-width: 1101px) and (max-height: 780px) {
+  .serviceBand { margin-top: -111px; }
+  .serviceCard { height: 135px; }
+  .serviceInfo { height: 62px; }
+  .showcaseSection { padding-top: 15px; }
+}
