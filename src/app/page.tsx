@@ -109,7 +109,7 @@ export default function HomePage() {
               <h2 id="work-title">The difference is in the details.</h2>
               <p className="section-heading__intro">A closer look at work from BrightView projects.</p>
             </div>
-            <Link href="/our-work" className="text-link">View our work <span aria-hidden="true">→</span></Link>
+            <Link href="/services" className="text-link">More project photos <span aria-hidden="true">→</span></Link>
           </div>
           <BeforeAfterShowcase />
         </Container>

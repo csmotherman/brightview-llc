@@ -14,10 +14,10 @@ BrightView is a family-owned Michigan window-cleaning, pressure-washing and holi
 
 ## Independent pages
 
-All routes below remain simple placeholders so they can be designed one at a time:
+The Services catalog is complete; a focused Window Cleaning page is drafted. Other routes remain simple placeholders:
 
-- `/services`
-- `/services/window-cleaning`
+- `/services` (built)
+- `/services/window-cleaning` (draft)
 - `/services/pressure-washing`
 - `/services/holiday-lights`
 - `/our-work`

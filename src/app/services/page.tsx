@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { Container } from "@/components/layout/Container";
 import { site } from "@/config/site";
 import styles from "./services.module.css";
@@ -25,6 +26,7 @@ type Comparison = {
 type Service = {
   slug: string;
   title: string;
+  detailHref?: string;
   what: string;
   benefit: string;
   comparisons: Comparison[];
@@ -35,6 +37,7 @@ const services: Service[] = [
   {
     slug: "window-cleaning",
     title: "Window cleaning",
+    detailHref: "/services/window-cleaning",
     what: "We clean residential windows so the glass looks clear and cared for.",
     benefit: "A clearer view, more natural light, and a fresher-looking exterior.",
     comparisons: [
@@ -210,7 +213,14 @@ export default function ServicesPage() {
             aria-labelledby={service.slug + "-title"}
           >
             <div className={styles.serviceDetails}>
-              <h2 id={service.slug + "-title"}>{service.title}</h2>
+              <div>
+                <h2 id={service.slug + "-title"}>{service.title}</h2>
+                {service.detailHref && (
+                  <Link className={styles.detailLink} href={service.detailHref}>
+                    Window cleaning details <span aria-hidden="true">↗</span>
+                  </Link>
+                )}
+              </div>
               <div className={styles.descriptionGroup}>
                 <div>
                   <h3>What we do</h3>
