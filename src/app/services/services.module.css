@@ -1,0 +1,82 @@
+.page { background: #fff; }
+.intro { padding: clamp(58px, 7vw, 104px) 0 54px; background: #f8f8f5; }
+.introGrid { display: grid; grid-template-columns: 1fr .72fr; align-items: start; gap: clamp(40px, 7vw, 120px); }
+.intro h1 { margin: 0; font-size: clamp(3.55rem, 7vw, 6.6rem); line-height: .98; font-weight: 820; letter-spacing: -.063em; }
+.introCopy { max-width: 410px; padding-top: 5px; }
+.introCopy > p:first-child { margin: 0; font-size: clamp(1.04rem, 1.5vw, 1.23rem); color: #253d54; line-height: 1.58; }
+.introDetail { margin: 16px 0 0; color: #677887; font-size: .9rem; line-height: 1.65; }
+.serviceIndex { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: clamp(42px, 5.5vw, 77px); border-top: 1px solid #ced6da; border-bottom: 1px solid #ced6da; }
+.serviceIndex a { display: flex; align-items: center; gap: 17px; min-height: 72px; padding: 12px 24px 12px 0; color: #142c43; text-decoration: none; font-weight: 730; font-size: .94rem; }
+.serviceIndex a + a { padding-left: 24px; border-left: 1px solid #ced6da; }
+.indexNumber { color: #987b32; font-size: .71rem; font-weight: 750; }
+.indexArrow { margin-left: auto; color: #3c5b71; font-size: 1.2rem; transition: transform .15s ease; }
+.serviceIndex a:hover .indexArrow { transform: translate(2px, 2px); }
+.serviceIndex a:hover { color: #164c7b; }
+.serviceList { padding: 12px 0 45px; }
+.serviceRow { display: grid; grid-template-columns: 1.08fr .92fr; gap: clamp(35px, 7vw, 112px); align-items: center; padding: clamp(60px, 7vw, 105px) 0; scroll-margin-top: 110px; }
+.serviceRow + .serviceRow { border-top: 1px solid #e3e7e8; }
+.photoColumn { min-width: 0; }
+.photo { position: relative; width: 100%; aspect-ratio: 4 / 3; overflow: hidden; background: #e0e6e9; }
+.photo img { object-fit: cover; object-position: center; }
+.photoCaption { margin: 10px 0 0; color: #72808b; text-transform: uppercase; letter-spacing: .08em; font-size: .64rem; font-weight: 720; }
+.serviceCopy { min-width: 0; }
+.serviceNumber { margin: 0 0 22px; color: #365b78; text-transform: uppercase; letter-spacing: .12em; font-weight: 780; font-size: .73rem; }
+.serviceNumber span { padding: 0 5px; color: #b29446; }
+.serviceCopy h2 { margin: 0 0 22px; max-width: 495px; font-size: clamp(2.65rem, 4vw, 4.25rem); font-weight: 805; letter-spacing: -.057em; line-height: 1.05; }
+.serviceLead { margin: 0; max-width: 450px; font-size: clamp(1.01rem, 1.4vw, 1.19rem); line-height: 1.65; color: #29425a; }
+.serviceDetail { margin: 18px 0 28px; max-width: 425px; font-size: .94rem; line-height: 1.72; color: #5a6d7e; }
+.serviceLink { display: inline-flex; align-items: center; gap: 29px; border-bottom: 1px solid #7193ad; padding: 0 0 7px; font-size: .94rem; color: #164c7b; font-weight: 790; text-decoration: none; }
+.serviceLink:hover { border-bottom-color: #164c7b; }
+.serviceLink span { font-size: 1.22rem; }
+.reversed .photoColumn { order: 2; }
+.reversed .serviceCopy { order: 1; padding-left: clamp(0px, 3vw, 30px); }
+.contact { padding: clamp(48px, 6vw, 78px) 0; background: #f7f5ee; border-top: 1px solid #e9e5dc; }
+.contactInner { display: flex; justify-content: space-between; align-items: center; gap: 45px; }
+.contact h2 { margin: 0; font-size: clamp(2.15rem, 3.2vw, 3.25rem); font-weight: 800; }
+.contactInner > div:first-child > p:last-child { margin: 10px 0 0; color: #556775; font-size: .95rem; }
+.contactAction { flex: none; }
+.contactAction .button { width: 100%; justify-content: space-between; gap: 22px; }
+.contactAction p { margin: 9px 0 0; max-width: 260px; color: #60707f; font-size: .72rem; }
+@media (max-width: 960px) {
+  .introGrid { grid-template-columns: 1fr .83fr; gap: 40px; }
+  .intro h1 { font-size: clamp(3.6rem, 7.5vw, 5.1rem); }
+  .serviceRow { gap: 35px; }
+  .serviceCopy h2 { font-size: clamp(2.4rem, 4.5vw, 3.4rem); }
+  .serviceIndex a { gap: 10px; padding-right: 15px; font-size: .83rem; }
+  .serviceIndex a + a { padding-left: 15px; }
+}
+@media (max-width: 760px) {
+  .intro { padding: 52px 0 30px; }
+  .introGrid { display: block; }
+  .intro h1 { font-size: clamp(3.6rem, 11vw, 5rem); }
+  .introCopy { padding-top: 21px; }
+  .serviceIndex { margin-top: 31px; }
+  .serviceIndex a { padding: 12px 9px 12px 0; min-height: 63px; }
+  .serviceIndex a + a { padding-left: 9px; }
+  .indexNumber { display: none; }
+  .indexArrow { font-size: .95rem; }
+  .serviceList { padding: 4px 0 12px; }
+  .serviceRow { display: flex; flex-direction: column; align-items: stretch; gap: 30px; padding: 55px 0; }
+  .reversed .photoColumn, .reversed .serviceCopy { order: initial; padding-left: 0; }
+  .photo { aspect-ratio: 4 / 3; }
+  .serviceNumber { margin-bottom: 14px; }
+  .serviceCopy h2 { font-size: clamp(2.7rem, 8.2vw, 3.5rem); margin-bottom: 15px; }
+  .serviceDetail { margin: 11px 0 22px; }
+  .contactInner { flex-direction: column; align-items: flex-start; gap: 25px; }
+}
+@media (max-width: 480px) {
+  .intro { padding-top: 40px; }
+  .intro h1 { font-size: 3.55rem; }
+  .serviceIndex { grid-template-columns: 1fr; }
+  .serviceIndex a { min-height: 49px; padding: 8px 2px; }
+  .serviceIndex a + a { padding: 8px 2px; border-left: none; border-top: 1px solid #dce2e5; }
+  .indexNumber { display: inline; min-width: 23px; }
+  .serviceRow { padding: 43px 0; gap: 21px; }
+  .serviceCopy h2 { font-size: 2.66rem; }
+  .photoCaption { font-size: .6rem; }
+  .contactAction { width: 100%; }
+  .contactAction .button { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .serviceIndex a .indexArrow { transition: none; }
+}
