@@ -4,19 +4,17 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { homeSlides } from "@/content/home-feature-slides";
-import { heroBenefits, homeProof } from "@/content/home-reference";
+import { homeProof } from "@/content/home-reference";
 import styles from "./HomeFeatureHero.module.css";
 
 const AUTO_MS = 10500;
 
-function BenefitIcon({ icon }: { icon: string }) {
-  const c = { width: 30, height: 30, viewBox: "0 0 32 32", fill: "none", stroke: "currentColor", strokeWidth: 1.6, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, "aria-hidden": true as const };
-  if (icon === "sun") return <svg {...c}><circle cx="16" cy="16" r="5.5" /><path d="M16 3v4M16 25v4M3 16h4M25 16h4M6.8 6.8l2.8 2.8M22.4 22.4l2.8 2.8M25.2 6.8l-2.8 2.8M9.6 22.4l-2.8 2.8" /></svg>;
-  if (icon === "sparkle") return <svg {...c}><path d="M12 5l2 6 6 2-6 2-2 6-2-6-6-2 6-2zM24 17l1 3 3 1-3 1-1 3-1-3-3-1 3-1zM23 4l.8 2.2L26 7l-2.2.8L23 10l-.8-2.2L20 7l2.2-.8z" /></svg>;
-  if (icon === "shield") return <svg {...c}><path d="M16 3.5l10 3.7v7.6c0 6-4.2 10.4-10 13.2C10.2 25.2 6 20.8 6 14.8V7.2z" /><path d="M16 10v9M11.5 14.5h9" /></svg>;
-  if (icon === "house") return <svg {...c}><path d="M4 15.5L16 5l12 10.5M7 13.5V27h6v-7h6v7h6V13.5" /></svg>;
-  return <svg {...c}><path d="M5 27V16h5v11M13.5 27V8h5v19M22 27V13h5v14" fill="currentColor" stroke="none" /></svg>;
-}
+const careBenefits = [
+  "Remove visible dirt and buildup",
+  "Enjoy clearer window views",
+  "Refresh your home's curb appeal",
+  "Bring seasonal lighting to life",
+] as const;
 
 function Avatar({ tone }: { tone: string }) {
   return (
@@ -135,18 +133,26 @@ export function HomeFeatureHero() {
           </div>
         </div>
 
-        <aside className={styles.floating} aria-label="Why choose BrightView">
-          {heroBenefits.map((item) => (
-            <Link key={item.title} href={item.href} className={"lead" in item ? styles.glassLead : styles.glassCard}>
-              <span className={"lead" in item ? styles.sunIcon : styles.benefitIcon}><BenefitIcon icon={item.icon} /></span>
-              {"lead" in item ? (
-                <span className={styles.leadText}>{item.title}<br />{item.sub}</span>
-              ) : (
-                <span className={styles.cardText}>{item.title}</span>
-              )}
-              <span className={styles.circle} aria-hidden="true">→</span>
-            </Link>
-          ))}
+        <aside className={styles.floating} aria-labelledby="exterior-benefits-heading">
+          <div className={styles.benefitPanel}>
+            <div className={styles.panelHeading}>
+              <p className={styles.panelEyebrow}>WHY IT MATTERS</p>
+              <h2 id="exterior-benefits-heading">A little care goes a long way.</h2>
+            </div>
+            <ul className={styles.benefitList}>
+              {careBenefits.map((benefit) => (
+                <li key={benefit}>
+                  <span className={styles.checkIcon} aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                      <rect x="1" y="1" width="16" height="16" rx="4" />
+                      <path d="m4.5 9 3 3 6-6" />
+                    </svg>
+                  </span>
+                  <span>{benefit}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </aside>
       </div>
     </section>

@@ -17,11 +17,3 @@ export const homeProof = {
     { value: "3+", label: "Years Local" },
   ],
 } as const;
-
-export const heroBenefits = [
-  { icon: "sun", title: "CLEANER HOMES", sub: "BRIGHTER NEIGHBORHOODS", href: "/services", lead: true },
-  { icon: "sparkle", title: "Removes Dirt & Grime", href: "/services#pressure-washing" },
-  { icon: "shield", title: "Prevents Costly Damage", href: "/services#extra-title" },
-  { icon: "house", title: "Boosts Curb Appeal", href: "/services#window-cleaning" },
-  { icon: "chart", title: "Increases Property Value", href: "/services" },
-] as const;
