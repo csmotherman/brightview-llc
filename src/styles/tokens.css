@@ -1,0 +1,16 @@
+:root {
+  /* Starting visual tokens — refine with each page, not a finished design. */
+  --color-navy: #071b35;
+  --color-blue: #155fae;
+  --color-gold: #f4be34;
+  --color-ink: #16253a;
+  --color-muted: #5b687a;
+  --color-white: #ffffff;
+  --color-page: #f8fafc;
+  --color-line: #e4e9ef;
+  --container-max: 1240px;
+  --page-gutter: clamp(20px, 4vw, 48px);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
