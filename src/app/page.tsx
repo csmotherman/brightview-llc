@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { BeforeAfterShowcase } from "@/components/home/BeforeAfterShowcase";
 import { Container } from "@/components/layout/Container";
-import { site } from "@/config/site";
 
 const services = [
   {
@@ -37,17 +36,21 @@ export default function HomePage() {
             <p className="hero__eyebrow">Family-owned in Michigan</p>
             <h1 id="hero-title">Make your home <span>look its best.</span></h1>
             <p className="hero__description">
-              Window cleaning, pressure washing and holiday lighting from a local,
-              family-owned team.
+              Window cleaning, pressure washing, and holiday lighting for Michigan homes.
             </p>
             <div className="hero__actions">
-              <a className="button button--primary" href={site.facebookUrl} target="_blank" rel="noopener noreferrer">
-                Message BrightView <span aria-hidden="true">↗</span>
-              </a>
+              <Link className="button button--primary" href="/contact">
+                Get Free Quote <span aria-hidden="true">↗</span>
+              </Link>
               <a className="button button--secondary" href="#work">
                 See our work <span aria-hidden="true">→</span>
               </a>
             </div>
+            <ul className="hero__trust" aria-label="BrightView highlights">
+              <li>Family-owned</li>
+              <li>Michigan based</li>
+              <li>Real project photos</li>
+            </ul>
           </div>
           <div className="hero__image">
             <Image
@@ -61,14 +64,6 @@ export default function HomePage() {
           </div>
         </Container>
       </section>
-
-      <div className="facts-strip">
-        <Container className="facts-strip__inner">
-          <span>Family-owned</span>
-          <span>Michigan based</span>
-          <span>Real project photos</span>
-        </Container>
-      </div>
 
       <section className="section" id="services" aria-labelledby="services-title">
         <Container>
@@ -145,9 +140,9 @@ export default function HomePage() {
             <h2 id="contact-title">Have a project in mind?</h2>
             <p>Tell us what you need. We'd be glad to hear from you.</p>
           </div>
-          <a href={site.facebookUrl} target="_blank" rel="noopener noreferrer" className="button button--primary">
-            Message BrightView <span aria-hidden="true">↗</span>
-          </a>
+          <Link href="/contact" className="button button--primary">
+            Get Free Quote <span aria-hidden="true">↗</span>
+          </Link>
         </Container>
       </section>
     </>
