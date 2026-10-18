@@ -1,46 +1,27 @@
-# BrightView — Directory Plan
+# BrightView — Page-by-page plan
 
-## Purpose
-Keep the codebase simple, organized by actual page responsibility, and ready to build one page at a time. This is a structural plan, not a completed site or a commitment to any quote-management service.
+Only the homepage is designed and filled in. All routes below exist as deliberately sparse placeholders that will be built individually after review.
 
-## Directory responsibilities
+- / — homepage: compact above-the-fold desktop hero, trust facts, 3 service teasers, side-by-side real before/after, contact steps, family introduction, and Facebook CTA.
+- /services — all services (placeholder)
+- /services/window-cleaning — window cleaning (placeholder)
+- /services/pressure-washing — pressure washing (placeholder)
+- /services/holiday-lights — holiday lighting (placeholder)
+- /our-work — projects (placeholder; homepage shows a preview only)
+- /about — family story (placeholder)
+- /reviews — genuine reviews (placeholder; do not fabricate)
+- /service-areas — verified service locations (placeholder; do not invent)
+- /faq — answers to actual customer questions (placeholder)
+- /contact — final contact options, to be decided (placeholder)
 
-- `src/app/`: Next.js routes. Each reserved route contains only a `.gitkeep` until it is actually built.
-- `src/components/layout/`: shared header, footer and content container.
-- `src/components/ui/`: small shared controls only when needed.
-- `src/components/sections/`: reusable content sections only after repeated usage is proven.
-- `src/config/`: confirmed business identity and site-wide configuration.
-- `src/content/`: future editorial or project content, once real source material is ready.
-- `src/lib/`: shared helpers added on demand.
-- `src/styles/`: design tokens and foundational CSS.
-- `public/brand/`: original BrightView logo and future approved brand assets.
-- `public/images/`: photographs grouped by usage and service; empty until genuine approved assets are available.
+The placeholder pages share one small component in src/components/layout/PlaceholderPage.tsx. No duplicate service/portfolio/story page content is embedded in the homepage.
 
-## Pages reserved, not yet built
+## Rules
 
-| Route | Role |
-| --- | --- |
-| `/` | Homepage — next page to design |
-| `/services` | All services |
-| `/services/window-cleaning` | Window cleaning |
-| `/services/pressure-washing` | Pressure washing |
-| `/services/holiday-lights` | Holiday lighting |
-| `/our-work` | Completed projects and before/after |
-| `/about` | Family and business story |
-| `/reviews` | Genuine customer reviews |
-| `/service-areas` | Verified areas served |
-| `/faq` | Service FAQs |
-| `/contact` | Contact details and options; method not decided |
-
-No quote/booking route, webhook or payment integration is included. Those decisions are deferred by request.
-
-## Rules for each next page
-
-1. Design it before implementing more pages.
-2. Use real business facts. Never invent phone numbers, testimonials, coverage, owners or credentials.
-3. Build responsive desktop/mobile views with semantic HTML, accessible focus states and usable text contrast.
-4. Keep design components small. No speculative abstractions or unused dependencies.
-5. Add navigation links only after their destinations exist.
-6. Preserve the original logo; only replace or crop it after explicit review.
-7. Keep the site non-indexable until real, publicly ready content exists.
-8. Document any new functionality and verify the build before review.
+1. One page at a time after approval.
+2. Existing real photographs and approved BrightView logo only.
+3. Before-and-after photos must always display in independent frames, Before left / After right, even on mobile.
+4. Don't introduce pricing, quote-management, Jobber, CRM, authentication, or other integrations.
+5. Don't invent claims, credentials, ratings, photos, phone numbers or coverage zones.
+6. Keep noindex until final site launch is approved and all public pages are ready.
+7. Ensure responsive layout and a build before merging.

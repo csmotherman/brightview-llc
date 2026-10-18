@@ -6,43 +6,48 @@ import { homeProjects } from "@/content/home-projects";
 
 export function BeforeAfterShowcase() {
   const [active, setActive] = useState(0);
-  const [reveal, setReveal] = useState(50);
   const project = homeProjects[active];
-
-  function chooseProject(index: number) {
-    setActive(index);
-    setReveal(50);
-  }
 
   return (
     <div className="showcase">
-      <div className="showcase__tabs" role="group" aria-label="Choose a before and after project">
+      <div className="showcase__tabs" role="group" aria-label="Select a photo comparison">
         {homeProjects.map((item, index) => (
-          <button key={item.id} type="button" className={index === active ? "showcase__tab showcase__tab--active" : "showcase__tab"} aria-pressed={index === active} onClick={() => chooseProject(index)}>
-            <span>{item.label}</span>
-            <span className="showcase__tab-arrow" aria-hidden="true">↗</span>
+          <button
+            key={item.id}
+            type="button"
+            className={active === index ? "showcase__tab showcase__tab--active" : "showcase__tab"}
+            aria-pressed={active === index}
+            onClick={() => setActive(index)}
+          >
+            {item.label}
           </button>
         ))}
       </div>
-      <div className="showcase__main">
-        <div className="compare" style={{ "--reveal": reveal + "%" } as React.CSSProperties}>
-          <Image key={project.id + "-before"} src={project.before} alt={"Before " + project.category.toLowerCase()} fill sizes="(max-width: 840px) 100vw, 60vw" className="compare__photo" />
-          <div className="compare__after" style={{ clipPath: "inset(0 " + (100 - reveal) + "% 0 0)" }}>
-            <Image key={project.id + "-after"} src={project.after} alt={"After " + project.category.toLowerCase()} fill sizes="(max-width: 840px) 100vw, 60vw" className="compare__photo" />
+      <div className="showcase__pair" aria-live="polite">
+        <figure className="showcase__figure">
+          <div className="showcase__photo">
+            <Image
+              src={project.before}
+              alt={"Before: " + project.category.toLowerCase()}
+              fill
+              sizes="(max-width: 680px) 48vw, 42vw"
+            />
           </div>
-          <div className="compare__label compare__label--left" aria-hidden="true">AFTER</div>
-          <div className="compare__label compare__label--right" aria-hidden="true">BEFORE</div>
-          <div className="compare__divider" aria-hidden="true"><span>↔</span></div>
-          <input className="compare__range" type="range" min="0" max="100" step="1" value={reveal} onChange={(event) => setReveal(Number(event.target.value))} aria-label={"Reveal before and after photographs of " + project.category.toLowerCase()} />
-        </div>
-        <aside className="showcase__details" aria-live="polite">
-          <span className="small-label">PROJECT {String(active + 1).padStart(2, "0")} / {String(homeProjects.length).padStart(2, "0")}</span>
-          <span className="showcase__category">{project.category}</span>
-          <h3>{project.title}</h3>
-          <p>{project.detail}</p>
-          <div className="showcase__instruction"><span className="showcase__instruction-icon" aria-hidden="true">↔</span> Drag the handle to compare</div>
-        </aside>
+          <figcaption>Before</figcaption>
+        </figure>
+        <figure className="showcase__figure">
+          <div className="showcase__photo">
+            <Image
+              src={project.after}
+              alt={"After: " + project.category.toLowerCase()}
+              fill
+              sizes="(max-width: 680px) 48vw, 42vw"
+            />
+          </div>
+          <figcaption>After</figcaption>
+        </figure>
       </div>
+      <p className="showcase__caption">{project.category}</p>
     </div>
   );
 }
