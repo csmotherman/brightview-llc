@@ -1,10 +1,10 @@
 .page { background: #f7f1e5; color: #101d19; min-width: 320px; overflow-x: clip; }
 
-/* Service tiles overlap the bottom of the 700px hero: tile top sits at y=497 in the reference. */
-.serviceBand { position: relative; z-index: 10; margin-top: -203px; }
+/* Service tiles overlap the bottom of the responsive hero, leaving the process row visible. */
+.serviceBand { position: relative; z-index: 10; margin-top: -125px; }
 .servicesGrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; padding: 0 41px 0 42px; max-width: 1800px; margin-inline: auto; }
 .serviceCard {
-  position: relative; display: block; height: 163px; overflow: hidden; border-radius: 15px; isolation: isolate;
+  position: relative; display: block; height: 160px; overflow: hidden; border-radius: 15px; isolation: isolate;
   color: #fff; text-decoration: none; background: #0a1a16;
   border: 1px solid rgba(255,255,255,.2);
   box-shadow: 0 16px 30px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.25);
@@ -34,7 +34,7 @@
 .serviceCard:hover .cardArrow { background: #f8e3b4; border-color: #f8e3b4; color: #10231f; }
 
 /* Lower row: process | before-after | testimonial (x=85 / 626 / 1146 at 1536px). */
-.showcaseSection { position: relative; z-index: 11; padding: 25px 0 34px; }
+.showcaseSection { position: relative; z-index: 11; padding: 16px 0 34px; }
 .showcaseGrid {
   display: grid; grid-template-columns: 522fr 501fr 385fr; gap: 19px; align-items: start;
   padding: 0 5px 0 85px; max-width: 1800px; margin-inline: auto;
@@ -75,26 +75,26 @@
 }
 @media (max-width: 1100px) {
   .servicesGrid { padding-inline: 24px; }
-  .serviceBand { margin-top: -140px; }
+  .serviceBand { margin-top: -123px; }
   .serviceInfo { padding: 0 14px; gap: 11px; }
   .serviceIcon { width: 26px; }
   .serviceIcon svg { width: 26px; height: 26px; }
   .cardArrow { width: 32px; height: 32px; }
 }
 @media (max-width: 780px) {
-  .serviceBand { margin-top: -150px; }
+  .serviceBand { margin-top: -100px; }
   .servicesGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-  .serviceCard { height: 150px; }
+  .serviceCard { height: 130px; }
   .serviceInfo { height: 68px; }
   .serviceCopy p { white-space: normal; }
   .showcaseGrid { grid-template-columns: 1fr; padding-inline: 24px; }
   .resultPanel { height: 300px; }
   .testimonial { height: auto; }
-  .showcaseSection { padding-top: 40px; }
+  .showcaseSection { padding-top: 24px; }
 }
 @media (max-width: 520px) {
   .servicesGrid { padding-inline: 14px; gap: 8px; }
-  .serviceCard { height: 140px; border-radius: 12px; }
+  .serviceCard { height: 112px; border-radius: 12px; }
   .serviceInfo { height: 70px; padding: 0 10px; gap: 8px; }
   .serviceIcon { display: none; }
   .serviceCopy h2 { font-size: .9rem; }
@@ -110,6 +110,6 @@
 /* Phones: no negative-margin overflow, shorter hero so tiles follow the CTA row. */
 @media (max-width: 1280px) { .steps { margin-right: 0; } }
 @media (max-width: 780px) {
-  .serviceBand { margin-top: -96px; }
+  .serviceBand { margin-top: -86px; }
   .steps::before { right: 20%; }
 }

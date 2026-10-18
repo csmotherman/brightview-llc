@@ -1,7 +1,7 @@
 /* Hero geometry measured from the 1536px design reference. */
 .hero {
   position: relative;
-  height: 700px;
+  height: clamp(565px, 63svh, 635px);
   isolation: isolate;
   color: #fff;
   background: #050f0d;
@@ -28,7 +28,7 @@
 }
 .heroInner {
   height: 100%;
-  padding: 100px 49px 0 99px;
+  padding: 88px 49px 0 99px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -50,13 +50,13 @@
 .message h1 {
   white-space: pre-line;
   font-family: var(--font-display); font-weight: 700;
-  font-size: clamp(3.4rem, 5.05vw, 5.8rem); line-height: .92; letter-spacing: -.01em;
+  font-size: clamp(3.35rem, 4.2vw, 4.2rem); line-height: .94; letter-spacing: -.015em;
   color: #fff; margin: 11px 0 0; text-shadow: 0 2px 22px rgba(0,0,0,.35);
 }
 .message > p {
   max-width: 509px; color: #fff;
-  font-size: clamp(.98rem, 1.07vw, 1.07rem); line-height: 1.42;
-  margin: 8px 0 17px; text-shadow: 0 1px 12px rgba(0,0,0,.5);
+  font-size: clamp(.93rem, 1.02vw, 1.01rem); line-height: 1.37;
+  margin: 8px 0 13px; text-shadow: 0 1px 12px rgba(0,0,0,.5);
 }
 .actions { display: flex; align-items: center; flex-wrap: wrap; gap: 17px 28px; }
 .mainAction {
@@ -82,7 +82,7 @@
   font-size: 1.15rem; transition: background .18s ease;
 }
 
-.proofRow { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 38px; margin-top: 18px; }
+.proofRow { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 22px; margin-top: 10px; }
 .homeowners { display: flex; align-items: center; gap: 15px; }
 .homeowners span:last-child { display: flex; flex-direction: column; gap: 1px; line-height: 1.2; }
 .homeowners strong { font-size: 1.08rem; font-weight: 600; }
@@ -107,10 +107,10 @@
 .controls button:last-child { font-size: .72rem; }
 
 /* Frosted glass cards. Same recipe is reused by the service tiles. */
-.floating { width: min(302px, 25vw); flex: none; display: flex; flex-direction: column; gap: 5px; margin-top: 6px; }
+.floating { width: min(302px, 25vw); flex: none; display: flex; flex-direction: column; gap: 4px; margin-top: 8px; }
 .glassLead, .glassCard {
   position: relative; display: flex; align-items: center; gap: 20px;
-  height: 69px; padding: 0 18px 0 24px; border-radius: 17px;
+  height: 57px; padding: 0 18px 0 24px; border-radius: 17px;
   color: #fff; text-decoration: none; overflow: hidden;
   background:
     linear-gradient(135deg, rgba(255,255,255,.17) 0%, rgba(255,255,255,.05) 55%, rgba(255,255,255,.09) 100%),
@@ -120,7 +120,7 @@
   box-shadow: inset 0 1px 0 rgba(255,255,255,.3), inset 0 -1px 0 rgba(255,255,255,.05), 0 10px 30px rgba(0,0,0,.28);
   transition: background-color .2s ease, border-color .2s ease;
 }
-.glassLead { height: 79px; }
+.glassLead { height: 66px; }
 .glassLead:hover, .glassCard:hover { border-color: rgba(255,255,255,.4); background-color: rgba(60,70,64,.4); }
 .sunIcon { color: #f2c95c; flex: none; display: grid; place-items: center; }
 .sunIcon svg { width: 36px; height: 36px; }
@@ -140,22 +140,22 @@
   .glassCard, .glassLead { padding-left: 16px; }
 }
 @media (max-width: 1100px) {
-  .hero { height: 660px; }
-  .message h1 { font-size: clamp(3.2rem, 6vw, 4.2rem); }
+  .hero { height: clamp(540px, 65svh, 600px); }
+  .message h1 { font-size: clamp(3.2rem, 5.4vw, 4rem); }
   .floating { display: none; }
-  .heroInner { padding-inline: 40px; }
+  .heroInner { padding: 86px 40px 0; }
 }
 @media (max-width: 780px) {
-  .hero { height: 770px; }
+  .hero { height: 560px; }
   .heroInner { padding: 88px 24px 0; }
-  .message h1 { font-size: clamp(3rem, 9vw, 4.2rem); }
+  .message h1 { font-size: clamp(2.95rem, 8vw, 3.9rem); }
   .tint { background: linear-gradient(0deg, rgba(2,12,10,.78), rgba(2,12,10,.55) 55%, rgba(2,12,10,.3)); }
 }
 @media (max-width: 520px) {
-  .hero { height: 790px; }
+  .hero { height: 555px; }
   .heroInner { padding: 82px 20px 0; }
   .pill { font-size: .6rem; padding: 0 12px; height: 30px; }
-  .message h1 { font-size: clamp(2.7rem, 11vw, 3.4rem); }
+  .message h1 { font-size: clamp(2.55rem, 9.8vw, 3.1rem); }
   .mainAction { height: 46px; padding: 0 20px; gap: 12px; font-size: .86rem; }
   .secondaryAction { font-size: .86rem; }
   .circleArrow { width: 38px; height: 38px; }
@@ -164,5 +164,4 @@
 @media (prefers-reduced-motion: reduce) {
   .photo, .photoActive { transition: none; }
 }
-@media (max-width: 780px) { .hero { height: 600px; } }
-@media (max-width: 520px) { .hero { height: 610px; } }
+/* Small screens use the measured heights above; don't override them below. */
