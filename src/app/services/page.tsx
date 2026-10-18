@@ -1,158 +1,282 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { Container } from "@/components/layout/Container";
 import { site } from "@/config/site";
-import { ServiceExplorer } from "./ServiceExplorer";
 import styles from "./services.module.css";
 
 export const metadata: Metadata = {
-  title: "Our Services | BrightView LLC",
+  title: "Services | BrightView LLC",
   description:
-    "Explore window cleaning, pressure washing and holiday lighting from family-owned BrightView LLC in Michigan.",
+    "Explore BrightView's window cleaning, pressure washing and holiday lighting services, with actual project photographs from Michigan.",
 };
+
+type Photo = {
+  src: string;
+  label: string;
+  alt: string;
+};
+
+type Comparison = {
+  title: string;
+  before: Photo;
+  after: Photo;
+};
+
+type Service = {
+  slug: string;
+  title: string;
+  what: string;
+  benefit: string;
+  comparisons: Comparison[];
+  finished: Photo[];
+};
+
+const services: Service[] = [
+  {
+    slug: "window-cleaning",
+    title: "Window cleaning",
+    what: "We clean residential windows so the glass looks clear and cared for.",
+    benefit: "A clearer view, more natural light, and a fresher-looking exterior.",
+    comparisons: [
+      {
+        title: "Window cleaning",
+        before: {
+          src: "/images/projects/window-cleaning/Window Before 4-3.png",
+          label: "Before",
+          alt: "Residential window before cleaning",
+        },
+        after: {
+          src: "/images/projects/window-cleaning/Window After 4-3.png",
+          label: "After",
+          alt: "Same residential window after cleaning",
+        },
+      },
+    ],
+    finished: [
+      {
+        src: "/images/projects/window-cleaning/Full House 16-9.png",
+        label: "Completed home",
+        alt: "House photographed after BrightView window-cleaning work",
+      },
+    ],
+  },
+  {
+    slug: "pressure-washing",
+    title: "Pressure washing",
+    what: "We clean exterior surfaces such as brick pavers, fences and porch areas.",
+    benefit: "Helps remove visible dirt and buildup to refresh the appearance of outdoor spaces.",
+    comparisons: [
+      {
+        title: "Brick pavers",
+        before: {
+          src: "/images/projects/pressure-washing/BrickPaver Before 4-3.png",
+          label: "Before",
+          alt: "Brick pavers before pressure washing",
+        },
+        after: {
+          src: "/images/projects/pressure-washing/BrickPaver After 4-3.png",
+          label: "After",
+          alt: "Same brick pavers after pressure washing",
+        },
+      },
+      {
+        title: "Fence",
+        before: {
+          src: "/images/projects/pressure-washing/Fence Before 4-3.png",
+          label: "Before",
+          alt: "Fence before cleaning",
+        },
+        after: {
+          src: "/images/projects/pressure-washing/Fence After 4-3.png",
+          label: "After",
+          alt: "Same fence after cleaning",
+        },
+      },
+    ],
+    finished: [
+      {
+        src: "/images/projects/pressure-washing/Porch.png",
+        label: "Porch project",
+        alt: "Porch photographed as part of a BrightView pressure-washing project",
+      },
+    ],
+  },
+  {
+    slug: "holiday-lights",
+    title: "Holiday lighting",
+    what: "We help homes get ready for the holiday season with outdoor decorative lighting.",
+    benefit: "A festive look that makes the home stand out after dark.",
+    comparisons: [],
+    finished: [
+      {
+        src: "/images/projects/holiday-lights/House1.png",
+        label: "Holiday lighting / 01",
+        alt: "BrightView holiday lighting on a house",
+      },
+      {
+        src: "/images/projects/holiday-lights/House2.png",
+        label: "Holiday lighting / 02",
+        alt: "BrightView holiday lighting display on a home",
+      },
+      {
+        src: "/images/projects/holiday-lights/House3.png",
+        label: "Holiday lighting / 03",
+        alt: "Home illuminated with holiday lights at night",
+      },
+      {
+        src: "/images/projects/holiday-lights/Trees.png",
+        label: "Trees",
+        alt: "Trees decorated with holiday lights",
+      },
+    ],
+  },
+];
+
+const gutterProject: Comparison = {
+  title: "Gutter cleaning",
+  before: {
+    src: "/images/gutter/Gutter Before 4-3.png",
+    label: "Before",
+    alt: "Gutter before cleaning",
+  },
+  after: {
+    src: "/images/gutter/Gutter After 4-3.png",
+    label: "After",
+    alt: "Gutter after cleaning",
+  },
+};
+
+function PhotoTile({ photo }: { photo: Photo }) {
+  return (
+    <figure className={styles.photoTile}>
+      <a
+        href={photo.src}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={"View full-size photo: " + photo.label + " (opens in a new tab)"}
+        className={styles.photoLink}
+      >
+        <Image
+          src={photo.src}
+          alt={photo.alt}
+          fill
+          sizes="(max-width: 620px) 48vw, (max-width: 900px) 44vw, 26vw"
+        />
+        <span className={styles.zoomIcon} aria-hidden="true">↗</span>
+      </a>
+      <figcaption>{photo.label}</figcaption>
+    </figure>
+  );
+}
+
+function ComparisonGallery({ comparison }: { comparison: Comparison }) {
+  return (
+    <div className={styles.comparison}>
+      <p className={styles.projectLabel}>{comparison.title}</p>
+      <div className={styles.comparisonPhotos}>
+        <PhotoTile photo={comparison.before} />
+        <PhotoTile photo={comparison.after} />
+      </div>
+    </div>
+  );
+}
 
 export default function ServicesPage() {
   return (
     <div className={styles.page}>
-      <section className={styles.hero} aria-labelledby="services-title">
-        <Container className={styles.heroLayout}>
-          <div className={styles.heroCopy}>
-            <p className={styles.overline}>BRIGHTVIEW LLC <span aria-hidden="true">/</span> OUR SERVICES</p>
-            <h1 id="services-title">
-              Clear windows.<br />
-              Clean surfaces.<br />
-              <span>Bright nights.</span>
-            </h1>
-            <p className={styles.heroDescription}>
-              Window cleaning, pressure washing and holiday lighting for Michigan
-              homes. A family-owned business with work you can see.
-            </p>
-            <a className={styles.heroJump} href="#explore-services">
-              Find your service
-              <span aria-hidden="true">↓</span>
-            </a>
-          </div>
-          <div className={styles.heroGallery} aria-label="BrightView project photography">
-            <div className={styles.heroMainPhoto}>
-              <Image
-                src="/images/projects/window-cleaning/Full House 16-9.png"
-                alt="House photographed as part of BrightView's window cleaning work"
-                fill
-                priority
-                sizes="(max-width: 800px) 72vw, 36vw"
-              />
-            </div>
-            <div className={styles.heroSidePhoto}>
-              <Image
-                src="/images/projects/holiday-lights/House2.png"
-                alt="Home illuminated with holiday lighting"
-                fill
-                priority
-                sizes="(max-width: 800px) 30vw, 18vw"
-              />
-            </div>
-            <div className={styles.heroPhotoCredit}>ACTUAL BRIGHTVIEW PROJECTS</div>
-          </div>
-        </Container>
-      </section>
-
-      <ServiceExplorer />
-
-      <section className={styles.proofSection} aria-labelledby="proof-title">
+      <section className={styles.intro} aria-labelledby="services-title">
         <Container>
-          <div className={styles.proofHeading}>
-            <div>
-              <p className={styles.overline}>THE WORK / UP CLOSE</p>
-              <h2 id="proof-title">See what a proper clean can uncover.</h2>
+          <p className={styles.eyebrow}>BRIGHTVIEW LLC / OUR SERVICES</p>
+          <div className={styles.introText}>
+            <h1 id="services-title">Services &amp; project photos</h1>
+            <p>What we do, why it helps, and examples of our work.</p>
+          </div>
+          <nav className={styles.quickLinks} aria-label="Services on this page">
+            {services.map((service) => (
+              <a href={"#" + service.slug} key={service.slug}>
+                {service.title} <span aria-hidden="true">↘</span>
+              </a>
+            ))}
+          </nav>
+        </Container>
+      </section>
+
+      <Container>
+        {services.map((service) => (
+          <section
+            key={service.slug}
+            id={service.slug}
+            className={styles.service}
+            aria-labelledby={service.slug + "-title"}
+          >
+            <div className={styles.serviceDetails}>
+              <h2 id={service.slug + "-title"}>{service.title}</h2>
+              <div className={styles.descriptionGroup}>
+                <div>
+                  <h3>What we do</h3>
+                  <p>{service.what}</p>
+                </div>
+                <div>
+                  <h3>Why it helps</h3>
+                  <p>{service.benefit}</p>
+                </div>
+              </div>
             </div>
-            <p>
-              A pair of original photographs from a BrightView brick-paver project.
-              Before on the left, after on the right.
-            </p>
-          </div>
-          <div className={styles.proofPhotos}>
-            <figure>
-              <a
-                className={styles.proofPhoto}
-                href="/images/projects/pressure-washing/BrickPaver Before 4-3.png"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Open full-size before photograph of brick pavers (opens in a new tab)"
-              >
-                <Image
-                  src="/images/projects/pressure-washing/BrickPaver Before 4-3.png"
-                  alt="Brick pavers before pressure washing"
-                  fill
-                  sizes="(max-width: 680px) 48vw, 42vw"
-                />
-                <span className={styles.expandIcon} aria-hidden="true">↗</span>
-              </a>
-              <figcaption><span>01</span> Before</figcaption>
-            </figure>
-            <figure>
-              <a
-                className={styles.proofPhoto}
-                href="/images/projects/pressure-washing/BrickPaver After 4-3.png"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Open full-size after photograph of brick pavers (opens in a new tab)"
-              >
-                <Image
-                  src="/images/projects/pressure-washing/BrickPaver After 4-3.png"
-                  alt="The same brick pavers after pressure washing"
-                  fill
-                  sizes="(max-width: 680px) 48vw, 42vw"
-                />
-                <span className={styles.expandIcon} aria-hidden="true">↗</span>
-              </a>
-              <figcaption><span>02</span> After</figcaption>
-            </figure>
-          </div>
-          <p className={styles.proofFootnote}>BRICK PAVERS <span aria-hidden="true">—</span> TAP A PHOTO TO SEE IT FULL SIZE</p>
-        </Container>
-      </section>
-
-      <section className={styles.nightSection} aria-labelledby="night-title">
-        <Container className={styles.nightLayout}>
-          <div className={styles.nightCopy}>
-            <p className={styles.nightOverline}>AFTER DARK / HOLIDAY LIGHTING</p>
-            <h2 id="night-title">A different kind of curb appeal.</h2>
-            <p>Browse the holiday lights we&apos;ve helped bring to Michigan homes.</p>
-            <Link href="/services/holiday-lights" className={styles.nightLink}>
-              Explore holiday lighting <span aria-hidden="true">↗</span>
-            </Link>
-          </div>
-          <div className={styles.nightPhoto}>
-            <Image
-              src="/images/projects/holiday-lights/House3.png"
-              alt="House with warm holiday lights photographed at night"
-              fill
-              sizes="(max-width: 760px) 100vw, 58vw"
-            />
-          </div>
-        </Container>
-      </section>
-
-      <section className={styles.contactSection} aria-labelledby="contact-title">
-        <Container className={styles.contactLayout}>
-          <div>
-            <p className={styles.overline}>HAVE SOMETHING IN MIND?</p>
-            <h2 id="contact-title">Tell us what your place needs.</h2>
-            <p>Reach out about windows, an outdoor surface or holiday lighting.</p>
-          </div>
-          <div className={styles.contactAction}>
-            <a
-              className="button button--primary"
-              href={site.facebookUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Get Free Quote — contact BrightView on Facebook (opens in a new tab)"
+            <div
+              className={[
+                styles.gallery,
+                service.comparisons.length > 0 && service.finished.length > 0
+                  ? styles.gallerySplit
+                  : "",
+              ].filter(Boolean).join(" ")}
             >
-              Get Free Quote <span aria-hidden="true">↗</span>
-            </a>
-            <p>Quote requests currently open our Facebook page.</p>
+              {service.comparisons.length > 0 && (
+                <div className={styles.comparisons}>
+                  {service.comparisons.map((comparison) => (
+                    <ComparisonGallery key={comparison.title} comparison={comparison} />
+                  ))}
+                </div>
+              )}
+              {service.finished.length > 0 && (
+                <div className={styles.finished}>
+                  <p className={styles.projectLabel}>
+                    {service.comparisons.length > 0 ? "More project photos" : "Completed projects"}
+                  </p>
+                  <div className={styles.finishedPhotos}>
+                    {service.finished.map((photo) => (
+                      <PhotoTile key={photo.src} photo={photo} />
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </section>
+        ))}
+
+        <section className={styles.extraWork} aria-labelledby="extra-title">
+          <div className={styles.extraHeading}>
+            <h2 id="extra-title">Additional project photos</h2>
+            <p>Gutter cleaning</p>
           </div>
+          <ComparisonGallery comparison={gutterProject} />
+        </section>
+      </Container>
+
+      <section className={styles.contact} aria-labelledby="contact-title">
+        <Container className={styles.contactInner}>
+          <div>
+            <h2 id="contact-title">Interested in a service?</h2>
+            <p>Tell us about your project. For now, quote requests go through Facebook.</p>
+          </div>
+          <a
+            href={site.facebookUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="button button--primary"
+            aria-label="Get Free Quote — contact BrightView on Facebook (opens in a new tab)"
+          >
+            Get Free Quote <span aria-hidden="true">↗</span>
+          </a>
         </Container>
       </section>
     </div>
