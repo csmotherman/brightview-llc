@@ -3,10 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { site } from "@/config/site";
 import { Container } from "./Container";
 
 const nav = [
-  { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
   { label: "Our Work", href: "/our-work" },
   { label: "Holiday Lights", href: "/services/holiday-lights" },
@@ -26,9 +26,15 @@ export function SiteHeader() {
         <nav className="site-nav" aria-label="Main navigation">
           {nav.map((item) => <Link href={item.href} key={item.href}>{item.label}</Link>)}
         </nav>
-        <Link className="header-contact" href="/contact">
+        <a
+          className="header-contact"
+          href={site.facebookUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Get Free Quote — contact BrightView on Facebook (opens in a new tab)"
+        >
           Get Free Quote <span aria-hidden="true">↗</span>
-        </Link>
+        </a>
         <button
           type="button"
           className="menu-toggle"
@@ -41,8 +47,9 @@ export function SiteHeader() {
         </button>
       </Container>
       <nav id="mobile-nav" className={menuOpen ? "mobile-nav mobile-nav--open" : "mobile-nav"} aria-label="Mobile navigation">
+        <Link href="/" onClick={() => setMenuOpen(false)} tabIndex={menuOpen ? 0 : -1}>Home</Link>
         {nav.map((item) => <Link href={item.href} key={item.href} onClick={() => setMenuOpen(false)} tabIndex={menuOpen ? 0 : -1}>{item.label}</Link>)}
-        <Link href="/contact" onClick={() => setMenuOpen(false)} tabIndex={menuOpen ? 0 : -1}>Get Free Quote ↗</Link>
+        <a href={site.facebookUrl} target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)} tabIndex={menuOpen ? 0 : -1} aria-label="Get Free Quote on BrightView's Facebook page (opens in a new tab)">Get Free Quote ↗</a>
       </nav>
     </header>
   );

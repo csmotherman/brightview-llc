@@ -1,40 +1,45 @@
-# BrightView LLC — homepage and reserved pages
+# BrightView LLC — homepage redesign (review branch)
 
-A Next.js website built page by page for BrightView LLC, a family-owned Michigan window cleaning, pressure washing and holiday lighting business.
+BrightView is a family-owned Michigan window-cleaning, pressure-washing and holiday-lighting business. This is a page-by-page website build, not a quote-management application.
 
-## Current scope
+## Homepage
 
-The **homepage** is the only page with full content:
-- Compact navigation and a desktop hero designed to remain in the first screen, with a subtle image-edge fade and a verified, minimal trust line (uses the supplied real hero photo).
-- Three service teasers linking to their separate pages.
-- Actual matched before/after photographs shown simultaneously: **Before on the left, After on the right**, with category buttons. No swipe, drag handle or split-image overlay.
-- Brief how-it-works, family-owned introduction and contact call to action.
-- Get Free Quote labels in the header, hero and bottom CTA link to the existing /contact placeholder until the quote feature is built. No form, quote processing, CRM or pricing yet. The existing Facebook link remains in the footer.
+- Compact header and restrained desktop hero using the real `Hero-HomePage.png` photo. On mobile the photo comes first. The hero is designed to fit in a typical desktop viewport without scrolling.
+- A smaller, all-navy service-first headline; short supporting description, one main CTA and a quiet secondary work link.
+- **Get Free Quote** temporarily opens the existing BrightView Facebook page (a new tab). The page explicitly says so. There is no quote form, automatic estimate, account, or CRM.
+- Three editorial, image-led service links (instead of boxed marketing cards).
+- Authentic before/after photos displayed independently, **Before on the left, After on the right**, across screen sizes. No drag/slide effect. Each photo can be opened full-size.
+- A short factual family-owned introduction and a minimal final contact call-to-action.
+- Generic three-column process filler, redundant badges/trust strip, decorative effects, and developer-facing copy have been removed.
 
-The routes below are accessible **blank placeholders** with just a page title, a coming-soon line and a link back home. They will be built independently later:
+## Independent pages
 
-/services
-/services/window-cleaning
-/services/pressure-washing
-/services/holiday-lights
-/our-work
-/about
-/reviews
-/service-areas
-/faq
-/contact
+All routes below remain simple placeholders so they can be designed one at a time:
 
-## Run
+- `/services`
+- `/services/window-cleaning`
+- `/services/pressure-washing`
+- `/services/holiday-lights`
+- `/our-work`
+- `/about`
+- `/reviews`
+- `/service-areas`
+- `/faq`
+- `/contact`
 
+## Run and check
+
+```bash
 npm ci
 npm run dev
 npm run build
+```
 
-## Boundaries
+## Still needed before launch
 
-- **Do not** implement Jobber, CRM, payments, quotes, scheduling, forms, pricing or other integrations.
-- No invented testimonials, star ratings, insurance/licensing promises, phone numbers or specific service areas.
-- Photos are existing images in public/images; no AI-generated or stock visuals.
-- Gutter photos are portfolio evidence, not a new confirmed bookable service.
-- Site remains noindex until business details, pages and launch have been reviewed.
-- This branch is for review only; do not merge or deploy until approved.
+- Verify the existing Facebook URL with BrightView, and replace the temporary quote link once the real quote/contact flow is approved.
+- Collect a genuine team/owners photo, verified reviews, and verified service-area details before adding public-facing claims.
+- Review the actual desktop/mobile layouts and image performance. Original PNGs are large, though Next.js optimizes them for delivery.
+- Review each reserved page before publishing. The whole site remains `noindex` until launch readiness is confirmed.
+
+No Jobber, CRM, pricing, scheduling, booking, payments, database or quote intake is implemented. No invented reviews, ratings, credentials, staff imagery or precise coverage claims.

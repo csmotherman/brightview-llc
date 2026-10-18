@@ -1,27 +1,25 @@
-# BrightView — Page-by-page plan
+# BrightView — build pages one by one
 
-Only the homepage is designed and filled in. All routes below exist as deliberately sparse placeholders that will be built individually after review.
+Only the homepage is designed and filled. The reserved pages below are separate minimal route placeholders.
 
-- / — homepage: compact above-the-fold desktop hero, trust facts, 3 service teasers, side-by-side real before/after, contact steps, family introduction, and Facebook CTA.
-- /services — all services (placeholder)
-- /services/window-cleaning — window cleaning (placeholder)
-- /services/pressure-washing — pressure washing (placeholder)
-- /services/holiday-lights — holiday lighting (placeholder)
-- /our-work — projects (placeholder; homepage shows a preview only)
-- /about — family story (placeholder)
-- /reviews — genuine reviews (placeholder; do not fabricate)
-- /service-areas — verified service locations (placeholder; do not invent)
-- /faq — answers to actual customer questions (placeholder)
-- /contact — final contact options, to be decided (placeholder)
+| Route | Purpose |
+| --- | --- |
+| / | Service-first hero, photo-led service choices, actual before/after results, brief family-owned introduction, Facebook contact |
+| /services | Full service overview — placeholder |
+| /services/window-cleaning | Window cleaning — placeholder |
+| /services/pressure-washing | Pressure washing — placeholder |
+| /services/holiday-lights | Holiday lighting — placeholder |
+| /our-work | Project portfolio — placeholder |
+| /about | Verified family story and genuine team photos — placeholder |
+| /reviews | Verified customer testimonials — placeholder |
+| /service-areas | Confirmed service-area locations — placeholder |
+| /faq | Genuine FAQs — placeholder |
+| /contact | Future quote/contact flow (not built) — placeholder |
 
-The placeholder pages share one small component in src/components/layout/PlaceholderPage.tsx. No duplicate service/portfolio/story page content is embedded in the homepage.
+Do not invent testimonials, ratings, service coverage, staff or credentials. Keep only the uploaded BrightView imagery.
 
-## Rules
+Before/after photos remain in two separate frames, Before left / After right, even on mobile; visitors can open the original file for a closer view. The home page only previews the work: it does not replace the future portfolio page.
 
-1. One page at a time after approval.
-2. Existing real photographs and approved BrightView logo only.
-3. Before-and-after photos must always display in independent frames, Before left / After right, even on mobile.
-4. Don't introduce pricing, quote-management, Jobber, CRM, authentication, or other integrations.
-5. Don't invent claims, credentials, ratings, photos, phone numbers or coverage zones.
-6. Keep noindex until final site launch is approved and all public pages are ready.
-7. Ensure responsive layout and a build before merging.
+Quote CTAs currently open the business's existing Facebook profile in a new tab, with clear copy that this is temporary. The Contact page remains a placeholder until the owner decides how quotes should work.
+
+Keep noindex in place until final launch approval. No Jobber, CRM, forms, pricing, booking, database or third-party quote integration.
