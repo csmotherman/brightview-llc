@@ -1,0 +1,35 @@
+/* Transparent header laid over each page's photographic header. */
+.header { position: absolute; z-index: 100; top: 0; left: 0; width: 100%; background: linear-gradient(180deg, rgb(2 10 9 / 50%), rgb(2 10 9 / 0%)); }
+.inner { display: flex; align-items: center; gap: 28px; width: 100%; max-width: var(--content-max); height: var(--header-height); margin-inline: auto; padding-inline: var(--edge); }
+
+.brand { display: inline-flex; align-items: center; gap: 9px; flex: none; text-decoration: none; color: #fff; }
+.logo { width: 54px; height: 54px; object-fit: contain; filter: drop-shadow(0 1px 3px rgb(0 0 0 / 28%)); }
+.brandText { display: flex; flex-direction: column; gap: 4px; line-height: 1; }
+.brandText strong { font-size: 1.11rem; font-weight: 850; letter-spacing: .01em; }
+.brandText small { color: #f3ecda; font-size: .62rem; font-weight: 780; letter-spacing: .17em; }
+
+.nav { display: flex; align-items: center; gap: 34px; margin-left: clamp(40px, 8vw, 130px); }
+.nav a { position: relative; color: #fff; font-size: var(--text-sm); font-weight: 500; white-space: nowrap; text-decoration: none; }
+.nav a:hover { color: #f6dca8; }
+.nav a[aria-current="page"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: -8px; height: 2px; background: #f0d28a; }
+.chevron { margin-left: 8px; vertical-align: middle; }
+.quote { margin-left: auto; }
+
+.toggle { display: none; margin-left: auto; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 45px; height: 43px; padding: 0 10px; border: 1px solid rgb(255 255 255 / 50%); border-radius: var(--radius-sm); background: rgb(8 35 27 / 75%); }
+.toggle span { width: 21px; height: 2px; background: #fff; }
+.mobileNav { display: none; position: absolute; top: 100%; left: 0; width: 100%; padding: 5px var(--edge) 18px; background: #102c23; border-bottom: 1px solid rgb(248 227 180 / 26%); box-shadow: 0 14px 20px rgb(0 14 10 / 18%); }
+.mobileNav a:not([data-button]) { padding: 13px 2px; color: #fff; text-decoration: none; border-bottom: 1px solid #385549; font-weight: 600; }
+.mobileNav a[aria-current="page"] { color: var(--gold-300); }
+.mobileNav [data-button] { margin-top: 14px; }
+.mobileOpen { display: flex; flex-direction: column; }
+
+@media (max-width: 1100px) { .nav { gap: 22px; margin-left: clamp(16px, 3vw, 40px); } }
+@media (max-width: 900px) {
+  .nav, .quote { display: none; }
+  .toggle { display: flex; }
+}
+@media (max-width: 520px) {
+  .logo { width: 46px; height: 46px; }
+  .brandText strong { font-size: .94rem; }
+  .brandText small { font-size: .55rem; letter-spacing: .14em; }
+}

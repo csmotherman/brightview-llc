@@ -1,0 +1,7 @@
+.eyebrow { display: flex; gap: 10px; align-items: center; margin: 0 0 var(--space-3); font-size: var(--text-xs); letter-spacing: .1em; font-weight: 600; text-transform: uppercase; color: var(--ink-900); }
+.eyebrow::before { content: ""; height: 3px; width: 23px; background: linear-gradient(90deg, var(--gold-500) 0 40%, var(--evergreen-900) 40%); }
+.title { margin: 0; font-size: var(--text-h2); line-height: 1.05; color: var(--text); }
+.lead { max-width: 620px; margin: var(--space-4) 0 0; font-size: var(--text-lg); line-height: 1.65; color: var(--text-body); }
+.onDark .eyebrow, .onDark .title { color: #faf3e4; }
+.onDark .eyebrow::before { background: linear-gradient(90deg, var(--gold-500) 0 40%, var(--cream-200) 40%); }
+.onDark .lead { color: var(--text-on-dark-muted); }

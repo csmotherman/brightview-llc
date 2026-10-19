@@ -4,7 +4,8 @@ import type { Metadata } from "next";
 import { HomeFeatureHero } from "@/components/home/HomeFeatureHero";
 import { BeforeAfterShowcase } from "@/components/home/BeforeAfterShowcase";
 import { TestimonialPanel } from "@/components/home/TestimonialPanel";
-import { site } from "@/config/site";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Button } from "@/components/ui/Button";
 import styles from "./home.module.css";
 
 export const metadata: Metadata = {
@@ -32,7 +33,7 @@ const featuredServices = [
   {
     name: "Gutter Cleaning",
     caption: "Keep water moving, protect your home.",
-    image: "/images/gutter/Gutter After 4-3.png",
+    image: "/images/projects/gutter/Gutter After 4-3.png",
     alt: "Gutter photographed after cleaning",
     icon: "gutter",
     href: "/services#extra-title",
@@ -81,21 +82,18 @@ export default function HomePage() {
       <section className={styles.showcaseSection} id="results" aria-label="How it works and project results">
         <div className={styles.showcaseGrid}>
           <div className={styles.process}>
-            <p className={styles.eyebrow}><span /> OUR PROCESS</p>
-            <h2>A Simple Process.<br />A Cleaner Home.</h2>
+            <SectionHeading eyebrow="OUR PROCESS" title={<>A Simple Process.<br />A Cleaner Home.</>} />
             <p className={styles.processIntro}>Getting started is easy. We handle the details so you can enjoy the results.</p>
             <div className={styles.steps}>
               <div className={styles.step}><span>1</span><h3>Request a Quote</h3><p>Tell us what you need cleaned.</p></div>
               <div className={styles.step}><span>2</span><h3>We&apos;ll Follow Up</h3><p>We&apos;ll review the details and provide a quote.</p></div>
               <div className={styles.step}><span>3</span><h3>Enjoy the Results</h3><p>Schedule your service and see the difference.</p></div>
             </div>
-            <a href={site.facebookUrl} target="_blank" rel="noopener noreferrer" className={styles.processCta} aria-label="Get started — contact BrightView on Facebook in a new tab">
-              Get Started Today <span aria-hidden="true">→</span>
-            </a>
+            <div className={styles.processAction}><Button href="/quote" arrow>Get Started Today</Button></div>
           </div>
 
           <div className={styles.resultPanel}>
-            <h2 className={styles.srOnly}>Actual before and after project photos</h2>
+            <h2 className="sr-only">Actual before and after project photos</h2>
             <BeforeAfterShowcase />
           </div>
 

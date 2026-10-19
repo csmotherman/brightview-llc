@@ -1,5 +1,8 @@
-import { PlaceholderPage } from "@/components/layout/PlaceholderPage";
+import type { Metadata } from "next";
+import { ServiceDetail } from "@/components/services/ServiceDetail";
+
+export const metadata: Metadata = { title: "Window Cleaning | BrightView LLC" };
 
 export default function Page() {
-  return <PlaceholderPage title="Window cleaning" />;
+  return <ServiceDetail slug="window-cleaning" />;
 }

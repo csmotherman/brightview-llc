@@ -1,0 +1,7 @@
+.faq { display: grid; gap: var(--space-4); max-width: 860px; }
+.faq details { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px 26px; box-shadow: var(--shadow-sm); }
+.faq summary { cursor: pointer; font-weight: 600; font-size: 1.02rem; color: var(--text); list-style: none; display: flex; justify-content: space-between; gap: var(--space-4); }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; color: #b0893a; font-size: 1.3rem; line-height: 1; }
+.faq details[open] summary::after { content: "–"; }
+.faq p { margin: 14px 0 0; color: var(--text-body); line-height: 1.65; }

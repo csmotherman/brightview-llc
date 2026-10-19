@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "@/components/ui/Button";
+import { Pill } from "@/components/ui/Pill";
 import { homeSlides } from "@/content/home-feature-slides";
 import { homeProof } from "@/content/home-reference";
 import styles from "./HomeFeatureHero.module.css";
@@ -97,15 +99,11 @@ export function HomeFeatureHero() {
       <div className={styles.fade} aria-hidden="true" />
       <div className={styles.heroInner}>
         <div className={styles.message} role="group" aria-roledescription="slide" aria-label={"Feature " + String(active + 1) + " of " + String(homeSlides.length)} aria-live={playing ? "off" : "polite"}>
-          <span className={styles.pill}><i aria-hidden="true" /> {slide.eyebrow}</span>
+          <Pill>{slide.eyebrow}</Pill>
           <h1>{slide.title}</h1>
           <p>{slide.description}</p>
           <div className={styles.actions}>
-            {slide.external ? (
-              <a className={styles.mainAction} href={slide.href} target="_blank" rel="noopener noreferrer" aria-label={slide.cta + " — contact BrightView on Facebook in a new tab"}>{slide.cta} <span aria-hidden="true">→</span></a>
-            ) : (
-              <Link className={styles.mainAction} href={slide.href}>{slide.cta} <span aria-hidden="true">→</span></Link>
-            )}
+            <Button href={slide.href} variant="gold" arrow>{slide.cta}</Button>
             <Link href={slide.secondaryHref} className={styles.secondaryAction}>{slide.secondary} <span className={styles.circleArrow} aria-hidden="true">→</span></Link>
           </div>
 

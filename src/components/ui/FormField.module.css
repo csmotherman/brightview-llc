@@ -1,0 +1,21 @@
+.field { min-width: 0; display: flex; flex-direction: column; gap: var(--space-2); }
+.label, .legend { color: var(--evergreen-800); font-size: var(--text-sm); font-weight: 730; }
+.required { color: var(--gold-700); }
+.control { width: 100%; min-width: 0; padding: 13px 14px; border: 1px solid #d2d9cd; border-radius: var(--radius-sm); outline: none; font: inherit; font-size: .94rem; color: var(--text); background: #fdfdfa; transition: border-color var(--transition), box-shadow var(--transition); }
+.control::placeholder { color: #7e8a7d; opacity: 1; }
+.control:focus { border-color: var(--evergreen-700); box-shadow: 0 0 0 3px rgb(46 97 69 / 12%); }
+.control[aria-invalid="true"] { border-color: var(--danger-500); }
+textarea.control { resize: vertical; min-height: 110px; line-height: 1.45; }
+.error { margin: 0; color: var(--danger-700); font-size: .78rem; }
+
+.option { display: flex; align-items: center; gap: 12px; padding: 12px 13px; border: 1px solid #d6ddd4; border-radius: 10px; background: #fcfdf9; cursor: pointer; position: relative; transition: background var(--transition), border-color var(--transition); }
+.option:hover { border-color: #7a9b81; }
+.option:has(input:checked) { border-color: #2f704a; background: #eff7ef; }
+.option:has(input:focus-visible) { outline: 3px solid var(--gold-500); outline-offset: 2px; }
+.option input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.box { display: grid; place-items: center; flex: none; width: 22px; height: 22px; border: 1.5px solid #9daea1; border-radius: 6px; color: transparent; font-size: .78rem; font-weight: 750; background: #fff; }
+.option input:checked + .box { color: #fff; border-color: var(--evergreen-700); background: var(--evergreen-700); }
+.optionCopy { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.optionCopy strong { font-size: .91rem; line-height: 1.2; font-weight: 730; }
+.optionCopy small { font-size: .74rem; color: #65776a; line-height: 1.35; }
+@media (max-width: 520px) { .control { font-size: 1rem; } }

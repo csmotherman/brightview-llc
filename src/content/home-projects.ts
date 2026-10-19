@@ -43,7 +43,7 @@ export const homeProjects: HomeProject[] = [
     category: "Gutter cleaning",
     title: "Attention to the overlooked spots.",
     detail: "Your real before-and-after photographs tell the story.",
-    before: "/images/gutter/Gutter Before 4-3.png",
-    after: "/images/gutter/Gutter After 4-3.png",
+    before: "/images/projects/gutter/Gutter Before 4-3.png",
+    after: "/images/projects/gutter/Gutter After 4-3.png",
   },
 ];
