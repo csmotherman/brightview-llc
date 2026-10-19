@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import { HomeFeatureHero } from "@/components/home/HomeFeatureHero";
 import { BeforeAfterShowcase } from "@/components/home/BeforeAfterShowcase";
 import { TestimonialPanel } from "@/components/home/TestimonialPanel";
-import { site } from "@/config/site";
 import styles from "./home.module.css";
 
 export const metadata: Metadata = {
@@ -89,9 +88,9 @@ export default function HomePage() {
               <div className={styles.step}><span>2</span><h3>We&apos;ll Follow Up</h3><p>We&apos;ll review the details and provide a quote.</p></div>
               <div className={styles.step}><span>3</span><h3>Enjoy the Results</h3><p>Schedule your service and see the difference.</p></div>
             </div>
-            <a href={site.facebookUrl} target="_blank" rel="noopener noreferrer" className={styles.processCta} aria-label="Get started — contact BrightView on Facebook in a new tab">
+            <Link href="/quote" className={styles.processCta}>
               Get Started Today <span aria-hidden="true">→</span>
-            </a>
+            </Link>
           </div>
 
           <div className={styles.resultPanel}>

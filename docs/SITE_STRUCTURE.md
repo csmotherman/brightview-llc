@@ -14,7 +14,8 @@ The homepage and main `/services` catalog are designed. All other routes remain 
 | /reviews | Verified customer testimonials — placeholder |
 | /service-areas | Confirmed service-area locations — placeholder |
 | /faq | Genuine FAQs — placeholder |
-| /contact | Contact / quote flow to be decided last — placeholder |
+| /quote | Zolato embedded lead intake (no custom backend) |
+| /contact | Redirects to the active `/quote` form |
 
 ## Services gallery inventory
 
@@ -26,7 +27,7 @@ The homepage and main `/services` catalog are designed. All other routes remain 
 
 Each image is shown without a swipe control, and each opens the original file in a new browser tab. Before is always left; after is always right, including on small screens. The page uses no service-selection JS or homepage-style promotional hero.
 
-The bottom Get Free Quote button currently opens the verified BrightView Facebook page in a new tab. No quote form, pricing, scheduling, CRM or Jobber integration has been implemented.
+The bottom Get Free Quote button routes to `/quote`. Website leads go to BrightView's Zolato lead board using its official embed. No custom webhook, scheduling, automatic prices, or payments are implemented.
 
 ## Build order
 
@@ -37,7 +38,7 @@ The bottom Get Free Quote button currently opens the verified BrightView Faceboo
 5. About
 6. Verified reviews, service areas, FAQ
 7. Contact
-8. Quote form **last**
+8. Quote form (now integrated with Zolato)
 
 Keep the site noindex until launch approval.
 
@@ -46,7 +47,7 @@ Keep the site noindex until launch approval.
 - Homepage follows the supplied layout reference: photographic evergreen-toned hero with transparent navigation, cream-gold quote button, four photo service tiles, and a cream lower strip with process / real before-after / dark proof panel.
 - Real photography from the repo only; no placeholder cards, external image hotlinks or simulated reviews.
 - Existing BrightView logo preserved. The screenshot's example three faces, 200+ happy customers, quoted testimonial, 5.0 rating and other unverified superlatives were deliberately not reproduced.
-- Holiday lighting is the first hero feature during the current season; subsequent slides feature pressure washing and window cleaning. Slideshow controls include pause/play, previous/next and accessible direct selection. Quote requests still go to Facebook, **not an online booking system**.
+- Holiday lighting is the first hero feature during the current season; subsequent slides feature pressure washing and window cleaning. Slideshow controls include pause/play, previous/next and accessible direct selection. Quote requests use `/quote` and Zolato's lead-intake form, **not an online booking system**.
 - Four service tiles visually match the sample. Window, pressure and holiday lighting are the three confirmed core services. The Gutter Cleaning tile links only to the genuine additional-project photos already on /services; don't imply a separate gutter quote flow until scope is confirmed.
 - The right-hand proof panel shows real photograph counts, existing categories, and verified family-owned Michigan context instead of invented reviews.
 - Screenshot imagery itself is used for layout inspiration only, not as a production image; no fabricated before/after property photograph.

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { Container } from "@/components/layout/Container";
-import { site } from "@/config/site";
 import styles from "./services.module.css";
 
 export const metadata: Metadata = {
@@ -266,17 +266,11 @@ export default function ServicesPage() {
         <Container className={styles.contactInner}>
           <div>
             <h2 id="contact-title">Interested in a service?</h2>
-            <p>Tell us about your project. For now, quote requests go through Facebook.</p>
+            <p>Tell us what you need, and we'll follow up to discuss your quote.</p>
           </div>
-          <a
-            href={site.facebookUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="button button--primary"
-            aria-label="Get Free Quote — contact BrightView on Facebook (opens in a new tab)"
-          >
+          <Link href="/quote" className="button button--primary">
             Get Free Quote <span aria-hidden="true">↗</span>
-          </a>
+          </Link>
         </Container>
       </section>
     </div>

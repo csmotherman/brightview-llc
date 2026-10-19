@@ -1,5 +1,5 @@
-import { PlaceholderPage } from "@/components/layout/PlaceholderPage";
+import { redirect } from "next/navigation";
 
-export default function Page() {
-  return <PlaceholderPage title="Contact" />;
+export default function ContactPage() {
+  redirect("/quote");
 }

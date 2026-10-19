@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { site } from "@/config/site";
 import { Container } from "./Container";
 
 const nav = [
@@ -29,15 +28,9 @@ export function SiteHeader() {
         <nav className="site-nav" aria-label="Main navigation">
           {nav.map((item) => <Link href={item.href} key={item.href} aria-current={(item.href === "/" && pathname === "/") || (item.href !== "/" && item.href !== "/#results" && pathname === item.href) ? "page" : undefined}>{item.label}</Link>)}
         </nav>
-        <a
-          className="header-contact"
-          href={site.facebookUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Get Free Quote — contact BrightView on Facebook (opens in a new tab)"
-        >
+        <Link className="header-contact" href="/quote">
           Get a Quote <span aria-hidden="true">→</span>
-        </a>
+        </Link>
         <button
           type="button"
           className="menu-toggle"
@@ -51,7 +44,7 @@ export function SiteHeader() {
       </Container>
       <nav id="mobile-nav" className={menuOpen ? "mobile-nav mobile-nav--open" : "mobile-nav"} aria-label="Mobile navigation">
         {nav.map((item) => <Link href={item.href} key={item.href} onClick={() => setMenuOpen(false)} tabIndex={menuOpen ? 0 : -1}>{item.label}</Link>)}
-        <a href={site.facebookUrl} target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)} tabIndex={menuOpen ? 0 : -1} aria-label="Get Free Quote on BrightView's Facebook page (opens in a new tab)">Get a Quote →</a>
+        <Link href="/quote" onClick={() => setMenuOpen(false)} tabIndex={menuOpen ? 0 : -1}>Get a Quote →</Link>
       </nav>
     </header>
   );
