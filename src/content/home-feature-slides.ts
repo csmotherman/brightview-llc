@@ -1,5 +1,3 @@
-import { site } from "@/config/site";
-
 /**
  * Seasonal features use only BrightView's existing imagery and verified copy.
  * Keep the holiday promotion first until the business decides to rotate it out.
@@ -16,8 +14,8 @@ export const homeSlides = [
     objectPosition: "center 40%",
     flip: false,
     cta: "Request Holiday Lighting",
-    href: site.facebookUrl,
-    external: true,
+    href: "/quote",
+    external: false,
     secondary: "See Our Work",
     secondaryHref: "/#results",
     photoLabel: "HOLIDAY LIGHTING",
