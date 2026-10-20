@@ -1,4 +1,4 @@
-/** Verified service copy and real project photos shared by /services, service pages and /our-work. */
+/** Verified service copy and real project photos shared by /services, service pages and /gallery. */
 export type Photo = {
   src: string;
   label: string;

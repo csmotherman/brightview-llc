@@ -1,10 +1,18 @@
 import type { Metadata } from "next";
 import { HomeFeatureHero } from "@/components/home/HomeFeatureHero";
-import { BeforeAfterShowcase } from "@/components/home/BeforeAfterShowcase";
 import { ProcessSteps } from "@/components/home/ProcessSteps";
 import { ServiceTiles } from "@/components/home/ServiceTiles";
-import { TestimonialPanel } from "@/components/home/TestimonialPanel";
+import dynamic from "next/dynamic";
+import { Skeleton } from "@/components/ui/Skeleton";
 import styles from "./home.module.css";
+
+// Interactive lower-row widgets load as separate chunks, so the hero and service tiles paint first.
+const BeforeAfterShowcase = dynamic(() => import("@/components/home/BeforeAfterShowcase").then((m) => m.BeforeAfterShowcase), {
+  loading: () => <Skeleton variant="block" height="100%" round />,
+});
+const TestimonialPanel = dynamic(() => import("@/components/home/TestimonialPanel").then((m) => m.TestimonialPanel), {
+  loading: () => <Skeleton variant="block" height="100%" round />,
+});
 
 export const metadata: Metadata = {
   title: "BrightView LLC | Exterior Cleaning & Holiday Lighting",

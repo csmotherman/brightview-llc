@@ -12,7 +12,6 @@
 .nav a { position: relative; color: #fff; font-size: var(--text-sm); font-weight: 500; white-space: nowrap; text-decoration: none; }
 .nav a:hover { color: #f6dca8; }
 .nav a[aria-current="page"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: -8px; height: 2px; background: #f0d28a; }
-.chevron { margin-left: 8px; vertical-align: middle; }
 .quote { margin-left: auto; }
 
 .toggle { display: none; margin-left: auto; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 45px; height: 43px; padding: 0 10px; border: 1px solid rgb(255 255 255 / 50%); border-radius: var(--radius-sm); background: rgb(8 35 27 / 75%); }
