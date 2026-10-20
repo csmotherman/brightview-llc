@@ -21,7 +21,7 @@ export const viewport: Viewport = { width: "device-width", initialScale: 1, them
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={sans.variable + " " + display.variable}>
+    <html lang="en" data-scroll-behavior="smooth" className={sans.variable + " " + display.variable}>
       <body>
         <a className="skip-link" href="#main-content">Skip to content</a>
         <PageBackdrop />
