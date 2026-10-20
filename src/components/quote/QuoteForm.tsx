@@ -153,7 +153,7 @@ export function QuoteForm() {
     <Card tone="glass" className={styles.card}>
       <div className={styles.intro}>
         <p className={styles.eyebrow}>FREE QUOTE REQUEST</p>
-        <h2>Tell us about your project.</h2>
+        <h2>Let’s get your quote started.</h2>
         <p>Choose as many services as you need. Fields marked * are required.</p>
       </div>
       <form className={styles.form} onSubmit={submit} noValidate aria-busy={busy}>
