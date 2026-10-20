@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { ServiceDetail } from "@/components/services/ServiceDetail";
+import { GlassPage } from "@/components/layout/GlassPage";
 
-export const metadata: Metadata = { title: "Window Cleaning | BrightView LLC" };
+export const metadata: Metadata = { title: "Window Cleaning | BrightView LLC", description: "Residential window cleaning from BrightView LLC." };
 
 export default function Page() {
-  return <ServiceDetail slug="window-cleaning" />;
+  return <GlassPage title="Window Cleaning" />;
 }

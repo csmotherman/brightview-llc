@@ -11,7 +11,6 @@ export function PageHeader({ eyebrow, title, description, image, objectPosition 
     <section className={styles.hero}>
       <Image src={image} alt="" fill priority sizes="100vw" className={styles.photo} style={{ objectPosition }} />
       <div className={styles.tint} aria-hidden="true" />
-      <div className={styles.fade} aria-hidden="true" />
       <div className={styles.inner}>
         <Pill>{eyebrow}</Pill>
         <h1>{title}</h1>

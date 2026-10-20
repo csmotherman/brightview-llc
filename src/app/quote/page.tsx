@@ -21,7 +21,7 @@ export default function QuotePage() {
         image="/images/projects/holiday-lights/House3.png"
         objectPosition="center 45%"
       />
-      <Section aria-label="Quote request">
+      <Section bare aria-label="Quote request">
         <div className={styles.layout}>
           <QuoteForm />
           <aside className={styles.details}>

@@ -2,7 +2,7 @@
 
 | Route | Purpose |
 | --- | --- |
-| / | Homepage: seasonal feature hero, service tiles, process, real before/after slider, review panel |
+| / | Homepage: two-slide hero (window cleaning, holiday lighting), service tiles, process, real before/after slider, recommendation card |
 | /services | All core-service descriptions with every real project photo |
 | /services/window-cleaning, /pressure-washing, /holiday-lights | Per-service detail pages (shared `ServiceDetail`) |
 | /our-work | Filterable gallery of all project photos |
@@ -16,7 +16,7 @@
 ## Content rules
 
 - Use only real BrightView photographs and verified facts. No invented reviews, pricing, certifications or coverage areas.
-- `src/content/home-reference.ts` holds the homepage "200+ happy homeowners" and the review-panel stats (200+ / 5.0 / 3+ years). They are **not verified business facts**; confirm or remove them before launch.
+- The homepage review card (`src/content/home-reference.ts`) shows only real Facebook recommendations. The earlier placeholder "200+ homeowners", 5.0 rating and "3+ years" stats were removed as unverified; add numbers back only if BrightView confirms them.
 - Gutter cleaning appears only as additional project evidence, not as a confirmed core service.
 - Core services (also the quote form's options): Window Cleaning, Pressure Washing, Holiday Lighting.
 - Keep the site `noindex` until launch approval.
