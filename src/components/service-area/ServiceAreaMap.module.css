@@ -1,0 +1,27 @@
+/* Night-map card: dark glass map beside a cream glass info column. Static; no animation. */
+.wrap { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(20px, 3vw, 44px); padding: clamp(14px, 2vw, 24px); align-items: stretch; }
+
+.stage { position: relative; margin: 0; border-radius: calc(var(--radius-lg) - 6px); overflow: hidden; background: #071a36; border: 1px solid rgb(255 255 255 / 22%); box-shadow: inset 0 1px 0 rgb(255 255 255 / 25%), 0 18px 40px rgb(5 14 30 / 38%); aspect-ratio: 1 / 1; }
+.map { display: block; width: 100%; height: 100%; }
+.neighbors { fill: rgb(255 255 255 / 5%); stroke: rgb(157 184 224 / 28%); stroke-width: 1; }
+.lake { fill: rgb(170 200 240 / 60%); font-size: 13px; letter-spacing: .16em; font-weight: 600; pointer-events: none; }
+.landGlow { fill: rgb(110 170 255 / 28%); }
+.land { fill: rgb(46 92 168 / 52%); }
+.landEdge { fill: none; stroke: rgb(248 227 180 / 85%); stroke-width: 2; stroke-linejoin: round; }
+.region { fill: rgb(255 226 160 / 62%); }
+.regionLabel { fill: #fff8e6; font-size: 21px; font-weight: 700; letter-spacing: .18em; paint-order: stroke; stroke: rgb(10 37 28 / 55%); stroke-width: 4px; pointer-events: none; }
+.caption { position: absolute; left: 14px; bottom: 12px; padding: 5px 12px; border-radius: 99px; font-size: .72rem; font-weight: 600; color: #fff; background: rgb(8 20 40 / 55%); border: 1px solid rgb(255 255 255 / 25%); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+
+.side { min-width: 0; display: flex; flex-direction: column; justify-content: center; padding: clamp(6px, 1vw, 14px) clamp(4px, 1vw, 12px); }
+.eyebrow { margin: 0 0 var(--space-3); display: flex; gap: 10px; align-items: center; font-size: var(--text-xs); letter-spacing: .12em; font-weight: 600; color: var(--ink-900); }
+.eyebrow::before { content: ""; height: 3px; width: 23px; background: linear-gradient(90deg, var(--gold-500) 0 40%, var(--evergreen-900) 40%); }
+.side h2 { margin: 0; font-size: clamp(1.6rem, 2.3vw, 2.2rem); line-height: 1.1; color: var(--evergreen-900); }
+.lead { margin: var(--space-3) 0 0; color: var(--text-body); font-size: var(--text-base); line-height: 1.6; }
+.legend { list-style: none; margin: var(--space-5) 0 var(--space-3); padding: 0; font-size: var(--text-sm); color: var(--text-body); }
+.legend li { display: flex; align-items: center; gap: 12px; }
+.key { flex: none; width: 18px; height: 18px; border-radius: 50%; background: radial-gradient(circle, rgb(255 226 160 / 95%), rgb(255 226 160 / 25%)); box-shadow: 0 0 0 1px rgb(158 96 27 / 30%); }
+.note { margin: 0 0 var(--space-5); color: var(--text-muted); font-size: .85rem; line-height: 1.5; }
+.side > :last-child { align-self: flex-start; }
+
+@media (max-width: 1100px) { .wrap { grid-template-columns: 1fr; } .stage { max-width: 640px; width: 100%; margin-inline: auto; } }
+@media (max-width: 520px) { .wrap { padding: 10px; } .lake { font-size: 17px; } .regionLabel { font-size: 27px; } .caption { font-size: .68rem; } }
