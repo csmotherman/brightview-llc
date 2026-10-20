@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { GalleryGrid } from "@/components/gallery/GalleryGrid";
 import styles from "./gallery.module.css";
 
-export const metadata: Metadata = {
-  title: "Gallery | BrightView LLC",
-  description: "Project photos from BrightView LLC: window cleaning, pressure washing, gutter cleaning and holiday lighting.",
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Project Gallery: Before & After Photos",
+  description:
+    "Real BrightView project photos: before-and-after window cleaning, pressure washing and gutter cleaning, plus holiday lighting displays.",
+  path: "/gallery",
+});
 
 export default function GalleryPage() {
   return (

@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { site } from "@/config/site";
 import styles from "../info-pages.module.css";
 
-export const metadata: Metadata = {
-  title: "Contact BrightView LLC",
-  description: "Contact BrightView by phone, email or Facebook about window cleaning, exterior washing and holiday lighting in Southeast Michigan.",
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Contact Us",
+  description:
+    "Call, email or message BrightView LLC about window cleaning, exterior washing and holiday lighting in Southeast Michigan. Quote requests are free.",
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

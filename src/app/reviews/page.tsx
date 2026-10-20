@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { reviews } from "@/content/reviews";
 import { site } from "@/config/site";
 import styles from "../info-pages.module.css";
 
-export const metadata: Metadata = {
-  title: "Customer Reviews | BrightView LLC",
-  description: "Read customer recommendations for BrightView's window cleaning and exterior washing, originally shared on Facebook.",
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Customer Reviews",
+  description:
+    "Read customer recommendations for BrightView window cleaning and exterior washing, originally shared on Facebook.",
+  path: "/reviews",
+});
 
 export default function ReviewsPage() {
   return (

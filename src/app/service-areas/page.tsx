@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { ServiceAreaMap } from "@/components/service-area/ServiceAreaMap";
 import styles from "./service-areas.module.css";
 
-export const metadata: Metadata = {
-  title: "Service Area | BrightView LLC",
-  description: "BrightView LLC proudly serves communities throughout Southeast Michigan. Reach out for a free quote and we'll confirm availability for your location.",
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Service Area: Southeast Michigan",
+  description:
+    "BrightView proudly serves communities throughout Southeast Michigan. Request a free quote with your address and we will confirm availability for your location.",
+  path: "/service-areas",
+});
 
 export default function ServiceAreasPage() {
   return (

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { HomeFeatureHero } from "@/components/home/HomeFeatureHero";
 import { ProcessSteps } from "@/components/home/ProcessSteps";
 import { ServiceTiles } from "@/components/home/ServiceTiles";
@@ -14,10 +15,13 @@ const TestimonialPanel = dynamic(() => import("@/components/home/TestimonialPane
   loading: () => <Skeleton variant="block" height="100%" round />,
 });
 
-export const metadata: Metadata = {
-  title: "BrightView LLC | Exterior Cleaning & Holiday Lighting",
-  description: "Family-owned Michigan window cleaning, pressure washing and holiday lighting. See genuine project results and contact BrightView about your home.",
-};
+export const metadata: Metadata = pageMetadata({
+  title: "BrightView LLC | Exterior Cleaning in Southeast Michigan",
+  description:
+    "Family-owned Michigan window cleaning, pressure washing, gutter, soft wash, roof cleaning and holiday lighting. See real project photos and get a free quote.",
+  path: "/",
+  absoluteTitle: true,
+});
 
 export default function HomePage() {
   return (
