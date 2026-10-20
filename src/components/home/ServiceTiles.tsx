@@ -37,8 +37,10 @@ export function ServiceTiles() {
     <section className={styles.band} aria-label="Explore BrightView services">
       <div className={styles.grid}>
         {tiles.map((service) => (
-          <Link href={service.href} key={service.name} className={styles.card} aria-label={"See " + service.name + " project photos"}>
-            <Image src={service.image} alt={service.alt} fill sizes="(max-width: 900px) 50vw, 24vw" style={"position" in service ? { objectPosition: service.position } : undefined} />
+          <Link href={service.href} key={service.name} className={styles.card} aria-label={"Explore " + service.name}>
+            <span className={styles.photo}>
+              <Image src={service.image} alt={service.alt} fill sizes="(max-width: 360px) 40vw, (max-width: 900px) 50vw, 24vw" style={"position" in service ? { objectPosition: service.position } : undefined} />
+            </span>
             <div className={styles.info}>
               <span className={styles.icon}><ServiceIcon icon={service.icon} /></span>
               <div className={styles.copy}>

@@ -16,11 +16,57 @@
 
 .toggle { display: none; margin-left: auto; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 45px; height: 43px; padding: 0 10px; border: 1px solid rgb(255 255 255 / 50%); border-radius: var(--radius-sm); background: rgb(8 35 27 / 75%); }
 .toggle span { width: 21px; height: 2px; background: #fff; }
-.mobileNav { display: none; position: absolute; top: 100%; left: 0; width: 100%; padding: 5px var(--edge) 18px; background: #102c23; border-bottom: 1px solid rgb(248 227 180 / 26%); box-shadow: 0 14px 20px rgb(0 14 10 / 18%); }
-.mobileNav a:not([data-button]) { padding: 13px 2px; color: #fff; text-decoration: none; border-bottom: 1px solid #385549; font-weight: 600; }
-.mobileNav a[aria-current="page"] { color: var(--gold-300); }
-.mobileNav [data-button] { margin-top: 14px; }
-.mobileOpen { display: flex; flex-direction: column; }
+/* Mobile drawer is a native modal: focus is trapped and the rest of the site is inert. */
+.drawer {
+  position: fixed; inset: 0 0 0 auto; margin: 0 0 0 auto;
+  width: min(88vw, 360px); max-width: 100vw; height: 100dvh; max-height: 100dvh;
+  padding: 0; border: 0; border-left: 1px solid rgb(248 227 180 / 32%);
+  color: var(--text-on-dark); background: rgb(10 37 28 / 96%);
+  box-shadow: -24px 0 60px rgb(0 0 0 / 32%); overflow: hidden;
+}
+@supports (backdrop-filter: blur(18px)) {
+  .drawer { background: rgb(10 37 28 / 88%); backdrop-filter: blur(28px) saturate(145%); }
+}
+.drawer::backdrop { background: rgb(5 16 13 / 65%); backdrop-filter: blur(4px); }
+.drawerPanel {
+  display: flex; flex-direction: column; height: 100%; min-height: 0;
+  padding: max(22px, env(safe-area-inset-top)) 22px max(20px, env(safe-area-inset-bottom));
+}
+.drawerHeader { flex: none; display: flex; align-items: center; justify-content: space-between; gap: 14px; padding-bottom: 18px; border-bottom: 1px solid rgb(255 255 255 / 15%); }
+.drawerEyebrow { font-size: .7rem; font-weight: 700; letter-spacing: .14em; color: var(--gold-300); }
+.drawerEyebrow span { padding: 0 7px; opacity: .5; }
+.drawerClose {
+  flex: none; width: 44px; height: 44px; display: grid; place-items: center;
+  border: 1px solid rgb(255 255 255 / 26%); border-radius: 50%;
+  background: rgb(255 255 255 / 10%); color: #fff;
+}
+.drawerClose span { font-size: 1.7rem; line-height: 1; transform: translateY(-1px); }
+.drawerClose:hover { background: rgb(255 255 255 / 20%); }
+.mobileNav { min-height: 0; overflow-y: auto; overscroll-behavior: contain; display: grid; align-content: start; padding: 18px 0; }
+.mobileNav a {
+  position: relative; min-height: 54px; padding: 13px 14px; display: flex;
+  align-items: center; justify-content: space-between; gap: 16px;
+  color: #f7f7f0; font-size: 1.02rem; font-weight: 550; text-decoration: none;
+  border-bottom: 1px solid rgb(255 255 255 / 12%); border-radius: 8px;
+}
+.mobileNav a:hover { background: rgb(255 255 255 / 8%); }
+.mobileNav a[aria-current="page"] { color: var(--gold-300); background: rgb(248 227 180 / 9%); }
+.mobileNav a[aria-current="page"]::before { content: ""; position: absolute; inset: 12px auto 12px 0; width: 3px; background: var(--gold-300); border-radius: 2px; }
+.navArrow { font-size: 1rem; opacity: .48; }
+.mobileNav a[aria-current="page"] .navArrow { opacity: 1; }
+.drawerFooter { flex: none; margin-top: auto; padding-top: 16px; border-top: 1px solid rgb(255 255 255 / 15%); }
+.drawerFooter a { min-height: 52px; }
+.drawerClose:focus-visible, .mobileNav a:focus-visible, .drawerFooter a:focus-visible, .toggle:focus-visible {
+  outline: 3px solid var(--gold-300); outline-offset: 3px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .drawer[open] { animation: drawerSlide .25s cubic-bezier(.22,.61,.36,1) both; }
+  .drawer[open]::backdrop { animation: backdropFade .25s ease both; }
+}
+@keyframes drawerSlide { from { transform: translateX(100%); } to { transform: translateX(0); } }
+@keyframes backdropFade { from { opacity: 0; } to { opacity: 1; } }
+@media (max-height: 530px) { .mobileNav a { min-height: 46px; padding-block: 9px; } .mobileNav { padding-block: 8px; } }
+@media (min-width: 901px) { .drawer { display: none; } }
 
 @media (max-width: 1100px) { .nav { gap: 22px; margin-left: clamp(16px, 3vw, 40px); } }
 @media (max-width: 900px) {
