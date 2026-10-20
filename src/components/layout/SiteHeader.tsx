@@ -11,8 +11,9 @@ const nav = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
   { label: "Gallery", href: "/gallery" },
-  { label: "About", href: "/about" },
   { label: "Service Area", href: "/service-areas" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const isActive = (href: string, path: string) => (href === "/" ? path === "/" : path === href || path.startsWith(href + "/"));
@@ -66,7 +67,7 @@ export function SiteHeader() {
   }, [pathname]);
 
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 901px)");
+    const mq = window.matchMedia("(min-width: 1001px)");
     const onResize = () => { if (mq.matches) close(); };
     mq.addEventListener("change", onResize);
     return () => mq.removeEventListener("change", onResize);
@@ -86,7 +87,7 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <Button href="/quote" variant="gold" size="sm" arrow className={styles.quote}>Get a Quote</Button>
+        <Button href="/quote" variant="gold" size="sm" arrow className={styles.quote}>Get Free Quote</Button>
         <button ref={toggleRef} type="button" className={styles.toggle} aria-label="Open menu" aria-controls="mobile-nav" aria-expanded={menuOpen} onClick={() => setMenuOpen(true)}>
           <span /><span /><span />
         </button>
@@ -114,7 +115,7 @@ export function SiteHeader() {
             ))}
           </nav>
           <div className={styles.drawerFooter}>
-            <Button href="/quote" variant="gold" block arrow onClick={close}>Get a Quote</Button>
+            <Button href="/quote" variant="gold" block arrow onClick={close}>Get Free Quote</Button>
           </div>
         </div>
       </dialog>
