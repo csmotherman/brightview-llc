@@ -2,7 +2,7 @@
 
 import { useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
-import { EMAIL_PATTERN, QUOTE_LIMITS, SERVICE_OPTIONS, hasEnoughPhoneDigits } from "@/lib/quote-services";
+import { QUOTE_LIMITS, SERVICE_OPTIONS, isValidEmailAddress, isValidPhoneNumber } from "@/lib/quote-services";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { CheckboxOption, FieldError, FormField, Input, Textarea, formStyles } from "@/components/ui/FormField";
@@ -29,13 +29,12 @@ const formatAddress = ({ street, city, zip }: Pick<FormValues, "street" | "city"
 function validate(form: FormValues): FieldErrors {
   const errors: FieldErrors = {};
   if (!form.name.trim()) errors.name = "Please enter your name.";
-  if (!hasEnoughPhoneDigits(form.phone)) errors.phone = "Please enter a valid phone number.";
-  if (!EMAIL_PATTERN.test(form.email.trim())) errors.email = "Please enter a valid email address.";
+  if (!isValidPhoneNumber(form.phone)) errors.phone = "Enter a valid 10-digit phone number.";
+  if (!isValidEmailAddress(form.email)) errors.email = "Enter a valid email address.";
   if (!form.street.trim()) errors.street = "Enter the street address.";
   if (!form.city.trim()) errors.city = "Enter the city.";
   if (!/^\d{5}(?:-?\d{4})?$/.test(form.zip.trim())) errors.zip = "Enter a valid 5-digit ZIP code.";
   if (form.services.length === 0) errors.services = "Please select at least one service.";
-  if (!form.message.trim()) errors.message = "Please tell us a little about your project.";
   return errors;
 }
 
@@ -44,6 +43,8 @@ export function QuoteForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
   const [error, setError] = useState("");
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+  // Use the same validation for button availability and the submit handler.
+  const canSubmit = Object.keys(validate(form)).length === 0;
   const sending = useRef(false);
   // One id per attempt-series: retries of the same request reuse it so the server can de-duplicate.
   const submissionId = useRef<string>(newSubmissionId());
@@ -52,6 +53,10 @@ export function QuoteForm() {
     setForm((current) => ({ ...current, [field]: value }));
     setFieldErrors((current) => ({ ...current, [field]: undefined }));
     if (error) setError("");
+  };
+
+  const validateOnBlur = (field: TextField) => {
+    setFieldErrors((current) => ({ ...current, [field]: validate(form)[field] }));
   };
 
   const toggleService = (service: string) => {
@@ -134,12 +139,13 @@ export function QuoteForm() {
 
   const busy = status === "submitting";
   const invalid = (field: TextField) => Boolean(fieldErrors[field]);
-  const bind = (field: TextField, extra: { id: string; maxLength: number }) => ({
+  const bind = (field: TextField, extra: { id: string; maxLength: number; required?: boolean }) => ({
     ...extra,
     name: field,
-    required: true,
+    required: extra.required !== false,
     value: form[field],
     invalid: invalid(field),
+    onBlur: () => validateOnBlur(field),
     onChange: (event: { target: { value: string } }) => updateText(field, event.target.value),
   });
 
@@ -190,8 +196,8 @@ export function QuoteForm() {
             </div>
             {fieldErrors.services && <FieldError id="quote-services-error">{fieldErrors.services}</FieldError>}
           </fieldset>
-          <FormField id="quote-message" label="Tell us about your project" required error={fieldErrors.message}>
-            <Textarea {...bind("message", { id: "quote-message", maxLength: QUOTE_LIMITS.message })} rows={4} placeholder="What would you like done? Any helpful details about the property?" />
+          <FormField id="quote-message" label="Special requests or additional notes (optional)" error={fieldErrors.message}>
+            <Textarea {...bind("message", { id: "quote-message", maxLength: QUOTE_LIMITS.message, required: false })} rows={3} placeholder="Anything else you'd like us to know?" />
           </FormField>
           <div className={styles.honeypot} aria-hidden="true">
             <label htmlFor="quote-website">Leave this field empty</label>
@@ -199,7 +205,8 @@ export function QuoteForm() {
           </div>
         </fieldset>
         {error && <p role="alert" className={styles.error}>{error}</p>}
-        <Button type="submit" block arrow={!busy} disabled={busy}>{busy ? "Sending request…" : "Request My Free Quote"}</Button>
+        <Button type="submit" block arrow={!busy} disabled={busy || !canSubmit}>{busy ? "Sending request…" : "Request My Free Quote"}</Button>
+        {!canSubmit && <p className={styles.submitHint}>Enter your contact details, property address and at least one service to continue.</p>}
         <p className={styles.disclaimer}>No payment or booking required. We&apos;ll contact you about a quote.</p>
       </form>
     </Card>
