@@ -66,20 +66,14 @@ export function ServiceAreaMap() {
             <tspan x="560" dy="1.3em">SERVICE AREA</tspan>
           </text>
         </svg>
-        <figcaption className={styles.caption}>Approximate area. Not a verified service boundary.</figcaption>
+        <figcaption className={styles.caption}>Not a verified service boundary.</figcaption>
       </figure>
 
       <div className={styles.side}>
-        <p className={styles.eyebrow}>SERVICE AREA</p>
-        <h2>Serving Southeast Michigan.</h2>
-        <p className={styles.lead}>
-          Proudly serving communities throughout Southeast Michigan. Not sure if you&apos;re in our service area? Reach out for a free quote, and we&apos;ll confirm availability for your location.
-        </p>
-        <ul className={styles.legend} aria-label="Map key">
-          <li><i className={styles.key} /><span>Approximate service area</span></li>
-        </ul>
+        <p className={styles.lead}>Not sure if you&apos;re in our service area?</p>
         <p className={styles.cta}>
-          <strong>Request a quote with your address.</strong> We&apos;ll confirm whether we reach your location.
+          <strong>Request a quote with your address.</strong>
+          We&apos;ll confirm availability for your location.
         </p>
         <Button href="/quote" arrow className={styles.bigButton}>Request a Free Quote</Button>
       </div>

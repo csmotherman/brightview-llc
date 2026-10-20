@@ -12,9 +12,9 @@ export default function ServiceAreasPage() {
     <div className={styles.page}>
       <div className={styles.wrap}>
         <header className={styles.intro}>
-          <p className={styles.eyebrow}>WHERE WE WORK</p>
-          <h1>Proudly serving Southeast Michigan.</h1>
-          <p>BrightView is a family-owned Michigan business. See the general region we serve, then request a quote for your address.</p>
+          <p className={styles.eyebrow}>SERVICE AREA</p>
+          <h1>Where we work.</h1>
+          <p>Proudly serving communities throughout Southeast Michigan.</p>
         </header>
         <div className={styles.glass}>
           <ServiceAreaMap />
