@@ -8,16 +8,12 @@ import styles from "@/app/services/services.module.css";
 
 type Photo = { src: string; alt: string; label?: string };
 
-/** One photo frame; renders blank when the service has no photo for that slot yet. */
-function Frame({ photo, className }: { photo?: Photo | null; className: string }) {
+/** One photo frame. Only rendered for real project photos; services without photos get a text-first panel. */
+function Frame({ photo, className }: { photo: Photo; className: string }) {
   return (
-    <figure className={`${className} ${photo ? styles.filled : styles.blank}`}>
-      {photo && (
-        <>
-          <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 1100px) 90vw, 32vw" />
-          {photo.label && <figcaption className={styles.tag}>{photo.label}</figcaption>}
-        </>
-      )}
+    <figure className={`${className} ${styles.filled}`}>
+      <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 1100px) 90vw, 32vw" />
+      {photo.label && <figcaption className={styles.tag}>{photo.label}</figcaption>}
     </figure>
   );
 }
@@ -46,11 +42,12 @@ export function ServiceExplorer() {
     <ul className={`${styles.glass} ${styles.list}`} aria-label="Services">
       {serviceDetails.map((s) => {
         const open = s.id === selected;
+        const photos = [s.photos.top, ...s.photos.bottom].filter((p): p is Photo => Boolean(p));
         return (
           <li key={s.id} id={s.id} className={open ? styles.itemOpen : styles.item}>
             <h2 className={styles.rowHeading}>
               <button type="button" className={styles.row} aria-expanded={open} aria-controls={s.id + "-panel"} onClick={() => toggle(s.id)}>
-                <Image src={s.symbol} alt="" width={64} height={64} className={styles.symbol} />
+                <Image src={s.symbol} alt="" width={64} height={64} sizes="64px" loading="eager" className={styles.symbol} />
                 <span className={styles.rowText}>
                   <span className={styles.rowTitle}>{s.name}</span>
                   <span className={styles.rowDef}>{s.definition}</span>
@@ -59,13 +56,14 @@ export function ServiceExplorer() {
               </button>
             </h2>
             {open && (
-              <div id={s.id + "-panel"} className={styles.panel} role="region" aria-label={s.name + " details"}>
-                <div className={styles.photos}>
-                  {/* No full-product shot (e.g. gutters): show just the before/after pair. */}
-                  {(s.photos.top || s.photos.bottom.length === 0) && <Frame photo={s.photos.top} className={styles.photoTop} />}
-                  <Frame photo={s.photos.bottom[0]} className={styles.photo} />
-                  <Frame photo={s.photos.bottom[1]} className={styles.photo} />
-                </div>
+              <div id={s.id + "-panel"} className={photos.length ? styles.panel : `${styles.panel} ${styles.panelText}`} role="region" aria-label={s.name + " details"}>
+                {photos.length > 0 && (
+                  <div className={styles.photos}>
+                    {/* A full-product shot spans the top; before/after pairs sit side by side beneath (or alone, for gutters). */}
+                    {s.photos.top && <Frame photo={s.photos.top} className={styles.photoTop} />}
+                    {s.photos.bottom.map((p) => <Frame key={p.src} photo={p} className={styles.photo} />)}
+                  </div>
+                )}
                 <div className={styles.info}>
                   <div className={styles.story}>
                     <h3>{s.headline}</h3>
