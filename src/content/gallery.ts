@@ -1,34 +1,45 @@
 import { gutterProject, services } from "./services";
 
-/** Every gallery photo is a real BrightView project photo already used elsewhere on the site (no new or generated images). */
-export type GalleryCategory = "windows" | "pressure" | "holiday" | "gutters";
-export type GalleryItem = { src: string; alt: string; caption: string; category: GalleryCategory; tag?: "Before" | "After" };
+/**
+ * Gallery content. Every photo is a real BrightView project photo already used elsewhere on the site (no new or
+ * generated images). Before/after photos are stored as one pair so they always render side by side.
+ */
+export type GalleryGroup = "exterior" | "holiday";
+export type GallerySub = "windows" | "pressure" | "gutters" | "holiday";
+export type GalleryPhoto = { src: string; alt: string; tag?: "Before" | "After" };
+export type GalleryEntry = { id: string; group: GalleryGroup; sub: GallerySub; caption: string; photos: [GalleryPhoto] | [GalleryPhoto, GalleryPhoto] };
 
-export const galleryFilters: { id: "all" | GalleryCategory; label: string }[] = [
-  { id: "all", label: "All" },
-  { id: "windows", label: "Windows" },
-  { id: "pressure", label: "Pressure washing" },
-  { id: "holiday", label: "Holiday lighting" },
-  { id: "gutters", label: "Gutters" },
+const bySlug = (slug: string) => services.find((s) => s.slug === slug)!;
+const pair = (id: string, group: GalleryGroup, sub: GallerySub, c: { title: string; before: { src: string; alt: string }; after: { src: string; alt: string } }): GalleryEntry => ({
+  id, group, sub, caption: c.title,
+  photos: [{ src: c.before.src, alt: c.before.alt, tag: "Before" }, { src: c.after.src, alt: c.after.alt, tag: "After" }],
+});
+const single = (group: GalleryGroup, sub: GallerySub, p: { src: string; alt: string; label: string }): GalleryEntry => ({ id: p.src, group, sub, caption: p.label, photos: [{ src: p.src, alt: p.alt }] });
+
+const windows = bySlug("window-cleaning");
+const pressure = bySlug("pressure-washing");
+const holiday = bySlug("holiday-lights");
+
+export const galleryEntries: GalleryEntry[] = [
+  ...windows.comparisons.map((c, i) => pair(`windows-pair-${i}`, "exterior", "windows", c)),
+  { id: "window-hero", group: "exterior", sub: "windows", caption: "Window cleaning in progress", photos: [{ src: "/images/Hero-HomePage.png", alt: "A BrightView team member squeegeeing a large window, with fresh suds still on the glass" }] },
+  ...windows.finished.map((p) => single("exterior", "windows", p)),
+  ...pressure.comparisons.map((c, i) => pair(`pressure-pair-${i}`, "exterior", "pressure", c)),
+  ...pressure.finished.map((p) => single("exterior", "pressure", p)),
+  pair("gutters-pair", "exterior", "gutters", gutterProject),
+  ...holiday.finished.map((p) => single("holiday", "holiday", { ...p, label: "Holiday lighting" })),
 ];
 
-const categoryFor: Record<string, GalleryCategory> = { "window-cleaning": "windows", "pressure-washing": "pressure", "holiday-lights": "holiday" };
+/** The filter tree: top-level groups, with sub-filters nested under Exterior Cleaning. */
+export const galleryTree: { id: "all" | GalleryGroup; label: string; children?: { id: GallerySub; label: string }[] }[] = [
+  { id: "all", label: "All" },
+  { id: "exterior", label: "Exterior Cleaning", children: [{ id: "windows", label: "Windows" }, { id: "pressure", label: "Pressure Washing" }, { id: "gutters", label: "Gutters" }] },
+  { id: "holiday", label: "Holiday Lighting" },
+];
 
-const fromServices = services.flatMap((s): GalleryItem[] => {
-  const category = categoryFor[s.slug];
-  return [
-    ...s.comparisons.flatMap((c): GalleryItem[] => [
-      { src: c.before.src, alt: c.before.alt, caption: c.title, category, tag: "Before" },
-      { src: c.after.src, alt: c.after.alt, caption: c.title, category, tag: "After" },
-    ]),
-    ...s.finished.map((f): GalleryItem => ({ src: f.src, alt: f.alt, caption: f.label, category })),
-  ];
-});
-
-export const galleryItems: GalleryItem[] = [
-  { src: "/images/Hero-HomePage.png", alt: "A BrightView team member squeegeeing a large window, with fresh suds still on the glass", caption: "Window cleaning in progress", category: "windows" },
-  ...fromServices,
-  { src: "/images/projects/holiday-lights/HolidayHero.png", alt: "Collage of Michigan homes decorated with BrightView holiday lights at night", caption: "Holiday lighting collage", category: "holiday" },
-  { src: gutterProject.before.src, alt: gutterProject.before.alt, caption: gutterProject.title, category: "gutters", tag: "Before" },
-  { src: gutterProject.after.src, alt: gutterProject.after.alt, caption: gutterProject.title, category: "gutters", tag: "After" },
+export const gallerySections: { id: GallerySub; group: GalleryGroup; title: string }[] = [
+  { id: "windows", group: "exterior", title: "Window Cleaning" },
+  { id: "pressure", group: "exterior", title: "Pressure Washing" },
+  { id: "gutters", group: "exterior", title: "Gutter Cleaning" },
+  { id: "holiday", group: "holiday", title: "Holiday Lighting" },
 ];
