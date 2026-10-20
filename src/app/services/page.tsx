@@ -15,7 +15,7 @@ export default function ServicesPage() {
         <header className={styles.intro}>
           <p className={styles.eyebrow}>OUR SERVICES</p>
           <h1>Everything your exterior needs.</h1>
-          <p>Tap a service to see what we do, how it works and why it&apos;s worth it.</p>
+          <p>Explore what each service does, why it matters for your home, and how to get started.</p>
         </header>
         <ServiceExplorer />
       </div>

@@ -67,10 +67,23 @@ export function ServiceExplorer() {
                   <Frame photo={s.photos.bottom[1]} className={styles.photo} />
                 </div>
                 <div className={styles.info}>
-                  <div className={styles.block}><h3>What we do</h3><p>{s.what}</p></div>
-                  <div className={styles.block}><h3>How it works</h3><ol>{s.how.map((step) => <li key={step}>{step}</li>)}</ol></div>
-                  <div className={styles.block}><h3>Why get it</h3><ul>{s.why.map((reason) => <li key={reason}>{reason}</li>)}</ul></div>
-                  <div className={styles.cta}><Button href="/quote" arrow>Get Free Quote</Button></div>
+                  <div className={styles.story}>
+                    <h3>{s.headline}</h3>
+                    <p>{s.what}</p>
+                  </div>
+                  <div className={[styles.block, styles.importance].join(" ")}>
+                    <h3>Why it matters</h3>
+                    <p>{s.importance}</p>
+                  </div>
+                  <div className={styles.block}>
+                    <h3>Benefits for your home</h3>
+                    <ul>{s.why.map((reason) => <li key={reason}>{reason}</li>)}</ul>
+                  </div>
+                  <div className={styles.block}>
+                    <h3>How to get started</h3>
+                    <ol>{s.how.map((step) => <li key={step}>{step}</li>)}</ol>
+                  </div>
+                  <div className={styles.cta}><Button href="/quote" arrow>Request a Free Quote</Button></div>
                 </div>
               </div>
             )}
