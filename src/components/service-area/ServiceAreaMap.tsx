@@ -3,9 +3,8 @@ import { MAP } from "@/content/michigan-map";
 import styles from "./ServiceAreaMap.module.css";
 
 /**
- * Illustrative map: Michigan's lower peninsula with Southeast Michigan softly highlighted.
- * The highlight is a coarse static shape blurred heavily on screen. There is no marker, no radius or ring, no distance
- * or drive-time calculation and no coordinates, so nothing on the page indicates where BrightView is based.
+ * Illustrative map: Michigan's lower peninsula with an approximate service circle. The circle is a soft, dashed shape
+ * with no marker or label at its center, and the page states no distances or drive times.
  */
 export function ServiceAreaMap() {
   return (
@@ -15,7 +14,7 @@ export function ServiceAreaMap() {
           className={styles.map}
           viewBox={`0 0 ${MAP.width} ${MAP.height}`}
           role="img"
-          aria-label="Illustrative map of Michigan's lower peninsula with Southeast Michigan softly highlighted. It is not a verified service boundary."
+          aria-label="Illustrative map of Michigan's lower peninsula with an approximate service area circled in Southeast Michigan. It is not a verified service boundary."
         >
           <defs>
             <radialGradient id="sa-water" cx="70%" cy="72%" r="85%">
@@ -28,10 +27,11 @@ export function ServiceAreaMap() {
             <filter id="sa-glow" x="-20%" y="-20%" width="140%" height="140%">
               <feGaussianBlur stdDeviation="6" />
             </filter>
-            {/* Heavy blur: the highlight fades out gradually, so it has no readable edge or center. */}
-            <filter id="sa-feather" x="-40%" y="-40%" width="180%" height="180%">
-              <feGaussianBlur stdDeviation="44" />
-            </filter>
+            <radialGradient id="sa-area" cx="50%" cy="50%" r="50%">
+              <stop offset="0" stopColor="#ffe9b8" stopOpacity=".62" />
+              <stop offset=".72" stopColor="#f2cf86" stopOpacity=".42" />
+              <stop offset="1" stopColor="#e8b954" stopOpacity=".22" />
+            </radialGradient>
             <clipPath id="sa-land"><path d={MAP.michigan} /></clipPath>
           </defs>
 
@@ -56,16 +56,17 @@ export function ServiceAreaMap() {
           <path d={MAP.michigan} className={styles.land} />
 
           <g clipPath="url(#sa-land)">
-            <path d={MAP.region} className={styles.region} filter="url(#sa-feather)" />
+            <circle cx={MAP.area.cx} cy={MAP.area.cy} r={MAP.area.r} fill="url(#sa-area)" />
           </g>
           <path d={MAP.michigan} className={styles.landEdge} />
+          <circle cx={MAP.area.cx} cy={MAP.area.cy} r={MAP.area.r} className={styles.areaEdge} />
 
-          <text x="612" y="690" className={styles.regionLabel} textAnchor="middle">
-            <tspan>SOUTHEAST</tspan>
-            <tspan x="612" dy="1.3em">MICHIGAN</tspan>
+          <text x="560" y="668" className={styles.regionLabel} textAnchor="middle">
+            <tspan>APPROXIMATE</tspan>
+            <tspan x="560" dy="1.3em">SERVICE AREA</tspan>
           </text>
         </svg>
-        <figcaption className={styles.caption}>Illustrative map. Not a verified service boundary.</figcaption>
+        <figcaption className={styles.caption}>Approximate area. Not a verified service boundary.</figcaption>
       </figure>
 
       <div className={styles.side}>
@@ -75,10 +76,12 @@ export function ServiceAreaMap() {
           Proudly serving communities throughout Southeast Michigan. Not sure if you&apos;re in our service area? Reach out for a free quote, and we&apos;ll confirm availability for your location.
         </p>
         <ul className={styles.legend} aria-label="Map key">
-          <li><i className={styles.key} /><span>Approximate Southeast Michigan region</span></li>
+          <li><i className={styles.key} /><span>Approximate service area</span></li>
         </ul>
-        <p className={styles.note}>Availability depends on the project address.</p>
-        <Button href="/quote" arrow>Request a Free Quote</Button>
+        <p className={styles.cta}>
+          <strong>Request a quote with your address.</strong> We&apos;ll confirm whether we reach your location.
+        </p>
+        <Button href="/quote" arrow className={styles.bigButton}>Request a Free Quote</Button>
       </div>
     </div>
   );
