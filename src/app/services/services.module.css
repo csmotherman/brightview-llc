@@ -29,9 +29,9 @@
 .chevron { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--cream-400); color: var(--evergreen-800); font-size: 1.2rem; line-height: 1; background: rgb(255 255 255 / 55%); }
 .row[aria-expanded="true"] .chevron { background: var(--evergreen-800); border-color: var(--evergreen-800); color: #fff; }
 
-.panel { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.4fr); gap: clamp(20px, 3vw, 40px); padding: 6px 22px 24px; }
+.panel { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.4fr); gap: clamp(20px, 3vw, 40px); padding: 24px 22px 24px; }
 /* No photos: text uses the full width as two balanced columns instead of reserving empty space. */
-.panelText { grid-template-columns: minmax(0, 1fr); padding-top: 2px; }
+.panelText { grid-template-columns: minmax(0, 1fr); }
 .panelText .info { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(24px, 4vw, 56px); row-gap: var(--space-4); }
 .panelText .story { grid-column: 1; grid-row: 1; }
 .panelText .importance { grid-column: 2; grid-row: 1; align-self: start; padding-block: 0; border-block: 0; padding-left: clamp(20px, 3vw, 40px); border-left: 1px solid var(--cream-300); }
@@ -76,5 +76,5 @@
   .symbol { width: 46px; height: 46px; }
   .rowTitle { font-size: 1.15rem; }
   .rowDef { font-size: .85rem; }
-  .panel { padding: 4px 12px 22px; }
+  .panel { padding: 20px 12px 22px; }
 }
