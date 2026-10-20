@@ -8,7 +8,7 @@ import { Card } from "@/components/ui/Card";
 import { CheckboxOption, FieldError, FormField, Input, Textarea, formStyles } from "@/components/ui/FormField";
 import styles from "@/app/quote/quote.module.css";
 
-type TextField = "name" | "phone" | "email" | "address" | "message";
+type TextField = "name" | "phone" | "email" | "street" | "city" | "zip" | "message";
 type FormValues = Record<TextField, string> & { services: string[] };
 type FieldErrors = Partial<Record<TextField | "services", string>>;
 
@@ -17,14 +17,23 @@ const newSubmissionId = () =>
     ? crypto.randomUUID()
     : Math.random().toString(36).slice(2) + Date.now().toString(36);
 
-const emptyForm: FormValues = { name: "", phone: "", email: "", address: "", message: "", services: [] };
+const emptyForm: FormValues = { name: "", phone: "", email: "", street: "", city: "", zip: "", message: "", services: [] };
+
+// Zolato's intake expects one address string, even though users fill three short fields.
+const formatAddress = ({ street, city, zip }: Pick<FormValues, "street" | "city" | "zip">) => {
+  const clean = (value: string) => value.trim().replace(/\s+/g, " ");
+  const normalizedZip = clean(zip).replace(/^(\d{5})(\d{4})$/, "$1-$2");
+  return `${clean(street)}, ${clean(city)}, MI ${normalizedZip}`;
+};
 
 function validate(form: FormValues): FieldErrors {
   const errors: FieldErrors = {};
   if (!form.name.trim()) errors.name = "Please enter your name.";
   if (!hasEnoughPhoneDigits(form.phone)) errors.phone = "Please enter a valid phone number.";
   if (!EMAIL_PATTERN.test(form.email.trim())) errors.email = "Please enter a valid email address.";
-  if (!form.address.trim()) errors.address = "Please enter the property address.";
+  if (!form.street.trim()) errors.street = "Enter the street address.";
+  if (!form.city.trim()) errors.city = "Enter the city.";
+  if (!/^\d{5}(?:-?\d{4})?$/.test(form.zip.trim())) errors.zip = "Enter a valid 5-digit ZIP code.";
   if (form.services.length === 0) errors.services = "Please select at least one service.";
   if (!form.message.trim()) errors.message = "Please tell us a little about your project.";
   return errors;
@@ -77,7 +86,11 @@ export function QuoteForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          ...form,
+          name: form.name,
+          phone: form.phone,
+          email: form.email,
+          address: formatAddress(form),
+          message: form.message,
           services: SERVICE_OPTIONS.map((option) => option.name).filter((name) => form.services.includes(name)),
           website: String(data.get("website") ?? ""),
           submissionId: submissionId.current,
@@ -150,9 +163,21 @@ export function QuoteForm() {
           <FormField id="quote-email" label="Email address" required error={fieldErrors.email}>
             <Input {...bind("email", { id: "quote-email", maxLength: QUOTE_LIMITS.email })} type="email" autoComplete="email" placeholder="you@example.com" />
           </FormField>
-          <FormField id="quote-address" label="Property address" required error={fieldErrors.address}>
-            <Input {...bind("address", { id: "quote-address", maxLength: QUOTE_LIMITS.address })} type="text" autoComplete="street-address" placeholder="Street address, city, ZIP" />
-          </FormField>
+          <fieldset className={styles.addressFields}>
+            <legend className={formStyles.legend}>Where do you need service? <span className={formStyles.required} aria-hidden="true">*</span></legend>
+            <p className={styles.addressHint}>Michigan property address</p>
+            <FormField id="quote-street" label="Street address" required error={fieldErrors.street}>
+              <Input {...bind("street", { id: "quote-street", maxLength: 160 })} type="text" autoComplete="section-service-address address-line1" enterKeyHint="next" placeholder="123 Main St" />
+            </FormField>
+            <div className={styles.addressRow}>
+              <FormField id="quote-city" label="City" required error={fieldErrors.city}>
+                <Input {...bind("city", { id: "quote-city", maxLength: 80 })} type="text" autoComplete="section-service-address address-level2" enterKeyHint="next" placeholder="Clarkston" />
+              </FormField>
+              <FormField id="quote-zip" label="ZIP code" required error={fieldErrors.zip}>
+                <Input {...bind("zip", { id: "quote-zip", maxLength: 10 })} type="text" inputMode="numeric" autoComplete="section-service-address postal-code" enterKeyHint="next" placeholder="48346" />
+              </FormField>
+            </div>
+          </fieldset>
 
           <fieldset className={styles.services} aria-describedby="service-hint">
             <legend className={formStyles.legend}>Which services do you need? <span className={formStyles.required} aria-hidden="true">*</span></legend>
