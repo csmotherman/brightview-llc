@@ -47,21 +47,19 @@ export default function AboutPage() {
       {/* 2. Story */}
       <section className={`${styles.glass} ${styles.story} ${styles.reveal}`} aria-labelledby="about-story-title" data-reveal>
         <div className={styles.storyText}>
-          <p className={styles.kicker}>OUR STORY</p>
+          <p className={styles.kicker}>{aboutStory.kicker}</p>
           <h2 id="about-story-title">{aboutStory.heading}</h2>
           {aboutStory.paragraphs.map((p) => <p key={p}>{p}</p>)}
         </div>
         <figure className={styles.storyMedia}>
           <Image src={aboutStory.image.src} alt={aboutStory.image.alt} fill sizes="(max-width: 900px) 100vw, 44vw" className={styles.cover} style={{ objectPosition: "50% 45%" }} />
-          <blockquote className={styles.frost}>
-            <p>{aboutStory.pullQuote}</p>
-            <footer>{aboutStory.caption}</footer>
-          </blockquote>
+          <figcaption className={styles.chip}>{aboutStory.caption}</figcaption>
         </figure>
       </section>
 
       {/* 3. Principles */}
       <section className={`${styles.glass} ${styles.principles} ${styles.reveal}`} aria-labelledby="about-principles-title" data-reveal>
+        <p className={styles.kicker}>{aboutPrinciples.kicker}</p>
         <h2 id="about-principles-title">{aboutPrinciples.heading}</h2>
         <ol className={styles.principleList}>
           {aboutPrinciples.items.map((item, i) => (
@@ -143,12 +141,10 @@ export default function AboutPage() {
 
       {/* 7. Final CTA */}
       <section className={`${styles.glass} ${styles.cta} ${styles.reveal}`} aria-labelledby="about-cta-title" data-reveal>
-        <p className={styles.kicker}>{aboutCta.eyebrow}</p>
         <h2 id="about-cta-title">{aboutCta.headline}</h2>
         <p>{aboutCta.copy}</p>
         <div className={styles.ctaActions}>
           <Button href="/quote" arrow>Request Your Free Quote</Button>
-          <Button href={site.facebookUrl} variant="outline" target="_blank" rel="noopener noreferrer">Visit Us on Facebook<span className="sr-only"> (opens in a new tab)</span></Button>
         </div>
       </section>
     </div>
