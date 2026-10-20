@@ -1,49 +1,59 @@
-# BrightView LLC — homepage redesign (review branch)
+# BrightView LLC website
 
-BrightView is a family-owned Michigan window-cleaning, pressure-washing and holiday-lighting business. This is a page-by-page website build, not a quote-management application.
-
-## Homepage
-
-- Compact header and restrained desktop hero using the real `Hero-HomePage.png` photo. On mobile the photo comes first. The hero is designed to fit in a typical desktop viewport without scrolling.
-- A smaller, all-navy service-first headline; short supporting description, one main CTA and a quiet secondary work link.
-- **Get Free Quote** temporarily opens the existing BrightView Facebook page (a new tab). The page explicitly says so. There is no quote form, automatic estimate, account, or CRM.
-- Three editorial, image-led service links (instead of boxed marketing cards).
-- Authentic before/after photos displayed independently, **Before on the left, After on the right**, across screen sizes. No drag/slide effect. Each photo can be opened full-size.
-- A short factual family-owned introduction and a minimal final contact call-to-action.
-- Generic three-column process filler, redundant badges/trust strip, decorative effects, and developer-facing copy have been removed.
-
-## Independent pages
-
-All routes below remain simple placeholders so they can be designed one at a time:
-
-- `/services`
-- `/services/window-cleaning`
-- `/services/pressure-washing`
-- `/services/holiday-lights`
-- `/our-work`
-- `/about`
-- `/reviews`
-- `/service-areas`
-- `/faq`
-- `/contact`
-
-## Run and check
+Family-owned Michigan window cleaning, pressure washing and holiday lighting. Next.js (App Router) + plain CSS Modules, no UI framework.
 
 ```bash
 npm ci
-npm run dev
-npm run build
+npm run dev      # http://localhost:3000
+npm run build    # type-checks and builds
 ```
 
-## Still needed before launch
+## Architecture
 
-- Verify the existing Facebook URL with BrightView, and replace the temporary quote link once the real quote/contact flow is approved.
-- Collect a genuine team/owners photo, verified reviews, and verified service-area details before adding public-facing claims.
-- Review the actual desktop/mobile layouts and image performance. Original PNGs are large, though Next.js optimizes them for delivery.
-- Review each reserved page before publishing. The whole site remains `noindex` until launch readiness is confirmed.
+```text
+src/
+├── app/                    routes; each page composes shared components
+│   ├── layout.tsx          the one site layout: skip link, header, <main>, footer
+│   ├── globals.css         imports the design system (tokens + base) only
+│   ├── page.tsx            homepage (+ home.module.css, page-specific)
+│   ├── services/ about/ our-work/ reviews/ service-areas/ faq/ quote/
+│   ├── contact/            redirects to /quote
+│   └── api/quote/route.ts  server-side validation + Zolato forwarding
+├── components/
+│   ├── layout/             SiteHeader, SiteFooter, PageHeader, PageContainer, Section (+Split, CardGrid, ActionRow), QuoteBand
+│   ├── ui/                 Button, Card, SectionHeading, Pill, FormField (Input, Textarea, CheckboxOption)
+│   ├── home/ services/ quote/   feature components used by one area
+├── config/site.ts          verified business facts
+├── content/                page copy and photo inventories
+├── lib/quote-services.ts   service list + limits shared by the form and the API
+└── styles/
+    ├── tokens.css          design tokens (single source of truth)
+    └── base.css            reset, global typography, focus, reduced motion
+```
 
-No Jobber, CRM, pricing, scheduling, booking, payments, database or quote intake is implemented. No invented reviews, ratings, credentials, staff imagery or precise coverage claims.
+## Design system
 
-## New homepage reference layout (pending review)
+| Concern | Where it lives |
+| --- | --- |
+| Colors (evergreen / cream / champagne gold), semantic roles | `src/styles/tokens.css` |
+| Fonts (Inter + Playfair Display), type scale, spacing, radii, shadows, glass | `src/styles/tokens.css` (fonts are loaded in `app/layout.tsx`) |
+| Page width and gutters (`--content-max`, `--edge`) | `tokens.css`, applied by `PageContainer` / `Section` |
+| Buttons (`primary`, `gold`, `outline`; `md`, `sm`) | `components/ui/Button` |
+| Surfaces (`evergreen`, `light`, `glass`) | `components/ui/Card` |
+| Section intro (eyebrow + heading + lead) | `components/ui/SectionHeading` |
+| Form fields and multi-select checkboxes | `components/ui/FormField` |
+| Navigation and footer | `components/layout/SiteHeader`, `SiteFooter` |
+| Photographic page intro | `components/layout/PageHeader` |
+| Closing call to action | `components/layout/QuoteBand` |
 
-A screenshot-guided homepage design uses deep evergreen, cream and champagne-gold. The opening slideshow features holiday lighting first using real BrightView pictures, then pressure washing and windows. A transparent header overlays the large image; four project-image service tiles overlap the hero; below, a compact process and genuine before/after comparison sit next to a factual trust panel. There are **no** invented metrics/testimonials and no booking integration. Update seasonal hero slides in `src/content/home-feature-slides.ts`. The 4th Gutter Cleaning card is linked to existing additional project evidence, not a standalone booking flow. All new work is subject to visual review before merge.
+Rules: pages never define their own button, heading scale, colors or container widths. Page-specific layout stays in that page's CSS Module and reads tokens. Breakpoints are fixed at **1100px / 900px / 520px** (documented in `tokens.css`); the homepage lower row also uses one layout-specific 1280px break.
+
+## Quote form and Zolato intake
+
+`/quote` is a native form that posts to `/api/quote`, which validates the request and forwards it server-side to Zolato. `/contact` redirects to `/quote`. Customers never leave BrightView.
+
+Local setup: copy `.env.example` to `.env.local` (or `.env`) in **this** directory, set `ZOLATO_INTAKE_WEBHOOK_URL`, and restart `npm run dev` (Next reads env files only at startup). Never prefix it with `NEXT_PUBLIC_`.
+
+Built in: origin/JSON/size checks, allowlisted services, honeypot, best-effort per-instance rate limiting and duplicate suppression, no sensitive data in logs. Before public launch add edge rate limiting or CAPTCHA (e.g. Cloudflare Turnstile) and set the env var in the hosting provider. Live delivery to Zolato must be verified with one approved test lead.
+
+The site is `noindex` until launch approval (`app/layout.tsx`).

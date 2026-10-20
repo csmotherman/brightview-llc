@@ -1,0 +1,6 @@
+.band { background: linear-gradient(160deg, var(--evergreen-800) 0%, #0b2a20 70%); border-top: 1px solid var(--border-on-dark); }
+.inner { max-width: var(--content-max); margin-inline: auto; padding: 64px var(--edge); display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+.inner h2 { margin: 0; font-size: clamp(1.9rem, 2.8vw, 2.7rem); color: #faf3e4; }
+.inner p { margin: 12px 0 0; max-width: 560px; color: var(--text-on-dark-muted); }
+.inner a { flex: none; }
+@media (max-width: 900px) { .inner { flex-direction: column; align-items: flex-start; padding-block: 48px; } }

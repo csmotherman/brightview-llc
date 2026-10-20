@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
+import { PageBackdrop } from "@/components/layout/PageBackdrop";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { site } from "@/config/site";
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en" className={sans.variable + " " + display.variable}>
       <body>
         <a className="skip-link" href="#main-content">Skip to content</a>
+        <PageBackdrop />
         <SiteHeader />
         <main id="main-content">{children}</main>
         <SiteFooter />

@@ -4,34 +4,34 @@ import { useState } from "react";
 import { homeProof } from "@/content/home-reference";
 import styles from "./TestimonialPanel.module.css";
 
+/** Real Facebook recommendations, one at a time. No ratings or counts are claimed. */
 export function TestimonialPanel() {
   const list = homeProof.testimonials;
   const [index, setIndex] = useState(0);
-  const item = list[index];
   const go = (step: number) => setIndex((index + step + list.length) % list.length);
 
   return (
-    <aside className={styles.panel} aria-label="Customer feedback">
-      <div className={styles.top}>
-        <span className={styles.stars} role="img" aria-label="5 out of 5 stars">★★★★★</span>
-        <span className={styles.nav}>
-          <button type="button" aria-label="Previous testimonial" onClick={() => go(-1)}>‹</button>
-          <button type="button" aria-label="Next testimonial" onClick={() => go(1)}>›</button>
+    <aside className={styles.card} aria-label="Customer recommendations">
+      <p className={styles.eyebrow}>WHAT NEIGHBORS SAY</p>
+      {/* Every quote shares one grid cell, so the card keeps the height of the longest quote. */}
+      <div className={styles.stack} aria-live="polite">
+        {list.map((item, i) => (
+          <figure key={item.name} className={i === index ? styles.on : styles.off} aria-hidden={i !== index}>
+            <blockquote className={styles.quote}>&ldquo;{item.quote}&rdquo;</blockquote>
+            <figcaption className={styles.person}>
+              <span className={styles.initials} aria-hidden="true">{item.name.split(" ").map((w) => w[0]).join("")}</span>
+              <span><strong>{item.name}</strong><small>{item.place}</small></span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+      <div className={styles.pager}>
+        <span className={styles.count} aria-hidden="true">{index + 1} / {list.length}</span>
+        <span className={styles.buttons}>
+          <button type="button" aria-label="Previous recommendation" onClick={() => go(-1)}>‹</button>
+          <button type="button" aria-label="Next recommendation" onClick={() => go(1)}>›</button>
         </span>
       </div>
-      <blockquote className={styles.quote}>&ldquo;{item.quote}&rdquo;</blockquote>
-      <div className={styles.person}>
-        <span className={styles.initials} aria-hidden="true">{item.name.split(" ").map((w) => w[0]).join("")}</span>
-        <span><strong>{item.name}</strong><small>{item.place}</small></span>
-      </div>
-      <div className={styles.dots} aria-hidden="true">
-        {list.map((_, i) => <i key={i} className={i === index ? styles.on : undefined} />)}
-      </div>
-      <dl className={styles.stats}>
-        {homeProof.stats.map((stat) => (
-          <div key={stat.label}><dt>{stat.value}</dt><dd>{stat.label}</dd></div>
-        ))}
-      </dl>
     </aside>
   );
 }

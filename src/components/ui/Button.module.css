@@ -1,0 +1,24 @@
+.button {
+  display: inline-flex; align-items: center; justify-content: center; gap: 18px;
+  height: 50px; padding: 0 28px; border: 1px solid transparent; border-radius: var(--radius-pill);
+  font-size: .95rem; font-weight: 600; line-height: 1; text-decoration: none; white-space: nowrap;
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+}
+.button:disabled { opacity: .62; cursor: wait; }
+.arrow { font-size: 1.15rem; }
+
+/* Primary on light surfaces. */
+.primary { background: var(--evergreen-800); color: var(--white); box-shadow: var(--shadow-button); }
+.primary:hover:not(:disabled) { background: var(--evergreen-900); }
+
+/* Champagne gold on dark surfaces and photography. */
+.gold { background: var(--gold-300); color: var(--evergreen-900); box-shadow: var(--shadow-button-gold); }
+.gold:hover:not(:disabled) { background: var(--gold-200); }
+
+/* Quiet outline for secondary actions. */
+.outline { background: transparent; color: var(--evergreen-800); border-color: var(--evergreen-500); }
+.outline:hover:not(:disabled) { background: var(--cream-100); border-color: var(--evergreen-800); }
+
+.sm { height: 40px; padding: 0 22px; font-size: var(--text-sm); }
+.block { width: 100%; }
+.gold:focus-visible { outline-color: var(--focus-ring-on-dark); }

@@ -1,5 +1,8 @@
-import { PlaceholderPage } from "@/components/layout/PlaceholderPage";
+import type { Metadata } from "next";
+import { GlassPage } from "@/components/layout/GlassPage";
+
+export const metadata: Metadata = { title: "Service Areas | BrightView LLC", description: "BrightView LLC serves homeowners in Michigan." };
 
 export default function Page() {
-  return <PlaceholderPage title="Service areas" />;
+  return <GlassPage title="Service Areas" />;
 }

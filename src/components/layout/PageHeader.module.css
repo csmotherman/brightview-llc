@@ -1,0 +1,13 @@
+.hero { position: relative; isolation: isolate; overflow: hidden; color: #fff; background: #050f0d; -webkit-mask-image: linear-gradient(180deg, #000 0, #000 70%, transparent 100%); mask-image: linear-gradient(180deg, #000 0, #000 70%, transparent 100%); }
+.photo { object-fit: cover; z-index: -3; }
+.tint {
+  position: absolute; inset: 0; z-index: -2;
+  background:
+    linear-gradient(90deg, rgb(2 12 10 / 90%) 0%, rgb(2 12 10 / 68%) 40%, rgb(2 12 10 / 30%) 100%),
+    linear-gradient(180deg, rgb(2 10 9 / 60%) 0%, rgb(2 10 9 / 0%) 24%);
+}
+.inner { width: 100%; max-width: var(--content-max); margin-inline: auto; padding: 146px var(--edge) 96px; }
+.inner h1 { white-space: pre-line; margin: 22px 0 0; max-width: 780px; font-weight: 700; font-size: var(--text-display); line-height: 1.02; text-shadow: 0 2px 22px rgb(0 0 0 / 35%); }
+.inner p { max-width: 560px; margin: 20px 0 0; font-size: var(--text-lg); line-height: 1.55; text-shadow: 0 1px 12px rgb(0 0 0 / 50%); }
+.extra { margin-top: 30px; }
+@media (max-width: 900px) { .inner { padding: 112px var(--edge) 72px; } }

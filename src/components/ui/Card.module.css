@@ -1,0 +1,16 @@
+.card { display: flex; flex-direction: column; gap: var(--space-3); min-width: 0; padding: 30px; border-radius: var(--radius-lg); text-decoration: none; margin: 0; }
+.evergreen { background: var(--gradient-evergreen); border: 1px solid var(--border-on-dark); box-shadow: var(--shadow-dark); color: #fff; }
+.light { background: var(--cream-50); border: 1px solid var(--border); box-shadow: var(--shadow-md); color: var(--text-body); }
+.glass { background: var(--glass-cream-bg); border: 1px solid var(--glass-cream-border); box-shadow: var(--shadow-lg); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur); color: var(--text); }
+a.card { transition: transform .2s ease; }
+a.card:hover { transform: translateY(-3px); }
+@media (max-width: 520px) { .card { padding: 24px; } }
+@media (prefers-reduced-motion: reduce) { a.card:hover { transform: none; } }
+
+/* :where() keeps these defaults overridable by any page-level class. */
+:where(.card) h3 { margin: 0; font-size: var(--text-h3); }
+.card :where(p) { margin: 0; line-height: 1.6; font-size: .95rem; }
+.evergreen :where(p) { color: var(--text-on-dark-muted); }
+.evergreen :where(h3) { color: #fff; }
+.light :where(h3) { color: var(--text); }
+.action { margin-top: auto; padding-top: var(--space-3); color: var(--gold-300); font-weight: 600; font-size: var(--text-sm); }
