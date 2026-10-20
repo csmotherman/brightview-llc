@@ -2,13 +2,13 @@
 
 import { useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
-import { EMAIL_PATTERN, QUOTE_LIMITS, SERVICE_OPTIONS, hasEnoughPhoneDigits } from "@/lib/quote-services";
+import { QUOTE_LIMITS, SERVICE_OPTIONS, isValidEmailAddress, isValidPhoneNumber } from "@/lib/quote-services";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { CheckboxOption, FieldError, FormField, Input, Textarea, formStyles } from "@/components/ui/FormField";
 import styles from "@/app/quote/quote.module.css";
 
-type TextField = "name" | "phone" | "email" | "address" | "message";
+type TextField = "name" | "phone" | "email" | "street" | "city" | "zip" | "message";
 type FormValues = Record<TextField, string> & { services: string[] };
 type FieldErrors = Partial<Record<TextField | "services", string>>;
 
@@ -17,16 +17,24 @@ const newSubmissionId = () =>
     ? crypto.randomUUID()
     : Math.random().toString(36).slice(2) + Date.now().toString(36);
 
-const emptyForm: FormValues = { name: "", phone: "", email: "", address: "", message: "", services: [] };
+const emptyForm: FormValues = { name: "", phone: "", email: "", street: "", city: "", zip: "", message: "", services: [] };
+
+// Zolato's intake expects one address string, even though users fill three short fields.
+const formatAddress = ({ street, city, zip }: Pick<FormValues, "street" | "city" | "zip">) => {
+  const clean = (value: string) => value.trim().replace(/\s+/g, " ");
+  const normalizedZip = clean(zip).replace(/^(\d{5})(\d{4})$/, "$1-$2");
+  return `${clean(street)}, ${clean(city)}, MI ${normalizedZip}`;
+};
 
 function validate(form: FormValues): FieldErrors {
   const errors: FieldErrors = {};
   if (!form.name.trim()) errors.name = "Please enter your name.";
-  if (!hasEnoughPhoneDigits(form.phone)) errors.phone = "Please enter a valid phone number.";
-  if (!EMAIL_PATTERN.test(form.email.trim())) errors.email = "Please enter a valid email address.";
-  if (!form.address.trim()) errors.address = "Please enter the property address.";
+  if (!isValidPhoneNumber(form.phone)) errors.phone = "Enter a valid 10-digit phone number.";
+  if (!isValidEmailAddress(form.email)) errors.email = "Enter a valid email address.";
+  if (!form.street.trim()) errors.street = "Enter the street address.";
+  if (!form.city.trim()) errors.city = "Enter the city.";
+  if (!/^\d{5}(?:-?\d{4})?$/.test(form.zip.trim())) errors.zip = "Enter a valid 5-digit ZIP code.";
   if (form.services.length === 0) errors.services = "Please select at least one service.";
-  if (!form.message.trim()) errors.message = "Please tell us a little about your project.";
   return errors;
 }
 
@@ -35,6 +43,8 @@ export function QuoteForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
   const [error, setError] = useState("");
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+  // Use the same validation for button availability and the submit handler.
+  const canSubmit = Object.keys(validate(form)).length === 0;
   const sending = useRef(false);
   // One id per attempt-series: retries of the same request reuse it so the server can de-duplicate.
   const submissionId = useRef<string>(newSubmissionId());
@@ -43,6 +53,10 @@ export function QuoteForm() {
     setForm((current) => ({ ...current, [field]: value }));
     setFieldErrors((current) => ({ ...current, [field]: undefined }));
     if (error) setError("");
+  };
+
+  const validateOnBlur = (field: TextField) => {
+    setFieldErrors((current) => ({ ...current, [field]: validate(form)[field] }));
   };
 
   const toggleService = (service: string) => {
@@ -77,7 +91,11 @@ export function QuoteForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          ...form,
+          name: form.name,
+          phone: form.phone,
+          email: form.email,
+          address: formatAddress(form),
+          message: form.message,
           services: SERVICE_OPTIONS.map((option) => option.name).filter((name) => form.services.includes(name)),
           website: String(data.get("website") ?? ""),
           submissionId: submissionId.current,
@@ -121,12 +139,13 @@ export function QuoteForm() {
 
   const busy = status === "submitting";
   const invalid = (field: TextField) => Boolean(fieldErrors[field]);
-  const bind = (field: TextField, extra: { id: string; maxLength: number }) => ({
+  const bind = (field: TextField, extra: { id: string; maxLength: number; required?: boolean }) => ({
     ...extra,
     name: field,
-    required: true,
+    required: extra.required !== false,
     value: form[field],
     invalid: invalid(field),
+    onBlur: () => validateOnBlur(field),
     onChange: (event: { target: { value: string } }) => updateText(field, event.target.value),
   });
 
@@ -134,7 +153,7 @@ export function QuoteForm() {
     <Card tone="glass" className={styles.card}>
       <div className={styles.intro}>
         <p className={styles.eyebrow}>FREE QUOTE REQUEST</p>
-        <h2>Tell us about your project.</h2>
+        <h2>Let’s get your quote started.</h2>
         <p>Choose as many services as you need. Fields marked * are required.</p>
       </div>
       <form className={styles.form} onSubmit={submit} noValidate aria-busy={busy}>
@@ -150,9 +169,21 @@ export function QuoteForm() {
           <FormField id="quote-email" label="Email address" required error={fieldErrors.email}>
             <Input {...bind("email", { id: "quote-email", maxLength: QUOTE_LIMITS.email })} type="email" autoComplete="email" placeholder="you@example.com" />
           </FormField>
-          <FormField id="quote-address" label="Property address" required error={fieldErrors.address}>
-            <Input {...bind("address", { id: "quote-address", maxLength: QUOTE_LIMITS.address })} type="text" autoComplete="street-address" placeholder="Street address, city, ZIP" />
-          </FormField>
+          <fieldset className={styles.addressFields}>
+            <legend className={formStyles.legend}>Where do you need service? <span className={formStyles.required} aria-hidden="true">*</span></legend>
+            <p className={styles.addressHint}>Michigan property address</p>
+            <FormField id="quote-street" label="Street address" required error={fieldErrors.street}>
+              <Input {...bind("street", { id: "quote-street", maxLength: 160 })} type="text" autoComplete="section-service-address address-line1" enterKeyHint="next" placeholder="123 Main St" />
+            </FormField>
+            <div className={styles.addressRow}>
+              <FormField id="quote-city" label="City" required error={fieldErrors.city}>
+                <Input {...bind("city", { id: "quote-city", maxLength: 80 })} type="text" autoComplete="section-service-address address-level2" enterKeyHint="next" placeholder="Clarkston" />
+              </FormField>
+              <FormField id="quote-zip" label="ZIP code" required error={fieldErrors.zip}>
+                <Input {...bind("zip", { id: "quote-zip", maxLength: 10 })} type="text" inputMode="numeric" autoComplete="section-service-address postal-code" enterKeyHint="next" placeholder="48346" />
+              </FormField>
+            </div>
+          </fieldset>
 
           <fieldset className={styles.services} aria-describedby="service-hint">
             <legend className={formStyles.legend}>Which services do you need? <span className={formStyles.required} aria-hidden="true">*</span></legend>
@@ -165,8 +196,8 @@ export function QuoteForm() {
             </div>
             {fieldErrors.services && <FieldError id="quote-services-error">{fieldErrors.services}</FieldError>}
           </fieldset>
-          <FormField id="quote-message" label="Tell us about your project" required error={fieldErrors.message}>
-            <Textarea {...bind("message", { id: "quote-message", maxLength: QUOTE_LIMITS.message })} rows={4} placeholder="What would you like done? Any helpful details about the property?" />
+          <FormField id="quote-message" label="Special requests or additional notes (optional)" error={fieldErrors.message}>
+            <Textarea {...bind("message", { id: "quote-message", maxLength: QUOTE_LIMITS.message, required: false })} rows={3} placeholder="Anything else you'd like us to know?" />
           </FormField>
           <div className={styles.honeypot} aria-hidden="true">
             <label htmlFor="quote-website">Leave this field empty</label>
@@ -174,7 +205,8 @@ export function QuoteForm() {
           </div>
         </fieldset>
         {error && <p role="alert" className={styles.error}>{error}</p>}
-        <Button type="submit" block arrow={!busy} disabled={busy}>{busy ? "Sending request…" : "Request My Free Quote"}</Button>
+        <Button type="submit" block arrow={!busy} disabled={busy || !canSubmit}>{busy ? "Sending request…" : "Request My Free Quote"}</Button>
+        {!canSubmit && <p className={styles.submitHint}>Enter your contact details, property address and at least one service to continue.</p>}
         <p className={styles.disclaimer}>No payment or booking required. We&apos;ll contact you about a quote.</p>
       </form>
     </Card>

@@ -1,4 +1,4 @@
-import { EMAIL_PATTERN, QUOTE_LIMITS, SERVICE_OPTIONS, hasEnoughPhoneDigits } from "@/lib/quote-services";
+import { QUOTE_LIMITS, SERVICE_OPTIONS, isValidEmailAddress, isValidPhoneNumber } from "@/lib/quote-services";
 
 export const runtime = "nodejs";
 
@@ -94,15 +94,18 @@ export async function POST(request: Request) {
   const phone = normalize(input.phone, QUOTE_LIMITS.phone);
   const email = normalize(input.email, QUOTE_LIMITS.email);
   const address = normalize(input.address, QUOTE_LIMITS.address);
-  const message = normalize(input.message, QUOTE_LIMITS.message);
+  // Notes are genuinely optional; only reject incorrectly typed or oversized notes.
+  const message = input.message == null ? "" :
+    typeof input.message === "string" ? input.message.trim() : null;
   const services = input.services;
 
-  if (!name || !phone || !email || !address || !message ||
+  if (!name || !phone || !email || !address ||
+      message === null || message.length > QUOTE_LIMITS.message ||
       !Array.isArray(services) || services.length < 1 ||
       services.length > SERVICE_OPTIONS.length ||
       services.some((service) => typeof service !== "string" || !allowedServices.has(service)) ||
       new Set(services).size !== services.length ||
-      !hasEnoughPhoneDigits(phone) || !EMAIL_PATTERN.test(email)) {
+      !isValidPhoneNumber(phone) || !isValidEmailAddress(email)) {
     return errorResponse("Please complete all required fields and select at least one service.", 400);
   }
 
@@ -133,7 +136,8 @@ export async function POST(request: Request) {
     email,
     address,
     service: selectedServices,
-    message: "Requested services: " + selectedServices + "\n\nProject details:\n" + message,
+    message: "Requested services: " + selectedServices +
+      (message ? "\n\nSpecial requests / additional notes:\n" + message : ""),
     source: "website",
   };
 
