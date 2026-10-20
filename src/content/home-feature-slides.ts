@@ -45,7 +45,7 @@ export const homeSlides = [
   },
   {
     key: "gutters",
-    title: "Clear Gutters.\nRainwater Flowing.",
+    title: "Clear Gutters.\nBetter Drainage.",
     description:
       "Leaves and debris can block gutter channels. BrightView clears buildup to help rainwater move toward the downspouts.",
     image: "/images/projects/gutter/Gutter After 4-3.png",
