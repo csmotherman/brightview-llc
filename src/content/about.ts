@@ -31,7 +31,7 @@ export const aboutPrinciples = {
   kicker: "WHAT YOU CAN EXPECT",
   heading: "Straightforward, from the first message.",
   items: [
-    { title: "Our work speaks for itself", body: "Explore examples of our exterior cleaning and holiday lighting, alongside feedback from real customers. See what BrightView is all about before requesting a quote." },
+    { title: "See for yourself", body: "Explore examples of our exterior cleaning and holiday lighting, alongside feedback from real customers. See what BrightView is all about before requesting a quote." },
     { title: "Right approach, right surface", body: "Glass, pavers, siding and roofs aren't all cleaned the same way. Different surfaces call for different cleaning approaches." },
     { title: "Free to ask", body: "Requesting a quote is free, with no payment or booking required." },
   ],
