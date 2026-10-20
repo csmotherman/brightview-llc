@@ -38,7 +38,13 @@
 .filled { background: #e6dfcf; box-shadow: 0 8px 20px rgb(10 37 28 / 16%); }
 .filled img { object-fit: cover; }
 .tag { position: absolute; left: 8px; top: 8px; padding: 3px 11px; border-radius: 99px; font-size: .68rem; font-weight: 600; color: #fff; background: rgb(12 22 18 / 62%); border: 1px solid rgb(255 255 255 / 35%); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
-.info { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-5); align-content: start; }
+/* Clear hierarchy: a service pitch, a why-it-matters explanation, then benefits and next steps. */
+.info { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-6); row-gap: var(--space-5); align-content: start; }
+.story, .importance { grid-column: 1 / -1; }
+.story h3 { margin: 0 0 var(--space-3); color: var(--evergreen-900); font-family: var(--font-display); font-size: clamp(1.45rem, 2.1vw, 1.9rem); font-weight: 600; line-height: 1.16; letter-spacing: -.015em; }
+.story p { margin: 0; font-size: var(--text-base); line-height: 1.68; color: var(--text-body); max-width: 70ch; }
+.importance { padding-block: var(--space-4); border-top: 1px solid var(--cream-300); border-bottom: 1px solid var(--cream-300); }
+.importance > p { max-width: 70ch; }
 .cta { grid-column: 1 / -1; }
 .block h3 { margin: 0 0 var(--space-3); font-family: var(--font-sans); font-size: .7rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--evergreen-500); }
 .block ol, .block ul { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--space-3); }
@@ -50,7 +56,7 @@
 .block > p { margin: 0; color: var(--text-body); font-size: var(--text-sm); line-height: 1.6; }
 
 @media (max-width: 1100px) { .panel { grid-template-columns: 1fr; } }
-@media (max-width: 900px) { .info { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .info { grid-template-columns: 1fr; } .story, .importance { grid-column: 1; } }
 @media (max-width: 520px) {
   .wrap { gap: var(--space-5); padding-top: var(--space-6); }
   .glass { border-radius: var(--radius-md); }
