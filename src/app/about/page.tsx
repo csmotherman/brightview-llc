@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
@@ -9,11 +10,12 @@ import { site } from "@/config/site";
 import { RevealOnScroll } from "./RevealOnScroll";
 import styles from "./about.module.css";
 
-export const metadata: Metadata = {
-  title: "About BrightView | Family-Owned Michigan Exterior Cleaning & Holiday Lighting",
+export const metadata: Metadata = pageMetadata({
+  title: "About Us: Family-Owned Exterior Cleaning in Michigan",
   description:
-    "Meet BrightView LLC, a family-owned Michigan business for window cleaning, exterior washing, gutter and roof cleaning, and professionally installed holiday lighting. See our real projects and what customers say.",
-};
+    "Meet BrightView LLC, a family-owned Michigan business for exterior cleaning and holiday lighting. See our real projects and what customers say.",
+  path: "/about",
+});
 
 const featured = reviews.find((r) => r.name === "Dawn Bostwick")!;
 const others = reviews.filter((r) => r.name !== featured.name);

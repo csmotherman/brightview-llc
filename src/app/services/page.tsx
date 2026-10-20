@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { ServiceExplorer } from "@/components/services/ServiceExplorer";
 import styles from "./services.module.css";
 
-export const metadata: Metadata = {
-  title: "Services | BrightView LLC",
+export const metadata: Metadata = pageMetadata({
+  title: "Exterior Cleaning & Lighting Services",
   description:
-    "BrightView's window cleaning, pressure washing, soft washing, roof cleaning, gutter cleaning and holiday lighting services for Michigan homes: what we do, how it works and why it helps.",
-};
+    "Window cleaning, pressure washing, soft washing, roof and gutter cleaning, and holiday lighting from BrightView. See what each service involves.",
+  path: "/services",
+});
 
 export default function ServicesPage() {
   return (

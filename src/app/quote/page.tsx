@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { QuoteForm } from "@/components/quote/QuoteForm";
 import styles from "./quote.module.css";
 
-export const metadata: Metadata = {
-  title: "Request a Free Quote | BrightView LLC",
+export const metadata: Metadata = pageMetadata({
+  title: "Request a Free Quote",
   description:
-    "Request a free quote for Michigan window cleaning, pressure washing, or holiday lighting. Select one or more services.",
-};
+    "Request a free quote for window cleaning, pressure washing, gutter cleaning, soft washing, roof cleaning or holiday lighting. No payment or booking required.",
+  path: "/quote",
+});
 
 export default function QuotePage() {
   return (

@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { faqs } from "@/content/faq";
 import styles from "../info-pages.module.css";
 
-export const metadata: Metadata = {
-  title: "Frequently Asked Questions | BrightView LLC",
-  description: "Answers about BrightView's exterior cleaning, holiday lighting, free quote requests and Southeast Michigan service area.",
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Frequently Asked Questions",
+  description:
+    "Answers about BrightView exterior cleaning, holiday lighting, free quote requests and our Southeast Michigan service area.",
+  path: "/faq",
+});
 
 export default function FAQPage() {
   return (
