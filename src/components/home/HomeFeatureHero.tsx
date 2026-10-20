@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
@@ -20,7 +20,7 @@ export function HomeFeatureHero() {
 
   // Never switch to a slide before its image is decoded, even on a slow connection.
   // All images are requested eagerly below; the first slide alone gets preload priority.
-  const showWhenReady = (index: number) => {
+  const showWhenReady = useCallback((index: number) => {
     const next = (index + homeSlides.length) % homeSlides.length;
     if (readyImages.current.has(next)) {
       queuedSlide.current = null;
@@ -28,7 +28,7 @@ export function HomeFeatureHero() {
     } else {
       queuedSlide.current = next;
     }
-  };
+  }, []);
 
   const onImageReady = (index: number) => {
     readyImages.current.add(index);
@@ -58,7 +58,7 @@ export function HomeFeatureHero() {
       showWhenReady(active + 1);
     }, AUTO_MS);
     return () => window.clearInterval(timer);
-  }, [playing, hovered, pausedByUser, visible, active]);
+  }, [playing, hovered, pausedByUser, visible, active, showWhenReady]);
 
   const choose = (index: number) => {
     showWhenReady(index);
