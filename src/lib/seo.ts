@@ -17,6 +17,14 @@ export const indexingAllowed =
   siteUrl !== null &&
   (process.env.VERCEL_ENV === undefined || process.env.VERCEL_ENV === "production");
 
+/**
+ * Base for resolving relative asset URLs (share image, icons) so link previews work on any Vercel deployment,
+ * including before the canonical domain is chosen. This is NOT used for canonicals, the sitemap or structured data,
+ * which stay tied to NEXT_PUBLIC_SITE_URL.
+ */
+const vercelHost = process.env.VERCEL_ENV === "production" ? (process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL) : process.env.VERCEL_URL;
+export const assetBaseUrl: string | null = siteUrl ?? (vercelHost ? `https://${vercelHost}` : null);
+
 export const absoluteUrl = (path: string): string | null => (siteUrl ? siteUrl + (path === "/" ? "" : path) : null);
 
 /** Every route that is ready for search engines, in sitemap order. Thin or unfinished routes stay out. */

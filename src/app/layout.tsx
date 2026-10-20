@@ -6,14 +6,14 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { BreadcrumbJsonLd } from "@/components/seo/BreadcrumbJsonLd";
 import { SiteJsonLd } from "@/components/seo/SiteJsonLd";
 import { site } from "@/config/site";
-import { defaultDescription, indexingAllowed, siteUrl } from "@/lib/seo";
+import { assetBaseUrl, defaultDescription, indexingAllowed } from "@/lib/seo";
 import "./globals.css";
 
 const sans = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 const display = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair", display: "swap" });
 
 export const metadata: Metadata = {
-  ...(siteUrl ? { metadataBase: new URL(siteUrl) } : {}),
+  ...(assetBaseUrl ? { metadataBase: new URL(assetBaseUrl) } : {}),
   title: { default: `${site.name} | Exterior Cleaning & Holiday Lighting in Southeast Michigan`, template: `%s | ${site.name}` },
   description: defaultDescription,
   applicationName: site.name,
