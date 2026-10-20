@@ -1,7 +1,10 @@
-/** Confirmed BrightView core services; the form and the server allowlist share this list. */
+/** BrightView services; the form and the server allowlist share this list. */
 export const SERVICE_OPTIONS = [
   { name: "Window Cleaning", description: "Clearer views, inside and out" },
   { name: "Pressure Washing", description: "Driveways, patios, and outdoor surfaces" },
+  { name: "Soft Washing", description: "Low-pressure washing for delicate surfaces" },
+  { name: "Roof Cleaning", description: "Clean up your roof's appearance" },
+  { name: "Gutter Cleaning", description: "Clear out built-up debris" },
   { name: "Holiday Lighting", description: "Seasonal outdoor lighting" },
 ] as const;
 

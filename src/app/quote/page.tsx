@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { PageHeader } from "@/components/layout/PageHeader";
-import { Section } from "@/components/layout/Section";
 import { QuoteForm } from "@/components/quote/QuoteForm";
 import styles from "./quote.module.css";
 
@@ -13,15 +11,13 @@ export const metadata: Metadata = {
 
 export default function QuotePage() {
   return (
-    <>
-      <PageHeader
-        eyebrow="BRIGHTVIEW LLC | GET A QUOTE"
-        title={"A brighter home\nstarts here."}
-        description="Tell us about your property and choose everything you need. We'll review your request and follow up."
-        image="/images/projects/holiday-lights/House3.png"
-        objectPosition="center 45%"
-      />
-      <Section bare aria-label="Quote request">
+    <div className={styles.page}>
+      <div className={styles.wrap}>
+        <header className={styles.pageIntro}>
+          <p className={styles.eyebrow}>GET A QUOTE</p>
+          <h1>A brighter home starts here.</h1>
+          <p>Tell us about your property and choose everything you need. We&apos;ll review your request and follow up.</p>
+        </header>
         <div className={styles.layout}>
           <QuoteForm />
           <aside className={styles.details}>
@@ -32,7 +28,7 @@ export default function QuotePage() {
             <Link className={styles.backLink} href="/services">Explore our services <span aria-hidden="true">↗</span></Link>
           </aside>
         </div>
-      </Section>
-    </>
+      </div>
+    </div>
   );
 }

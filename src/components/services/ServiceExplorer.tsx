@@ -6,7 +6,23 @@ import { Button } from "@/components/ui/Button";
 import { serviceDetails } from "@/content/service-details";
 import styles from "@/app/services/services.module.css";
 
-/** Four selectable cards; details appear only for the chosen service. Deep links (/services#gutter-cleaning) preselect. */
+type Photo = { src: string; alt: string; label?: string };
+
+/** One photo frame; renders blank when the service has no photo for that slot yet. */
+function Frame({ photo, className }: { photo?: Photo | null; className: string }) {
+  return (
+    <figure className={`${className} ${photo ? styles.filled : styles.blank}`}>
+      {photo && (
+        <>
+          <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 1100px) 90vw, 32vw" />
+          {photo.label && <figcaption className={styles.tag}>{photo.label}</figcaption>}
+        </>
+      )}
+    </figure>
+  );
+}
+
+/** Accordion list: one line per service, details (with photo frames) open on click. Deep links (#roof-cleaning) preselect. */
 export function ServiceExplorer() {
   const [selected, setSelected] = useState<string | null>(null);
 
@@ -26,46 +42,41 @@ export function ServiceExplorer() {
     history.replaceState(null, "", next ? "#" + next : window.location.pathname);
   };
 
-  const current = serviceDetails.find((s) => s.id === selected);
-
   return (
-    <>
-      <ul className={styles.cards} aria-label="Services">
-        {serviceDetails.map((s) => (
-          <li key={s.id}>
-            <button
-              type="button"
-              className={`${styles.glass} ${styles.card}${s.id === selected ? " " + styles.cardOn : ""}`}
-              aria-pressed={s.id === selected}
-              aria-controls="service-detail"
-              onClick={() => toggle(s.id)}
-            >
-              <Image src={s.symbol} alt="" width={120} height={120} className={styles.symbol} />
-              <span className={styles.cardTitle}>{s.name}</span>
-              <span className={styles.cardBlurb}>{s.blurb}</span>
-              <span className={styles.more}>{s.id === selected ? "Hide details" : "Learn more"} <span aria-hidden="true">{s.id === selected ? "↑" : "↓"}</span></span>
-            </button>
+    <ul className={`${styles.glass} ${styles.list}`} aria-label="Services">
+      {serviceDetails.map((s) => {
+        const open = s.id === selected;
+        return (
+          <li key={s.id} id={s.id} className={open ? styles.itemOpen : styles.item}>
+            <h2 className={styles.rowHeading}>
+              <button type="button" className={styles.row} aria-expanded={open} aria-controls={s.id + "-panel"} onClick={() => toggle(s.id)}>
+                <Image src={s.symbol} alt="" width={64} height={64} className={styles.symbol} />
+                <span className={styles.rowText}>
+                  <span className={styles.rowTitle}>{s.name}</span>
+                  <span className={styles.rowDef}>{s.definition}</span>
+                </span>
+                <span className={styles.chevron} aria-hidden="true">{open ? "−" : "+"}</span>
+              </button>
+            </h2>
+            {open && (
+              <div id={s.id + "-panel"} className={styles.panel} role="region" aria-label={s.name + " details"}>
+                <div className={styles.photos}>
+                  {/* No full-product shot (e.g. gutters): show just the before/after pair. */}
+                  {(s.photos.top || s.photos.bottom.length === 0) && <Frame photo={s.photos.top} className={styles.photoTop} />}
+                  <Frame photo={s.photos.bottom[0]} className={styles.photo} />
+                  <Frame photo={s.photos.bottom[1]} className={styles.photo} />
+                </div>
+                <div className={styles.info}>
+                  <div className={styles.block}><h3>What we do</h3><p>{s.what}</p></div>
+                  <div className={styles.block}><h3>How it works</h3><ol>{s.how.map((step) => <li key={step}>{step}</li>)}</ol></div>
+                  <div className={styles.block}><h3>Why get it</h3><ul>{s.why.map((reason) => <li key={reason}>{reason}</li>)}</ul></div>
+                  <div className={styles.cta}><Button href="/quote" arrow>Get Free Quote</Button></div>
+                </div>
+              </div>
+            )}
           </li>
-        ))}
-      </ul>
-
-      <div id="service-detail" aria-live="polite">
-        {current && (
-          <section className={`${styles.glass} ${styles.detail}`} aria-labelledby="service-detail-title">
-            <div className={styles.head}>
-              <Image src={current.symbol} alt="" width={96} height={96} className={styles.symbol} />
-              <h2 id="service-detail-title">{current.name}</h2>
-              <p>{current.blurb}</p>
-              <Button href="/quote" arrow>Get Free Quote</Button>
-            </div>
-            <div className={styles.body}>
-              <div className={styles.block}><h3>What we do</h3><p>{current.what}</p></div>
-              <div className={styles.block}><h3>How it works</h3><ol>{current.how.map((step) => <li key={step}>{step}</li>)}</ol></div>
-              <div className={styles.block}><h3>Why get it</h3><ul>{current.why.map((reason) => <li key={reason}>{reason}</li>)}</ul></div>
-            </div>
-          </section>
-        )}
-      </div>
-    </>
+        );
+      })}
+    </ul>
   );
 }
