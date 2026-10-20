@@ -21,14 +21,6 @@ const tiles = [
     href: "/services#pressure-washing",
   },
   {
-    name: "Gutter Cleaning",
-    caption: "Keep water moving, protect your home.",
-    image: "/images/projects/gutter/Gutter After 4-3.png",
-    alt: "Gutter photographed after cleaning",
-    icon: "gutter",
-    href: "/services#gutter-cleaning",
-  },
-  {
     name: "Holiday Lighting",
     caption: "Professional installation & takedown.",
     image: "/images/projects/holiday-lights/House2.png",
@@ -39,7 +31,7 @@ const tiles = [
   },
 ] as const;
 
-/** Four photo tiles that overlap the bottom of the hero. */
+/** Three photo tiles plus a "More services" card to /services, overlapping the bottom of the hero. */
 export function ServiceTiles() {
   return (
     <section className={styles.band} aria-label="Explore BrightView services">
@@ -57,6 +49,11 @@ export function ServiceTiles() {
             </div>
           </Link>
         ))}
+        <Link href="/services" className={`${styles.card} ${styles.more}`}>
+          <span className={styles.moreSymbol} aria-hidden="true">→</span>
+          <h2>More services</h2>
+          <p>Soft washing, roof and gutter cleaning, and more.</p>
+        </Link>
       </div>
     </section>
   );

@@ -16,7 +16,7 @@ src/
 │   ├── layout.tsx          the one site layout: skip link, header, <main>, footer
 │   ├── globals.css         imports the design system (tokens + base) only
 │   ├── page.tsx            homepage (+ home.module.css, page-specific)
-│   ├── services/ about/ our-work/ reviews/ service-areas/ faq/ quote/
+│   ├── services/ about/ gallery/ reviews/ service-areas/ faq/ quote/
 │   ├── contact/            redirects to /quote
 │   └── api/quote/route.ts  server-side validation + Zolato forwarding
 ├── components/

@@ -1,0 +1,7 @@
+/* Mirrors the shared page shell (intro + glass surface) so navigation never flashes an empty screen. */
+.page { padding-top: var(--header-height); }
+.wrap { max-width: var(--content-max); margin-inline: auto; padding: var(--space-6) var(--edge) var(--section-y); display: grid; gap: var(--space-6); }
+.intro { display: grid; gap: var(--space-3); max-width: 560px; }
+.surface { min-height: min(62svh, 560px); padding: clamp(18px, 3vw, 32px); border-radius: var(--radius-lg); background: var(--glass-cream-bg); border: 1px solid var(--glass-cream-border); -webkit-backdrop-filter: blur(26px) saturate(150%); backdrop-filter: blur(26px) saturate(150%); box-shadow: inset 0 1px 0 rgb(255 255 255 / 60%), var(--shadow-lg); display: grid; gap: var(--space-4); align-content: start; }
+.rows { display: grid; gap: var(--space-3); }
+@media (max-width: 520px) { .surface { border-radius: var(--radius-md); } }

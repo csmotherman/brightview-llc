@@ -5,7 +5,7 @@
 | / | Homepage: two-slide hero (window cleaning, holiday lighting), service tiles, process, real before/after slider, recommendation card |
 | /services | All core-service descriptions with every real project photo |
 | /services/window-cleaning, /pressure-washing, /holiday-lights | Per-service detail pages (shared `ServiceDetail`) |
-| /our-work | Filterable gallery of all project photos |
+| /gallery | Project gallery (formerly /our-work, which redirects here) |
 | /about | Family-owned overview and service links |
 | /reviews | Real Facebook recommendations (`src/content/reviews.ts`) |
 | /service-areas | Michigan service-area contact prompt (no town list is claimed) |

@@ -14,7 +14,7 @@ export function SiteFooter() {
         <div className={styles.links}>
           <h2>Explore</h2>
           <Link href="/services">Services</Link>
-          <Link href="/our-work">Our Work</Link>
+          <Link href="/gallery">Gallery</Link>
           <Link href="/about">About</Link>
         </div>
         <div className={styles.links}>

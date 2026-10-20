@@ -9,8 +9,8 @@ import styles from "./SiteHeader.module.css";
 
 const nav = [
   { label: "Home", href: "/" },
-  { label: "Services", href: "/services", menu: true },
-  { label: "Our Work", href: "/our-work" },
+  { label: "Services", href: "/services" },
+  { label: "Gallery", href: "/gallery" },
   { label: "About", href: "/about" },
   { label: "Service Area", href: "/service-areas" },
 ];
@@ -40,7 +40,6 @@ export function SiteHeader() {
           {nav.map((item) => (
             <Link href={item.href} key={item.href} aria-current={isActive(item.href, pathname) ? "page" : undefined}>
               {item.label}
-              {item.menu && <svg className={styles.chevron} width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" /></svg>}
             </Link>
           ))}
         </nav>
