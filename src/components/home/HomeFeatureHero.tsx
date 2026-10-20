@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type CSSProperties } from "react";
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
@@ -15,6 +15,28 @@ export function HomeFeatureHero() {
   const [pausedByUser, setPausedByUser] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [visible, setVisible] = useState(true);
+  const readyImages = useRef(new Set<number>());
+  const queuedSlide = useRef<number | null>(null);
+
+  // Never switch to a slide before its image is decoded, even on a slow connection.
+  // All images are requested eagerly below; the first slide alone gets preload priority.
+  const showWhenReady = useCallback((index: number) => {
+    const next = (index + homeSlides.length) % homeSlides.length;
+    if (readyImages.current.has(next)) {
+      queuedSlide.current = null;
+      setActive(next);
+    } else {
+      queuedSlide.current = next;
+    }
+  }, []);
+
+  const onImageReady = (index: number) => {
+    readyImages.current.add(index);
+    if (queuedSlide.current === index) {
+      queuedSlide.current = null;
+      setActive(index);
+    }
+  };
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -33,13 +55,13 @@ export function HomeFeatureHero() {
   useEffect(() => {
     if (!playing || hovered || pausedByUser || !visible) return;
     const timer = window.setInterval(() => {
-      setActive((index) => (index + 1) % homeSlides.length);
+      showWhenReady(active + 1);
     }, AUTO_MS);
     return () => window.clearInterval(timer);
-  }, [playing, hovered, pausedByUser, visible]);
+  }, [playing, hovered, pausedByUser, visible, active, showWhenReady]);
 
   const choose = (index: number) => {
-    setActive((index + homeSlides.length) % homeSlides.length);
+    showWhenReady(index);
     setPausedByUser(true);
     setPlaying(false);
   };
@@ -49,7 +71,7 @@ export function HomeFeatureHero() {
   return (
     <section
       className={styles.hero}
-      aria-label="BrightView featured services and seasonal highlights"
+      aria-label="BrightView featured exterior cleaning services"
       aria-roledescription="carousel"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -63,7 +85,16 @@ export function HomeFeatureHero() {
             style={{ "--pos": item.position, "--pos-m": item.positionMobile } as CSSProperties}
             aria-hidden={index !== active}
           >
-            <Image src={item.image} alt={index === active ? item.alt : ""} fill priority={index === 0} sizes="(max-width: 900px) 100vw, 70vw" />
+            <Image
+              src={item.image}
+              alt={index === active ? item.alt : ""}
+              fill
+              priority={index === 0}
+              loading={index === 0 ? undefined : "eager"}
+              fetchPriority={index === 0 ? "high" : "auto"}
+              onLoad={() => onImageReady(index)}
+              sizes="(max-width: 900px) 100vw, 70vw"
+            />
           </div>
         ))}
       </div>

@@ -12,8 +12,10 @@
   -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 32%);
   mask-image: linear-gradient(90deg, transparent 0, #000 32%);
 }
-.photo, .photoActive { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity .9s ease, visibility .9s; }
-.photoActive { opacity: 1; visibility: visible; }
+/* Keep all three images mounted, eagerly decoded and composited behind the active slide.
+   Opacity-only fades avoid the delayed reveal caused by visibility:hidden + lazy loading. */
+.photo, .photoActive { position: absolute; inset: 0; opacity: 0; pointer-events: none; transition: opacity .65s ease; }
+.photoActive { opacity: 1; }
 .stage img { object-fit: cover; object-position: var(--pos); }
 /* Bottom of the hero melts into the cream page behind the service tiles. */
 .fade { position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(180deg, rgb(7 27 22 / 62%) 0%, rgb(7 27 22 / 22%) 14%, transparent 26%, transparent 66%, rgb(247 241 229 / 70%) 90%, var(--bg-page) 100%); }
