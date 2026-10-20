@@ -11,13 +11,13 @@ export const aboutHero = {
   image: { src: "/images/Hero-HomePage.png", alt: "A BrightView team member squeegeeing a large window, with fresh suds still on the glass" },
 } as const;
 
-/** "The BrightView approach": who we are and how a project starts. Truthful until real company history is supplied. */
+/** "The BrightView approach": how customers are treated and what happens after a quote request (no services list; the hero covers that). */
 export const aboutStory = {
   kicker: "THE BRIGHTVIEW APPROACH",
   heading: "A family business, kept personal.",
   paragraphs: [
-    "BrightView is a family-owned Michigan business. We clean windows and exterior surfaces, clear gutters, clean roofs, and supply, install and take down holiday lighting.",
-    "Every project starts with listening. Tell us what you'd like done, and we'll follow up with a quote before any work is scheduled.",
+    "As a family-owned business, we keep things personal. Tell us about your property and what you'd like done, and we'll take the time to review the details.",
+    "After you request a quote, we follow up to talk through your project. Submitting a request doesn't book or purchase anything, so you can ask questions before deciding.",
   ],
   image: {
     src: "/images/projects/pressure-washing/Porch.png",
@@ -26,14 +26,14 @@ export const aboutStory = {
   caption: "A porch step, mid-clean.",
 } as const;
 
-/** Three distinct commitments; each is something the site itself already shows or states. */
+/** Three distinct commitments. Only claims the site itself already states; no inspection or assessment procedure is implied. */
 export const aboutPrinciples = {
   kicker: "WHAT YOU CAN EXPECT",
   heading: "Straightforward, from the first message.",
   items: [
-    { title: "Real work", body: "Every photograph on this site is from an actual BrightView project. We'd rather show what we've done than make promises." },
-    { title: "Care for the surface", body: "Windows, pavers, siding and roofs aren't all treated alike. We consider the material and its condition before choosing an approach." },
-    { title: "A clear next step", body: "Requesting a quote is free, with no payment or booking required. We review the details and follow up." },
+    { title: "Honest about our work", body: "The project photos in our work gallery are verified BrightView work. Decorative imagery is there for atmosphere, not as evidence of results." },
+    { title: "Right approach, right surface", body: "Glass, pavers, siding and roofs aren't all cleaned the same way. Different surfaces call for different cleaning approaches." },
+    { title: "Free to ask", body: "Requesting a quote is free, with no payment or booking required." },
   ],
 } as const;
 
