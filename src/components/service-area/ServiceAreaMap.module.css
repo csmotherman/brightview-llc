@@ -8,7 +8,7 @@
 .landGlow { fill: rgb(110 170 255 / 28%); }
 .land { fill: rgb(46 92 168 / 52%); }
 .landEdge { fill: none; stroke: rgb(248 227 180 / 85%); stroke-width: 2; stroke-linejoin: round; }
-.region { fill: rgb(255 226 160 / 62%); }
+.areaEdge { fill: none; stroke: rgb(255 233 184 / 85%); stroke-width: 2.5; stroke-dasharray: 10 8; }
 .regionLabel { fill: #fff8e6; font-size: 21px; font-weight: 700; letter-spacing: .18em; paint-order: stroke; stroke: rgb(10 37 28 / 55%); stroke-width: 4px; pointer-events: none; }
 .caption { position: absolute; left: 14px; bottom: 12px; padding: 5px 12px; border-radius: 99px; font-size: .72rem; font-weight: 600; color: #fff; background: rgb(8 20 40 / 55%); border: 1px solid rgb(255 255 255 / 25%); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
 
@@ -20,7 +20,9 @@
 .legend { list-style: none; margin: var(--space-5) 0 var(--space-3); padding: 0; font-size: var(--text-sm); color: var(--text-body); }
 .legend li { display: flex; align-items: center; gap: 12px; }
 .key { flex: none; width: 18px; height: 18px; border-radius: 50%; background: radial-gradient(circle, rgb(255 226 160 / 95%), rgb(255 226 160 / 25%)); box-shadow: 0 0 0 1px rgb(158 96 27 / 30%); }
-.note { margin: 0 0 var(--space-5); color: var(--text-muted); font-size: .85rem; line-height: 1.5; }
+.cta { margin: 0 0 var(--space-4); padding: var(--space-4) var(--space-5); border-radius: var(--radius-md); background: rgb(255 255 255 / 55%); border: 1px solid var(--glass-cream-border); color: var(--text-body); font-size: var(--text-base); line-height: 1.5; }
+.cta strong { display: block; margin-bottom: 2px; color: var(--evergreen-900); font-family: var(--font-display); font-size: clamp(1.15rem, 1.5vw, 1.4rem); font-weight: 700; letter-spacing: -.01em; }
+.bigButton { height: 58px; padding-inline: 34px; font-size: 1.05rem; font-weight: 700; }
 .side > :last-child { align-self: flex-start; }
 
 @media (max-width: 1100px) { .wrap { grid-template-columns: 1fr; } .stage { max-width: 640px; width: 100%; margin-inline: auto; } }
